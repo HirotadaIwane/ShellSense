@@ -1,0 +1,198 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "core",
+    "name": "shell",
+    "description": "Shell builtins and utilities"
+  },
+  "commands": {
+    "cd": {
+      "name": "cd",
+      "description": {
+        "ja": "作業ディレクトリを移動",
+        "en": "Change the current directory"
+      },
+      "baseRisk": "low",
+      "category": "shell"
+    },
+    "pwd": {
+      "name": "pwd",
+      "description": {
+        "ja": "現在の作業ディレクトリを表示",
+        "en": "Print the current working directory"
+      },
+      "baseRisk": "low",
+      "category": "shell"
+    },
+    "echo": {
+      "name": "echo",
+      "description": {
+        "ja": "テキストを表示",
+        "en": "Display a line of text"
+      },
+      "baseRisk": "low",
+      "category": "shell"
+    },
+    "which": {
+      "name": "which",
+      "description": {
+        "ja": "コマンドの実行パスを表示",
+        "en": "Locate a command"
+      },
+      "baseRisk": "low",
+      "category": "shell"
+    },
+    "xargs": {
+      "name": "xargs",
+      "description": {
+        "ja": "標準入力からコマンドを構築・実行",
+        "en": "Build and execute commands from standard input"
+      },
+      "baseRisk": "medium",
+      "category": "shell",
+      "flags": {
+        "-I": {
+          "description": { "ja": "置換文字列を指定", "en": "Specify replacement string" }
+        }
+      }
+    },
+    "export": {
+      "name": "export",
+      "description": {
+        "ja": "環境変数を設定",
+        "en": "Set environment variables"
+      },
+      "baseRisk": "low",
+      "category": "shell"
+    },
+    "source": {
+      "name": "source",
+      "description": {
+        "ja": "スクリプトを現在のシェルで実行",
+        "en": "Execute a script in the current shell"
+      },
+      "baseRisk": "medium",
+      "category": "shell"
+    },
+    "alias": {
+      "name": "alias",
+      "description": {
+        "ja": "コマンドの別名を定義・表示",
+        "en": "Define or display command aliases"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-p": {
+          "description": { "ja": "全エイリアスを表示", "en": "Print all aliases" }
+        }
+      }
+    },
+    "unalias": {
+      "name": "unalias",
+      "description": {
+        "ja": "エイリアスを削除",
+        "en": "Remove command aliases"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-a": {
+          "description": { "ja": "全エイリアス削除", "en": "Remove all aliases" },
+          "riskModifier": "medium"
+        }
+      }
+    },
+    "type": {
+      "name": "type",
+      "description": {
+        "ja": "コマンドの種類を表示",
+        "en": "Display command type information"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-t": {
+          "description": { "ja": "種類のみ1語で表示", "en": "Print type word only" }
+        },
+        "-a": {
+          "description": { "ja": "全候補を表示", "en": "Show all matches" }
+        },
+        "-p": {
+          "description": { "ja": "パスのみ表示", "en": "Print path only" }
+        }
+      }
+    },
+    "time": {
+      "name": "time",
+      "description": {
+        "ja": "コマンドの実行時間を計測",
+        "en": "Measure command execution time"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-p": {
+          "description": { "ja": "POSIX形式で表示", "en": "Print in POSIX format" }
+        }
+      }
+    },
+    "watch": {
+      "name": "watch",
+      "description": {
+        "ja": "コマンドを定期的に実行して変化を監視",
+        "en": "Execute a command periodically and watch output"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-n": {
+          "description": { "ja": "実行間隔指定", "en": "Set interval" }
+        },
+        "-d": {
+          "description": { "ja": "差分ハイライト", "en": "Highlight differences" }
+        },
+        "-g": {
+          "description": { "ja": "変化時に終了", "en": "Exit on change" }
+        },
+        "-t": {
+          "description": { "ja": "ヘッダー非表示", "en": "Hide header" }
+        },
+        "-e": {
+          "description": { "ja": "エラー時に終了", "en": "Exit on error" }
+        }
+      }
+    },
+    "history": {
+      "name": "history",
+      "description": {
+        "ja": "コマンド履歴を表示・操作",
+        "en": "Display or manipulate command history"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-c": {
+          "description": { "ja": "履歴を全消去", "en": "Clear all history" },
+          "riskModifier": "medium"
+        },
+        "-d": {
+          "description": { "ja": "指定番号の履歴を削除", "en": "Delete entry by number" }
+        },
+        "-a": {
+          "description": { "ja": "履歴ファイルに追記", "en": "Append to history file" }
+        }
+      }
+    },
+    "clear": {
+      "name": "clear",
+      "description": {
+        "ja": "ターミナル画面をクリア",
+        "en": "Clear the terminal screen"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {}
+    }
+  }
+}

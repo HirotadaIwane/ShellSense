@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "ShellSense formatter meta-config schema",
+  "required": ["style"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "style": {
+      "type": "string",
+      "description": "Style preset name or custom file path"
+    },
+    "overrides": {
+      "type": "object",
+      "description": "Partial FormatterConfig for deep merge override"
+    }
+  },
+  "definitions": {
+    "StyleFile": {
+      "type": "object",
+      "description": "Complete FormatterConfig for style preset files",
+      "required": ["version", "templates_long", "templates_short", "labels"],
+      "properties": {
+        "$schema": { "type": "string" },
+        "version": { "type": "string" },
+        "templates_long": {
+          "type": "object",
+          "required": [
+            "singleCommand", "chainHeader", "chainSegment",
+            "chainOperator", "chainFooter"
+          ],
+          "additionalProperties": { "type": "string" }
+        },
+        "templates_short": {
+          "type": "object",
+          "required": ["singleCommand", "chainCommand"],
+          "additionalProperties": { "type": "string" }
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/definitions/TemplateLabels" }
+        }
+      }
+    },
+    "TemplateLabels": {
+      "type": "object",
+      "required": [
+        "header",
+        "risk_low", "risk_low_short",
+        "risk_medium", "risk_medium_short",
+        "risk_high", "risk_high_short",
+        "risk_critical", "risk_critical_short",
+        "unknownRisk", "unknownRisk_short", "unknownCommand",
+        "target", "delimiter", "indent",
+        "chainNotice", "chainNumbering", "sudoNotice"
+      ],
+      "additionalProperties": { "type": "string" }
+    },
+    "LayoutGroupId": {
+      "enum": [
+        "sectionHeader", "commandDescription", "flagDescriptions",
+        "targetArguments", "separator", "riskLevel",
+        "overallRiskLevel", "chainNotice", "operatorDisplay",
+        "sudoNotice"
+      ]
+    },
+    "RiskLabels": {
+      "type": "object",
+      "required": ["label", "short"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "short": { "type": "string", "minLength": 1 }
+      }
+    },
+    "LanguageLabels": {
+      "type": "object",
+      "required": [
+        "sectionHeader", "riskLevel", "overallRiskLevel", "target",
+        "unknownCommand", "unknownRiskSuffix",
+        "chainNote", "chainNoteSuffix", "risk"
+      ],
+      "properties": {
+        "sectionHeader": { "type": "string" },
+        "riskLevel": { "type": "string" },
+        "overallRiskLevel": { "type": "string" },
+        "target": { "type": "string" },
+        "unknownCommand": { "type": "string" },
+        "unknownRiskSuffix": { "type": "string" },
+        "chainNote": { "type": "string" },
+        "chainNoteSuffix": { "type": "string" },
+        "risk": {
+          "type": "object",
+          "required": ["low", "medium", "high", "critical"],
+          "additionalProperties": { "$ref": "#/definitions/RiskLabels" }
+        },
+        "sudoNotice": { "type": "string" }
+      }
+    }
+  }
+}

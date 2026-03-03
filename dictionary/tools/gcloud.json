@@ -1,0 +1,70 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "tools",
+    "name": "gcloud",
+    "description": "Google Cloud CLI"
+  },
+  "commands": {
+    "gcloud": {
+      "name": "gcloud",
+      "description": {
+        "ja": "Google Cloudサービスを操作",
+        "en": "Google Cloud CLI"
+      },
+      "baseRisk": "medium",
+      "category": "cloud",
+      "flags": {
+        "--project": {
+          "description": { "ja": "操作対象のGCPプロジェクトを指定", "en": "Specify the GCP project to use" }
+        },
+        "--format": {
+          "description": { "ja": "出力形式を指定（json, yaml, table, csv等）", "en": "Specify output format (json, yaml, table, csv, etc.)" }
+        },
+        "--quiet": {
+          "description": { "ja": "確認プロンプトを表示しない", "en": "Disable interactive prompts" }
+        },
+        "--verbosity": {
+          "description": { "ja": "ログ出力の詳細度を指定", "en": "Specify the verbosity level of log output" }
+        },
+        "--account": {
+          "description": { "ja": "使用する認証アカウントを指定", "en": "Specify the account to use for authentication" }
+        },
+        "--impersonate-service-account": {
+          "description": { "ja": "サービスアカウントになりすまして操作", "en": "Impersonate a service account for the operation" },
+          "riskModifier": "medium"
+        }
+      },
+      "subcommands": {
+        "compute": {
+          "description": { "ja": "Compute Engineリソースを操作", "en": "Manage Compute Engine resources" },
+          "riskOverride": "medium"
+        },
+        "container": {
+          "description": { "ja": "GKEコンテナクラスタを操作", "en": "Manage Google Kubernetes Engine clusters" },
+          "riskOverride": "medium"
+        },
+        "iam": {
+          "description": { "ja": "IAMポリシーを管理", "en": "Manage IAM service accounts and keys" },
+          "riskOverride": "high"
+        },
+        "app": {
+          "description": { "ja": "App Engineアプリケーションを操作", "en": "Manage App Engine applications" },
+          "riskOverride": "medium"
+        },
+        "functions": {
+          "description": { "ja": "Cloud Functionsを操作", "en": "Manage Google Cloud Functions" },
+          "riskOverride": "medium"
+        },
+        "config": {
+          "description": { "ja": "SDK設定を管理", "en": "Manage Google Cloud CLI properties" },
+          "riskOverride": "low"
+        },
+        "auth": {
+          "description": { "ja": "認証情報を管理", "en": "Manage authentication for Google Cloud" },
+          "riskOverride": "low"
+        }
+      }
+    }
+  }
+}

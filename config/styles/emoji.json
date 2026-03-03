@@ -1,0 +1,68 @@
+{
+  "$schema": "../formatter.schema.json#/definitions/StyleFile",
+  "version": "2.0.0",
+
+  "templates_long": {
+    "singleCommand": "{risk}\n{sudo}\n{command}\n{flags}\n{target}\n{separator}",
+    "chainHeader": "{chainNotice}\n{overallRisk}\n{sudo}",
+    "chainSegment": "{command}\n{flags}\n{target}",
+    "chainOperator": "  {operator}",
+    "chainFooter": "{separator}"
+  },
+
+  "templates_short": {
+    "singleCommand": "[ShellSense {risk}] {commands}",
+    "chainCommand": "[ShellSense {risk}] {commands}"
+  },
+
+  "labels": {
+    "ja": {
+      "header": "</>",
+      "risk_low": "🟢",
+      "risk_low_short": "🟢",
+      "risk_medium": "🔶（ファイル変更含）",
+      "risk_medium_short": "🔶",
+      "risk_high": "⚠️（削除・上書含）",
+      "risk_high_short": "⚠️",
+      "risk_critical": "🚨（システムレベル・不可逆操作）",
+      "risk_critical_short": "🚨",
+      "unknownRisk": "❔（不明）",
+      "unknownRisk_short": "❔",
+      "unknownCommand": "未登録コマンド",
+      "target": "対象:",
+      "delimiter": "›",
+      "indent": " ",
+      "chainNotice": "⛓",
+      "chainNumbering": "dot",
+      "sudoNotice": "管理者権限",
+      "operator_&&": "✅››",
+      "operator_||": "❌››",
+      "operator_|": "📤››",
+      "operator_;": ";››"
+    },
+    "en": {
+      "header": "</>",
+      "risk_low": "🟢",
+      "risk_low_short": "🟢",
+      "risk_medium": "🔶(modify files)",
+      "risk_medium_short": "🔶",
+      "risk_high": "⚠️(delete or overwrite)",
+      "risk_high_short": "⚠️",
+      "risk_critical": "🚨(system-level or irreversible)",
+      "risk_critical_short": "🚨",
+      "unknownRisk": "❔(unknown)",
+      "unknownRisk_short": "❔",
+      "unknownCommand": "Not registered in dictionary",
+      "target": "Target:",
+      "delimiter": "›",
+      "indent": "  ",
+      "chainNotice": "⛓",
+      "chainNumbering": "dot",
+      "sudoNotice": "sudo: Running with elevated privileges (risk escalated)",
+      "operator_&&": "✅››",
+      "operator_||": "❌››",
+      "operator_|": "📤››",
+      "operator_;": ";››"
+    }
+  }
+}

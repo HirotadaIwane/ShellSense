@@ -1,0 +1,68 @@
+{
+  "$schema": "../formatter.schema.json#/definitions/StyleFile",
+  "version": "2.0.0",
+
+  "templates_long": {
+    "singleCommand": "{header}\n{command}\n{flags}\n{target}\n{sudo}\n{separator}\n{risk}",
+    "chainHeader": "{header}",
+    "chainSegment": "{command}\n{flags}\n{target}\n{sudo}",
+    "chainOperator": "  {operator}",
+    "chainFooter": "{separator}\n{overallRisk}"
+  },
+
+  "templates_short": {
+    "singleCommand": "{risk} {commands}",
+    "chainCommand": "{risk} {commands}"
+  },
+
+  "labels": {
+    "ja": {
+      "header": "---",
+      "risk_low": "Low",
+      "risk_low_short": "LOW",
+      "risk_medium": "Medium",
+      "risk_medium_short": "MED",
+      "risk_high": "High",
+      "risk_high_short": "HIGH",
+      "risk_critical": "Critical",
+      "risk_critical_short": "CRIT",
+      "unknownRisk": "Medium",
+      "unknownRisk_short": "MED",
+      "unknownCommand": "Unknown command",
+      "target": "Target:",
+      "delimiter": " -- ",
+      "indent": "  ",
+      "chainNotice": "Chained commands",
+      "chainNumbering": "dot",
+      "sudoNotice": "sudo: elevated privileges",
+      "operator_&&": ">>",
+      "operator_||": "X>",
+      "operator_|": "|>",
+      "operator_;": ">>"
+    },
+    "en": {
+      "header": "---",
+      "risk_low": "Low",
+      "risk_low_short": "LOW",
+      "risk_medium": "Medium",
+      "risk_medium_short": "MED",
+      "risk_high": "High",
+      "risk_high_short": "HIGH",
+      "risk_critical": "Critical",
+      "risk_critical_short": "CRIT",
+      "unknownRisk": "Medium",
+      "unknownRisk_short": "MED",
+      "unknownCommand": "Unknown command",
+      "target": "Target:",
+      "delimiter": " -- ",
+      "indent": "  ",
+      "chainNotice": "Chained commands",
+      "chainNumbering": "dot",
+      "sudoNotice": "sudo: elevated privileges",
+      "operator_&&": ">>",
+      "operator_||": "X>",
+      "operator_|": "|>",
+      "operator_;": ">>"
+    }
+  }
+}

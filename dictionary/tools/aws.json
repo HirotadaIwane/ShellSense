@@ -1,0 +1,73 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "tools",
+    "name": "aws",
+    "description": "AWS Command Line Interface"
+  },
+  "commands": {
+    "aws": {
+      "name": "aws",
+      "description": {
+        "ja": "AWSクラウドサービスを操作",
+        "en": "AWS Command Line Interface"
+      },
+      "baseRisk": "medium",
+      "category": "cloud",
+      "flags": {
+        "--region": {
+          "description": { "ja": "操作対象のAWSリージョンを指定", "en": "Specify the AWS region to use" }
+        },
+        "--profile": {
+          "description": { "ja": "使用する認証プロファイルを指定", "en": "Specify the named profile to use" }
+        },
+        "--output": {
+          "description": { "ja": "出力形式を指定（json, text, table, yaml）", "en": "Specify output format (json, text, table, yaml)" }
+        },
+        "--no-cli-pager": {
+          "description": { "ja": "ページャーを無効にして全出力を直接表示", "en": "Disable the CLI pager and print output directly" }
+        },
+        "--dry-run": {
+          "description": { "ja": "実行せずに権限チェックのみ行う", "en": "Check permissions without actually running the command" }
+        },
+        "--query": {
+          "description": { "ja": "JMESPath式で出力をフィルタリング", "en": "Filter output using a JMESPath query" }
+        }
+      },
+      "subcommands": {
+        "s3": {
+          "description": { "ja": "S3ストレージを操作", "en": "Manage Amazon S3 buckets and objects" },
+          "riskOverride": "medium"
+        },
+        "ec2": {
+          "description": { "ja": "EC2インスタンスを操作", "en": "Manage Amazon EC2 instances" },
+          "riskOverride": "medium"
+        },
+        "iam": {
+          "description": { "ja": "IAMユーザー・ロールを管理", "en": "Manage IAM users, roles, and policies" },
+          "riskOverride": "high"
+        },
+        "lambda": {
+          "description": { "ja": "Lambda関数を管理", "en": "Manage AWS Lambda functions" },
+          "riskOverride": "medium"
+        },
+        "ecs": {
+          "description": { "ja": "ECSコンテナサービスを管理", "en": "Manage Amazon ECS clusters and services" },
+          "riskOverride": "medium"
+        },
+        "cloudformation": {
+          "description": { "ja": "CloudFormationスタックを管理", "en": "Manage AWS CloudFormation stacks" },
+          "riskOverride": "high"
+        },
+        "sts": {
+          "description": { "ja": "セキュリティトークンを操作", "en": "Manage AWS Security Token Service" },
+          "riskOverride": "low"
+        },
+        "logs": {
+          "description": { "ja": "CloudWatchログを操作", "en": "Manage Amazon CloudWatch Logs" },
+          "riskOverride": "low"
+        }
+      }
+    }
+  }
+}

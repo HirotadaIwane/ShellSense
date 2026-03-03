@@ -1,0 +1,1188 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "os",
+    "name": "linux",
+    "description": "Linux-specific commands for developers (package management, service management, system diagnostics)",
+    "os": "linux"
+  },
+  "commands": {
+    "apt": {
+      "name": "apt",
+      "description": {
+        "ja": "Debian/Ubuntu系のパッケージを管理します",
+        "en": "Manage packages on Debian/Ubuntu systems"
+      },
+      "baseRisk": "medium",
+      "category": "package",
+      "subcommands": {
+        "install": {
+          "description": { "ja": "パッケージをインストール", "en": "Install packages" },
+          "riskOverride": "medium"
+        },
+        "remove": {
+          "description": { "ja": "パッケージを削除（設定ファイルは残る）", "en": "Remove packages (config files remain)" },
+          "riskOverride": "high"
+        },
+        "purge": {
+          "description": { "ja": "パッケージと設定ファイルを完全に削除", "en": "Remove packages and their configuration files" },
+          "riskOverride": "critical"
+        },
+        "update": {
+          "description": { "ja": "パッケージリストを更新", "en": "Update package lists" },
+          "riskOverride": "low"
+        },
+        "upgrade": {
+          "description": { "ja": "インストール済みパッケージを更新", "en": "Upgrade installed packages" },
+          "riskOverride": "medium"
+        },
+        "dist-upgrade": {
+          "description": { "ja": "依存関係を解決しながらシステム全体を更新", "en": "Upgrade system with dependency resolution" },
+          "riskOverride": "high"
+        },
+        "autoremove": {
+          "description": { "ja": "不要になった依存パッケージを自動削除", "en": "Remove automatically installed unused packages" },
+          "riskOverride": "high"
+        },
+        "search": {
+          "description": { "ja": "パッケージを検索", "en": "Search for packages" },
+          "riskOverride": "low"
+        },
+        "list": {
+          "description": { "ja": "パッケージ一覧を表示", "en": "List packages" },
+          "riskOverride": "low"
+        },
+        "show": {
+          "description": { "ja": "パッケージの詳細情報を表示", "en": "Show package details" },
+          "riskOverride": "low"
+        }
+      },
+      "flags": {
+        "-y": {
+          "description": { "ja": "確認プロンプトなしで実行", "en": "Assume yes to all prompts" },
+          "riskModifier": "medium"
+        }
+      }
+    },
+    "apt-get": {
+      "name": "apt-get",
+      "description": {
+        "ja": "Debian/Ubuntu系の低レベルパッケージ管理ツールです",
+        "en": "Low-level package management tool for Debian/Ubuntu systems"
+      },
+      "baseRisk": "medium",
+      "category": "package",
+      "subcommands": {
+        "install": {
+          "description": { "ja": "パッケージをインストール", "en": "Install packages" },
+          "riskOverride": "medium"
+        },
+        "remove": {
+          "description": { "ja": "パッケージを削除", "en": "Remove packages" },
+          "riskOverride": "high"
+        },
+        "purge": {
+          "description": { "ja": "パッケージと設定ファイルを完全に削除", "en": "Remove packages and configuration files" },
+          "riskOverride": "critical"
+        },
+        "update": {
+          "description": { "ja": "パッケージリストを更新", "en": "Update package lists" },
+          "riskOverride": "low"
+        },
+        "upgrade": {
+          "description": { "ja": "インストール済みパッケージを更新", "en": "Upgrade installed packages" },
+          "riskOverride": "medium"
+        },
+        "dist-upgrade": {
+          "description": { "ja": "依存関係を解決しながらシステム全体を更新", "en": "Upgrade system with dependency resolution" },
+          "riskOverride": "high"
+        },
+        "autoremove": {
+          "description": { "ja": "不要な依存パッケージを自動削除", "en": "Remove unused dependency packages" },
+          "riskOverride": "high"
+        },
+        "clean": {
+          "description": { "ja": "ダウンロード済みパッケージキャッシュを削除", "en": "Clear downloaded package cache" },
+          "riskOverride": "medium"
+        }
+      },
+      "flags": {
+        "-y": {
+          "description": { "ja": "確認プロンプトなしで実行", "en": "Assume yes to all prompts" },
+          "riskModifier": "medium"
+        },
+        "--no-install-recommends": {
+          "description": { "ja": "推奨パッケージをインストールしない", "en": "Do not install recommended packages" }
+        },
+        "-f": {
+          "description": { "ja": "壊れた依存関係を修復", "en": "Fix broken dependencies" }
+        }
+      }
+    },
+    "apt-cache": {
+      "name": "apt-cache",
+      "description": {
+        "ja": "APTパッケージキャッシュを検索・照会します",
+        "en": "Query the APT package cache"
+      },
+      "baseRisk": "low",
+      "category": "package",
+      "subcommands": {
+        "search": {
+          "description": { "ja": "パッケージ名・説明を検索", "en": "Search package names and descriptions" },
+          "riskOverride": "low"
+        },
+        "show": {
+          "description": { "ja": "パッケージの詳細情報を表示", "en": "Show package details" },
+          "riskOverride": "low"
+        },
+        "depends": {
+          "description": { "ja": "パッケージの依存関係を表示", "en": "Show package dependencies" },
+          "riskOverride": "low"
+        },
+        "rdepends": {
+          "description": { "ja": "逆依存関係を表示", "en": "Show reverse dependencies" },
+          "riskOverride": "low"
+        },
+        "policy": {
+          "description": { "ja": "パッケージのバージョンと優先度を表示", "en": "Show package version and priority info" },
+          "riskOverride": "low"
+        }
+      },
+      "flags": {}
+    },
+    "dpkg": {
+      "name": "dpkg",
+      "description": {
+        "ja": "Debianパッケージを直接操作します（低レベル）",
+        "en": "Low-level Debian package manager"
+      },
+      "baseRisk": "medium",
+      "category": "package",
+      "flags": {
+        "-i": {
+          "description": { "ja": ".debパッケージをインストール", "en": "Install a .deb package" },
+          "riskModifier": "medium"
+        },
+        "-r": {
+          "description": { "ja": "パッケージを削除（設定は残る）", "en": "Remove package (config remains)" },
+          "riskModifier": "high"
+        },
+        "-P": {
+          "description": { "ja": "パッケージと設定ファイルを完全に削除", "en": "Purge package and configuration" },
+          "riskModifier": "critical"
+        },
+        "-l": {
+          "description": { "ja": "インストール済みパッケージ一覧を表示", "en": "List installed packages" }
+        },
+        "-s": {
+          "description": { "ja": "パッケージの状態を表示", "en": "Show package status" }
+        },
+        "-L": {
+          "description": { "ja": "パッケージに含まれるファイル一覧を表示", "en": "List files installed by package" }
+        },
+        "--configure": {
+          "description": { "ja": "展開済みパッケージを設定", "en": "Configure an unpacked package" },
+          "riskModifier": "medium"
+        }
+      }
+    },
+    "dnf": {
+      "name": "dnf",
+      "description": {
+        "ja": "RHEL/Fedora系のパッケージを管理します",
+        "en": "Manage packages on RHEL/Fedora systems"
+      },
+      "baseRisk": "medium",
+      "category": "package",
+      "subcommands": {
+        "install": {
+          "description": { "ja": "パッケージをインストール", "en": "Install packages" },
+          "riskOverride": "medium"
+        },
+        "remove": {
+          "description": { "ja": "パッケージを削除", "en": "Remove packages" },
+          "riskOverride": "high"
+        },
+        "update": {
+          "description": { "ja": "パッケージを更新", "en": "Update packages" },
+          "riskOverride": "medium"
+        },
+        "upgrade": {
+          "description": { "ja": "システム全体をアップグレード", "en": "Upgrade entire system" },
+          "riskOverride": "medium"
+        },
+        "search": {
+          "description": { "ja": "パッケージを検索", "en": "Search for packages" },
+          "riskOverride": "low"
+        },
+        "list": {
+          "description": { "ja": "パッケージ一覧を表示", "en": "List packages" },
+          "riskOverride": "low"
+        },
+        "info": {
+          "description": { "ja": "パッケージの詳細情報を表示", "en": "Show package details" },
+          "riskOverride": "low"
+        },
+        "clean": {
+          "description": { "ja": "キャッシュデータを削除", "en": "Clean cached data" },
+          "riskOverride": "medium"
+        }
+      },
+      "flags": {
+        "-y": {
+          "description": { "ja": "確認プロンプトなしで実行", "en": "Assume yes to all prompts" },
+          "riskModifier": "medium"
+        }
+      }
+    },
+    "snap": {
+      "name": "snap",
+      "description": {
+        "ja": "Snapパッケージを管理します",
+        "en": "Manage snap packages"
+      },
+      "baseRisk": "medium",
+      "category": "package",
+      "subcommands": {
+        "install": {
+          "description": { "ja": "snapパッケージをインストール", "en": "Install a snap package" },
+          "riskOverride": "medium"
+        },
+        "remove": {
+          "description": { "ja": "snapパッケージを削除", "en": "Remove a snap package" },
+          "riskOverride": "high"
+        },
+        "list": {
+          "description": { "ja": "インストール済みsnapを一覧表示", "en": "List installed snaps" },
+          "riskOverride": "low"
+        },
+        "find": {
+          "description": { "ja": "snapストアでパッケージを検索", "en": "Search the snap store" },
+          "riskOverride": "low"
+        },
+        "refresh": {
+          "description": { "ja": "snapパッケージを更新", "en": "Refresh snap packages" },
+          "riskOverride": "medium"
+        },
+        "info": {
+          "description": { "ja": "snapパッケージの詳細情報を表示", "en": "Show snap package details" },
+          "riskOverride": "low"
+        },
+        "revert": {
+          "description": { "ja": "snapパッケージを前のバージョンに戻す", "en": "Revert snap to previous version" },
+          "riskOverride": "medium"
+        }
+      },
+      "flags": {
+        "--classic": {
+          "description": { "ja": "クラシック制限モードでインストール", "en": "Install with classic confinement" },
+          "riskModifier": "medium"
+        }
+      }
+    },
+    "systemctl": {
+      "name": "systemctl",
+      "description": {
+        "ja": "systemdサービスマネージャーです",
+        "en": "Control the systemd service manager"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "subcommands": {
+        "start": {
+          "description": { "ja": "サービスを起動", "en": "Start a service" },
+          "riskOverride": "medium"
+        },
+        "stop": {
+          "description": { "ja": "サービスを停止", "en": "Stop a service" },
+          "riskOverride": "high"
+        },
+        "restart": {
+          "description": { "ja": "サービスを停止してから再起動（一時的なダウンタイムが発生）", "en": "Stop and restart a service (causes brief downtime)" },
+          "riskOverride": "high"
+        },
+        "reload": {
+          "description": { "ja": "サービスの設定を再読み込み（停止なし）", "en": "Reload service configuration (no downtime)" },
+          "riskOverride": "medium"
+        },
+        "enable": {
+          "description": { "ja": "サービスの自動起動を有効化", "en": "Enable service to start at boot" },
+          "riskOverride": "medium"
+        },
+        "disable": {
+          "description": { "ja": "サービスの自動起動を無効化", "en": "Disable service from starting at boot" },
+          "riskOverride": "medium"
+        },
+        "status": {
+          "description": { "ja": "サービスの状態を表示", "en": "Show service status" },
+          "riskOverride": "low"
+        },
+        "daemon-reload": {
+          "description": { "ja": "systemdデーモンの設定を再読み込み", "en": "Reload systemd daemon configuration" },
+          "riskOverride": "medium"
+        },
+        "is-active": {
+          "description": { "ja": "サービスが起動中か確認", "en": "Check if service is active" },
+          "riskOverride": "low"
+        },
+        "is-enabled": {
+          "description": { "ja": "サービスが自動起動設定か確認", "en": "Check if service is enabled" },
+          "riskOverride": "low"
+        },
+        "list-units": {
+          "description": { "ja": "ユニット一覧を表示", "en": "List loaded units" },
+          "riskOverride": "low"
+        },
+        "mask": {
+          "description": { "ja": "サービスを完全に無効化（起動不可にする）", "en": "Completely disable service (prevent starting)" },
+          "riskOverride": "high"
+        }
+      },
+      "flags": {
+        "--now": {
+          "description": { "ja": "enable/disableと同時に即座にstart/stop", "en": "Start/stop immediately with enable/disable" },
+          "riskModifier": "medium"
+        },
+        "--user": {
+          "description": { "ja": "ユーザースコープのサービスを操作", "en": "Operate on user-scope services" }
+        }
+      }
+    },
+    "journalctl": {
+      "name": "journalctl",
+      "description": {
+        "ja": "systemdジャーナルログを表示します",
+        "en": "View systemd journal logs"
+      },
+      "baseRisk": "low",
+      "category": "system",
+      "flags": {
+        "-f": {
+          "description": { "ja": "ログをリアルタイムで追跡（tail -f相当）", "en": "Follow log output in real-time (like tail -f)" }
+        },
+        "-u": {
+          "description": { "ja": "指定サービスのログのみ表示", "en": "Show logs for specified service unit" }
+        },
+        "-n": {
+          "description": { "ja": "直近N件のログを表示", "en": "Show last N log entries" }
+        },
+        "--since": {
+          "description": { "ja": "指定日時以降のログを表示", "en": "Show logs since specified date/time" }
+        },
+        "--until": {
+          "description": { "ja": "指定日時までのログを表示", "en": "Show logs until specified date/time" }
+        },
+        "-p": {
+          "description": { "ja": "指定優先度以上のログを表示", "en": "Show logs with specified priority or above" }
+        },
+        "-b": {
+          "description": { "ja": "現在の起動セッションのログを表示", "en": "Show logs from current boot" }
+        },
+        "-xe": {
+          "description": { "ja": "末尾から詳細情報付きで表示", "en": "Show from end with extra info" }
+        },
+        "-k": {
+          "description": { "ja": "カーネルメッセージのみ表示", "en": "Show kernel messages only" }
+        },
+        "--no-pager": {
+          "description": { "ja": "ページャーを使用せず直接出力", "en": "Output directly without pager" }
+        }
+      }
+    },
+    "service": {
+      "name": "service",
+      "description": {
+        "ja": "SysVinitサービスを管理します（互換コマンド）",
+        "en": "Manage SysVinit services (compatibility command)"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "subcommands": {
+        "start": {
+          "description": { "ja": "サービスを起動", "en": "Start a service" },
+          "riskOverride": "medium"
+        },
+        "stop": {
+          "description": { "ja": "サービスを停止", "en": "Stop a service" },
+          "riskOverride": "high"
+        },
+        "restart": {
+          "description": { "ja": "サービスを再起動", "en": "Restart a service" },
+          "riskOverride": "high"
+        },
+        "status": {
+          "description": { "ja": "サービスの状態を表示", "en": "Show service status" },
+          "riskOverride": "low"
+        }
+      },
+      "flags": {}
+    },
+    "ufw": {
+      "name": "ufw",
+      "description": {
+        "ja": "Ubuntuのファイアウォールを管理します",
+        "en": "Manage Ubuntu firewall (Uncomplicated Firewall)"
+      },
+      "baseRisk": "high",
+      "category": "system",
+      "subcommands": {
+        "enable": {
+          "description": { "ja": "ファイアウォールを有効化", "en": "Enable firewall" },
+          "riskOverride": "high"
+        },
+        "disable": {
+          "description": { "ja": "ファイアウォールを無効化", "en": "Disable firewall" },
+          "riskOverride": "high"
+        },
+        "allow": {
+          "description": { "ja": "指定ポート/サービスへの接続を許可", "en": "Allow connections on specified port/service" },
+          "riskOverride": "medium"
+        },
+        "deny": {
+          "description": { "ja": "指定ポート/サービスへの接続を拒否", "en": "Deny connections on specified port/service" },
+          "riskOverride": "medium"
+        },
+        "status": {
+          "description": { "ja": "ファイアウォールの状態とルールを表示", "en": "Show firewall status and rules" },
+          "riskOverride": "low"
+        },
+        "delete": {
+          "description": { "ja": "ファイアウォールルールを削除", "en": "Delete a firewall rule" },
+          "riskOverride": "high"
+        },
+        "reset": {
+          "description": { "ja": "ファイアウォール設定を初期状態にリセット", "en": "Reset firewall to default settings" },
+          "riskOverride": "critical"
+        },
+        "reload": {
+          "description": { "ja": "ファイアウォールルールを再読み込み", "en": "Reload firewall rules" },
+          "riskOverride": "medium"
+        }
+      },
+      "flags": {
+        "--force": {
+          "description": { "ja": "確認なしで強制実行", "en": "Force execution without confirmation" },
+          "riskModifier": "critical"
+        }
+      }
+    },
+    "iptables": {
+      "name": "iptables",
+      "description": {
+        "ja": "Linuxカーネルのパケットフィルタリングルールを管理します",
+        "en": "Manage Linux kernel packet filtering rules"
+      },
+      "baseRisk": "critical",
+      "category": "system",
+      "flags": {
+        "-A": {
+          "description": { "ja": "チェーンにルールを追加", "en": "Append rule to chain" },
+          "riskModifier": "high"
+        },
+        "-D": {
+          "description": { "ja": "チェーンからルールを削除", "en": "Delete rule from chain" },
+          "riskModifier": "high"
+        },
+        "-I": {
+          "description": { "ja": "チェーンにルールを挿入", "en": "Insert rule into chain" },
+          "riskModifier": "high"
+        },
+        "-L": {
+          "description": { "ja": "ルール一覧を表示", "en": "List rules" }
+        },
+        "-F": {
+          "description": { "ja": "全ルールを削除（フラッシュ）", "en": "Flush all rules" },
+          "riskModifier": "critical"
+        },
+        "-X": {
+          "description": { "ja": "ユーザー定義チェーンを削除", "en": "Delete user-defined chains" },
+          "riskModifier": "critical"
+        },
+        "-t": {
+          "description": { "ja": "操作対象テーブルを指定", "en": "Specify table to operate on" }
+        },
+        "-p": {
+          "description": { "ja": "プロトコルを指定", "en": "Specify protocol" }
+        },
+        "--dport": {
+          "description": { "ja": "宛先ポートを指定", "en": "Specify destination port" }
+        },
+        "-j": {
+          "description": { "ja": "ルールのターゲット（ACCEPT/DROP/REJECT）を指定", "en": "Specify rule target (ACCEPT/DROP/REJECT)" }
+        }
+      }
+    },
+    "firewall-cmd": {
+      "name": "firewall-cmd",
+      "description": {
+        "ja": "firewalld（RHEL/Fedora系ファイアウォール）を管理します",
+        "en": "Manage firewalld (RHEL/Fedora firewall)"
+      },
+      "baseRisk": "high",
+      "category": "system",
+      "flags": {
+        "--add-port": {
+          "description": { "ja": "ポートを開放", "en": "Open a port" },
+          "riskModifier": "medium"
+        },
+        "--remove-port": {
+          "description": { "ja": "ポートを閉鎖", "en": "Close a port" },
+          "riskModifier": "high"
+        },
+        "--add-service": {
+          "description": { "ja": "サービスを許可", "en": "Allow a service" },
+          "riskModifier": "medium"
+        },
+        "--list-all": {
+          "description": { "ja": "全ルール・設定を表示", "en": "List all rules and settings" }
+        },
+        "--permanent": {
+          "description": { "ja": "永続的に変更を適用（再起動後も有効）", "en": "Apply changes permanently (persist after reboot)" },
+          "riskModifier": "high"
+        },
+        "--reload": {
+          "description": { "ja": "ファイアウォール設定を再読み込み", "en": "Reload firewall configuration" },
+          "riskModifier": "medium"
+        }
+      }
+    },
+    "useradd": {
+      "name": "useradd",
+      "description": {
+        "ja": "新しいユーザーアカウントを作成します",
+        "en": "Create a new user account"
+      },
+      "baseRisk": "high",
+      "category": "system",
+      "flags": {
+        "-m": {
+          "description": { "ja": "ホームディレクトリを作成", "en": "Create home directory" }
+        },
+        "-d": {
+          "description": { "ja": "ホームディレクトリのパスを指定", "en": "Specify home directory path" }
+        },
+        "-s": {
+          "description": { "ja": "ログインシェルを指定", "en": "Specify login shell" }
+        },
+        "-G": {
+          "description": { "ja": "追加グループを指定", "en": "Specify supplementary groups" }
+        },
+        "-r": {
+          "description": { "ja": "システムアカウントを作成", "en": "Create a system account" }
+        }
+      }
+    },
+    "usermod": {
+      "name": "usermod",
+      "description": {
+        "ja": "ユーザーアカウントの設定を変更します",
+        "en": "Modify a user account"
+      },
+      "baseRisk": "high",
+      "category": "system",
+      "flags": {
+        "-aG": {
+          "description": { "ja": "ユーザーを追加グループに追加", "en": "Append user to supplementary groups" },
+          "riskModifier": "medium"
+        },
+        "-L": {
+          "description": { "ja": "ユーザーアカウントをロック", "en": "Lock user account" },
+          "riskModifier": "high"
+        },
+        "-U": {
+          "description": { "ja": "ユーザーアカウントのロックを解除", "en": "Unlock user account" },
+          "riskModifier": "medium"
+        },
+        "-d": {
+          "description": { "ja": "ホームディレクトリを変更", "en": "Change home directory" }
+        },
+        "-s": {
+          "description": { "ja": "ログインシェルを変更", "en": "Change login shell" }
+        }
+      }
+    },
+    "userdel": {
+      "name": "userdel",
+      "description": {
+        "ja": "ユーザーアカウントを削除します",
+        "en": "Delete a user account"
+      },
+      "baseRisk": "critical",
+      "category": "system",
+      "flags": {
+        "-r": {
+          "description": { "ja": "ホームディレクトリとメールスプールも削除", "en": "Remove home directory and mail spool" },
+          "riskModifier": "critical"
+        }
+      }
+    },
+    "passwd": {
+      "name": "passwd",
+      "description": {
+        "ja": "ユーザーのパスワードを変更します",
+        "en": "Change user password"
+      },
+      "baseRisk": "high",
+      "category": "system",
+      "flags": {
+        "-l": {
+          "description": { "ja": "アカウントをロック", "en": "Lock account" },
+          "riskModifier": "high"
+        },
+        "-u": {
+          "description": { "ja": "アカウントのロックを解除", "en": "Unlock account" },
+          "riskModifier": "medium"
+        },
+        "-d": {
+          "description": { "ja": "パスワードを削除（空パスワードを許可）", "en": "Delete password (allow empty password)" },
+          "riskModifier": "critical"
+        },
+        "-e": {
+          "description": { "ja": "パスワードを即座に期限切れにする", "en": "Expire password immediately" },
+          "riskModifier": "medium"
+        }
+      }
+    },
+    "groupadd": {
+      "name": "groupadd",
+      "description": {
+        "ja": "新しいグループを作成します",
+        "en": "Create a new group"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "flags": {
+        "-r": {
+          "description": { "ja": "システムグループを作成", "en": "Create a system group" }
+        },
+        "-g": {
+          "description": { "ja": "GIDを指定", "en": "Specify GID" }
+        }
+      }
+    },
+    "lsb_release": {
+      "name": "lsb_release",
+      "description": {
+        "ja": "Linuxディストリビューション情報を表示します",
+        "en": "Show Linux distribution information"
+      },
+      "baseRisk": "low",
+      "category": "system",
+      "flags": {
+        "-a": {
+          "description": { "ja": "全情報を表示", "en": "Show all information" }
+        },
+        "-d": {
+          "description": { "ja": "ディストリビューション名を表示", "en": "Show distribution description" }
+        },
+        "-r": {
+          "description": { "ja": "リリース番号を表示", "en": "Show release number" }
+        },
+        "-c": {
+          "description": { "ja": "コードネームを表示", "en": "Show codename" }
+        }
+      }
+    },
+    "lscpu": {
+      "name": "lscpu",
+      "description": {
+        "ja": "CPU情報を表示します",
+        "en": "Display CPU architecture information"
+      },
+      "baseRisk": "low",
+      "category": "system",
+      "flags": {
+        "-e": {
+          "description": { "ja": "拡張形式で表示", "en": "Show extended format" }
+        },
+        "-J": {
+          "description": { "ja": "JSON形式で出力", "en": "Output in JSON format" }
+        }
+      }
+    },
+    "lsblk": {
+      "name": "lsblk",
+      "description": {
+        "ja": "ブロックデバイスの一覧を表示します",
+        "en": "List block devices"
+      },
+      "baseRisk": "low",
+      "category": "system",
+      "flags": {
+        "-f": {
+          "description": { "ja": "ファイルシステム情報を表示", "en": "Show filesystem information" }
+        },
+        "-a": {
+          "description": { "ja": "空のデバイスも表示", "en": "Show all devices including empty" }
+        },
+        "-o": {
+          "description": { "ja": "出力カラムを指定", "en": "Specify output columns" }
+        }
+      }
+    },
+    "dmesg": {
+      "name": "dmesg",
+      "description": {
+        "ja": "カーネルのメッセージバッファを表示します",
+        "en": "Print kernel ring buffer messages"
+      },
+      "baseRisk": "low",
+      "category": "system",
+      "flags": {
+        "-T": {
+          "description": { "ja": "人間が読める日時形式で表示", "en": "Show human-readable timestamps" }
+        },
+        "-w": {
+          "description": { "ja": "新しいメッセージをリアルタイムで表示", "en": "Follow new messages in real-time" }
+        },
+        "-l": {
+          "description": { "ja": "指定レベルのメッセージのみ表示", "en": "Show only messages with specified level" }
+        }
+      }
+    },
+    "strace": {
+      "name": "strace",
+      "description": {
+        "ja": "プロセスのシステムコールをトレースします",
+        "en": "Trace system calls and signals of a process"
+      },
+      "baseRisk": "low",
+      "category": "system",
+      "flags": {
+        "-p": {
+          "description": { "ja": "実行中プロセスにアタッチ", "en": "Attach to running process" }
+        },
+        "-e": {
+          "description": { "ja": "トレースするシステムコールを指定", "en": "Specify system calls to trace" }
+        },
+        "-f": {
+          "description": { "ja": "子プロセスもトレース", "en": "Trace child processes" }
+        },
+        "-o": {
+          "description": { "ja": "出力をファイルに保存", "en": "Write output to file" }
+        },
+        "-c": {
+          "description": { "ja": "システムコールの統計サマリーを表示", "en": "Show system call summary statistics" }
+        }
+      }
+    },
+    "sysctl": {
+      "name": "sysctl",
+      "description": {
+        "ja": "カーネルパラメータを表示・変更します",
+        "en": "View and modify kernel parameters at runtime"
+      },
+      "baseRisk": "high",
+      "category": "system",
+      "flags": {
+        "-a": {
+          "description": { "ja": "全カーネルパラメータを表示", "en": "Show all kernel parameters" }
+        },
+        "-w": {
+          "description": { "ja": "カーネルパラメータを設定", "en": "Set a kernel parameter" },
+          "riskModifier": "high"
+        },
+        "-p": {
+          "description": { "ja": "設定ファイルからパラメータを読み込み適用", "en": "Load parameters from configuration file" },
+          "riskModifier": "high"
+        }
+      }
+    },
+    "fdisk": {
+      "name": "fdisk",
+      "description": {
+        "ja": "ディスクのパーティションテーブルを操作します",
+        "en": "Manipulate disk partition table"
+      },
+      "baseRisk": "critical",
+      "category": "system",
+      "flags": {
+        "-l": {
+          "description": { "ja": "パーティション一覧を表示（読み取り専用）", "en": "List partitions (read-only)" }
+        }
+      }
+    },
+    "dd": {
+      "name": "dd",
+      "description": {
+        "ja": "ブロックレベルのデータコピー・変換を行います（ディスク全体の書き換えが可能）",
+        "en": "Copy and convert data at block level (can overwrite entire disks)"
+      },
+      "baseRisk": "critical",
+      "category": "system",
+      "flags": {
+        "if=": {
+          "description": { "ja": "入力ファイル（読み込み元）を指定", "en": "Specify input file (source)" }
+        },
+        "of=": {
+          "description": { "ja": "出力ファイル（書き込み先）を指定", "en": "Specify output file (destination)" },
+          "riskModifier": "critical"
+        },
+        "bs=": {
+          "description": { "ja": "ブロックサイズを指定", "en": "Set block size" }
+        },
+        "count=": {
+          "description": { "ja": "コピーするブロック数を指定", "en": "Set number of blocks to copy" }
+        },
+        "status=": {
+          "description": { "ja": "進捗表示レベルを指定", "en": "Set progress display level" }
+        }
+      }
+    },
+    "mkfs": {
+      "name": "mkfs",
+      "description": {
+        "ja": "ディスクにファイルシステムを作成します（全データが失われます）",
+        "en": "Create a filesystem on a device (destroys all existing data)"
+      },
+      "baseRisk": "critical",
+      "category": "system",
+      "flags": {
+        "-t": {
+          "description": { "ja": "ファイルシステムの種類を指定（ext4, xfs等）", "en": "Specify filesystem type (ext4, xfs, etc.)" }
+        }
+      }
+    },
+    "parted": {
+      "name": "parted",
+      "description": {
+        "ja": "ディスクのパーティションを管理します",
+        "en": "Manage disk partitions"
+      },
+      "baseRisk": "critical",
+      "category": "system",
+      "flags": {
+        "-l": {
+          "description": { "ja": "全ディスクのパーティション一覧を表示（読み取り専用）", "en": "List partitions on all disks (read-only)" }
+        }
+      }
+    },
+    "at": {
+      "name": "at",
+      "description": {
+        "ja": "指定時刻にコマンドを1回だけ実行するスケジュールを登録します",
+        "en": "Schedule a one-time command execution at a specified time"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "flags": {
+        "-l": {
+          "description": { "ja": "スケジュール済みジョブ一覧を表示", "en": "List scheduled jobs" }
+        },
+        "-d": {
+          "description": { "ja": "スケジュール済みジョブを削除", "en": "Delete a scheduled job" },
+          "riskModifier": "medium"
+        },
+        "-f": {
+          "description": { "ja": "実行するスクリプトファイルを指定", "en": "Specify script file to execute" }
+        }
+      }
+    },
+    "nice": {
+      "name": "nice",
+      "description": {
+        "ja": "指定した優先度でコマンドを実行します",
+        "en": "Run a command with modified scheduling priority"
+      },
+      "baseRisk": "medium",
+      "category": "process",
+      "flags": {
+        "-n": {
+          "description": { "ja": "nice値を指定（-20〜19、値が小さいほど高優先度）", "en": "Set nice value (-20 to 19, lower means higher priority)" }
+        }
+      }
+    },
+    "renice": {
+      "name": "renice",
+      "description": {
+        "ja": "実行中プロセスの優先度を変更します",
+        "en": "Change priority of running processes"
+      },
+      "baseRisk": "medium",
+      "category": "process",
+      "flags": {
+        "-n": {
+          "description": { "ja": "新しいnice値を指定", "en": "Set new nice value" }
+        },
+        "-p": {
+          "description": { "ja": "PIDを指定", "en": "Specify PID" }
+        },
+        "-u": {
+          "description": { "ja": "指定ユーザーの全プロセスの優先度を変更", "en": "Change priority for all processes of specified user" }
+        }
+      }
+    },
+    "vmstat": {
+      "name": "vmstat",
+      "description": {
+        "ja": "仮想メモリ、プロセス、CPU等の統計を表示します",
+        "en": "Report virtual memory, process, and CPU statistics"
+      },
+      "baseRisk": "low",
+      "category": "process",
+      "flags": {
+        "-s": {
+          "description": { "ja": "メモリ統計サマリーを表示", "en": "Show memory statistics summary" }
+        },
+        "-d": {
+          "description": { "ja": "ディスクI/O統計を表示", "en": "Show disk I/O statistics" }
+        },
+        "-w": {
+          "description": { "ja": "ワイドフォーマットで出力", "en": "Wide output format" }
+        }
+      }
+    },
+    "nmap": {
+      "name": "nmap",
+      "description": {
+        "ja": "ネットワーク探索・ポートスキャンを行います",
+        "en": "Network exploration and port scanning tool"
+      },
+      "baseRisk": "low",
+      "category": "network",
+      "flags": {
+        "-sS": {
+          "description": { "ja": "TCP SYNスキャン（ステルススキャン）", "en": "TCP SYN scan (stealth scan)" }
+        },
+        "-sV": {
+          "description": { "ja": "サービスバージョンを検出", "en": "Detect service versions" }
+        },
+        "-O": {
+          "description": { "ja": "OS検出", "en": "Enable OS detection" }
+        },
+        "-p": {
+          "description": { "ja": "スキャンするポート範囲を指定", "en": "Specify port range to scan" }
+        },
+        "-A": {
+          "description": { "ja": "OS検出・バージョン検出・スクリプトスキャンを一括実行", "en": "Enable OS detection, version detection, and script scanning" }
+        }
+      }
+    },
+    "tcpdump": {
+      "name": "tcpdump",
+      "description": {
+        "ja": "ネットワークパケットをキャプチャ・表示します",
+        "en": "Capture and display network packets"
+      },
+      "baseRisk": "low",
+      "category": "network",
+      "flags": {
+        "-i": {
+          "description": { "ja": "キャプチャするインターフェースを指定", "en": "Specify network interface to capture" }
+        },
+        "-w": {
+          "description": { "ja": "キャプチャ結果をファイルに保存", "en": "Write captured packets to file" }
+        },
+        "-r": {
+          "description": { "ja": "保存済みキャプチャファイルを読み込み", "en": "Read packets from saved file" }
+        },
+        "-n": {
+          "description": { "ja": "DNS逆引きしない（数値表示）", "en": "Don't resolve hostnames" }
+        },
+        "-c": {
+          "description": { "ja": "指定パケット数でキャプチャ終了", "en": "Stop after capturing specified number of packets" }
+        },
+        "-v": {
+          "description": { "ja": "詳細出力", "en": "Verbose output" }
+        }
+      }
+    },
+    "less": {
+      "name": "less",
+      "description": {
+        "ja": "ファイルをページ単位で閲覧します",
+        "en": "View file contents page by page"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-N": {
+          "description": { "ja": "行番号を表示", "en": "Show line numbers" }
+        },
+        "-S": {
+          "description": { "ja": "長い行を折り返さない", "en": "Don't wrap long lines" }
+        },
+        "-R": {
+          "description": { "ja": "ANSIカラーコードを解釈", "en": "Interpret ANSI color codes" }
+        },
+        "+F": {
+          "description": { "ja": "tail -fのようにファイル末尾を追跡", "en": "Follow file like tail -f" }
+        }
+      }
+    },
+    "stat": {
+      "name": "stat",
+      "description": {
+        "ja": "ファイルの詳細なメタデータを表示します（GNU版）",
+        "en": "Display detailed file metadata (GNU version)"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-c": {
+          "description": { "ja": "指定フォーマットで出力", "en": "Output in specified format" }
+        },
+        "-f": {
+          "description": { "ja": "ファイルシステム情報を表示", "en": "Show filesystem information" }
+        },
+        "-L": {
+          "description": { "ja": "シンボリックリンクの参照先を表示", "en": "Follow symbolic links" }
+        }
+      }
+    },
+    "readlink": {
+      "name": "readlink",
+      "description": {
+        "ja": "シンボリックリンクの参照先を表示します",
+        "en": "Print the target of a symbolic link"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-f": {
+          "description": { "ja": "全シンボリックリンクを解決して絶対パスを表示", "en": "Resolve all symlinks and show absolute path" }
+        },
+        "-e": {
+          "description": { "ja": "全要素が存在することを確認して解決", "en": "Resolve and verify all path components exist" }
+        }
+      }
+    },
+    "mktemp": {
+      "name": "mktemp",
+      "description": {
+        "ja": "一意な一時ファイルまたはディレクトリを作成します",
+        "en": "Create a unique temporary file or directory"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-d": {
+          "description": { "ja": "一時ディレクトリを作成", "en": "Create a temporary directory" }
+        },
+        "-t": {
+          "description": { "ja": "テンプレート名を指定", "en": "Specify template name" }
+        }
+      }
+    },
+    "tac": {
+      "name": "tac",
+      "description": {
+        "ja": "ファイルの内容を逆順（末尾から先頭）で表示します",
+        "en": "Display file contents in reverse order (last line first)"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-s": {
+          "description": { "ja": "区切り文字を指定", "en": "Specify separator string" }
+        }
+      }
+    },
+    "shred": {
+      "name": "shred",
+      "description": {
+        "ja": "ファイルを安全に削除します（データ復旧を困難にする上書き削除）",
+        "en": "Securely delete files by overwriting (makes recovery difficult)"
+      },
+      "baseRisk": "critical",
+      "category": "shell",
+      "flags": {
+        "-u": {
+          "description": { "ja": "上書き後にファイルを削除", "en": "Remove file after overwriting" },
+          "riskModifier": "critical"
+        },
+        "-n": {
+          "description": { "ja": "上書き回数を指定", "en": "Specify number of overwrite passes" }
+        },
+        "-v": {
+          "description": { "ja": "進捗を表示", "en": "Show progress" }
+        },
+        "-z": {
+          "description": { "ja": "最後にゼロで上書き（痕跡を隠す）", "en": "Add final overwrite with zeros (hide shredding)" }
+        }
+      }
+    },
+    "xdg-open": {
+      "name": "xdg-open",
+      "description": {
+        "ja": "デフォルトアプリケーションでファイルやURLを開きます",
+        "en": "Open a file or URL with the default application"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {}
+    },
+    "xclip": {
+      "name": "xclip",
+      "description": {
+        "ja": "X11クリップボードにデータをコピー・取得します",
+        "en": "Copy and retrieve data from X11 clipboard"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-selection": {
+          "description": { "ja": "クリップボードの種類を指定（clipboard/primary/secondary）", "en": "Specify selection (clipboard/primary/secondary)" }
+        },
+        "-o": {
+          "description": { "ja": "クリップボードの内容を出力", "en": "Output clipboard contents" }
+        },
+        "-i": {
+          "description": { "ja": "標準入力からクリップボードに書き込み", "en": "Read from stdin to clipboard" }
+        }
+      }
+    },
+    "xsel": {
+      "name": "xsel",
+      "description": {
+        "ja": "X11セレクションバッファを操作します（xclip代替）",
+        "en": "Manipulate X11 selection buffers (alternative to xclip)"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "--clipboard": {
+          "description": { "ja": "クリップボードセレクションを操作", "en": "Operate on clipboard selection" }
+        },
+        "-o": {
+          "description": { "ja": "セレクション内容を出力", "en": "Output selection contents" }
+        },
+        "-i": {
+          "description": { "ja": "標準入力からセレクションに書き込み", "en": "Read from stdin to selection" }
+        }
+      }
+    },
+    "strings": {
+      "name": "strings",
+      "description": {
+        "ja": "バイナリファイルから印字可能な文字列を抽出します",
+        "en": "Extract printable strings from binary files"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-n": {
+          "description": { "ja": "最小文字列長を指定", "en": "Set minimum string length" }
+        },
+        "-a": {
+          "description": { "ja": "ファイル全体をスキャン", "en": "Scan entire file" }
+        }
+      }
+    },
+    "envsubst": {
+      "name": "envsubst",
+      "description": {
+        "ja": "テキスト内の環境変数を実際の値に置換します",
+        "en": "Substitute environment variables in text"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-v": {
+          "description": { "ja": "参照された環境変数を表示", "en": "Show referenced variables" }
+        }
+      }
+    }
+  }
+}

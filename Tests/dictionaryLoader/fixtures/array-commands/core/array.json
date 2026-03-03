@@ -1,0 +1,9 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "core",
+    "name": "array-commands",
+    "description": "Test fixture with commands as array (invalid)"
+  },
+  "commands": ["not", "an", "object"]
+}

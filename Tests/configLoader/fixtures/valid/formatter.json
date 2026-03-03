@@ -1,0 +1,49 @@
+{
+  "version": "test-1.0.0",
+  "emoji": {
+    "risk": {
+      "low": "T_LOW",
+      "medium": "T_MED",
+      "high": "T_HIGH",
+      "critical": "T_CRIT"
+    },
+    "label": {
+      "riskLevel": "T_RL",
+      "chainNote": "T_CN",
+      "unknownRisk": "T_UR"
+    },
+    "operator": {
+      "&&": "T_AND",
+      "||": "T_OR",
+      "|": "T_PIPE",
+      ";": "T_SEMI"
+    }
+  },
+  "labels": {
+    "ja": {
+      "sectionHeader": "T_SEC",
+      "riskLevel": "T_リスク:",
+      "overallRiskLevel": "T_総合:",
+      "target": "T_対象:",
+      "unknownCommand": "T_未登録",
+      "unknownRiskSuffix": "T_中",
+      "chainNote": "T_注意",
+      "chainNoteSuffix": "T_。",
+      "risk": {
+        "low":      { "label": "T_低", "short": "T_低S" },
+        "medium":   { "label": "T_中", "short": "T_中S" },
+        "high":     { "label": "T_高", "short": "T_高S" },
+        "critical": { "label": "T_最高", "short": "T_最高S" }
+      }
+    }
+  },
+  "layout": {
+    "commandDelimiter": " -- ",
+    "chainNumbering": "none",
+    "detailedSingle": ["sectionHeader"],
+    "detailedChainHeader": ["sectionHeader"],
+    "detailedChainSegment": ["commandDescription"],
+    "detailedChainFooter": ["separator"],
+    "compactTemplate": "[Test {riskShort}] {commands}"
+  }
+}

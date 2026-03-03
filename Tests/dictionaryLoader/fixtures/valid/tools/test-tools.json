@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "tools",
+    "name": "test-tools",
+    "description": "Test fixture for tool commands"
+  },
+  "commands": {
+    "testtool1": {
+      "name": "testtool1",
+      "description": { "ja": "テストツール1", "en": "Test tool 1" },
+      "baseRisk": "high",
+      "category": "container"
+    }
+  }
+}

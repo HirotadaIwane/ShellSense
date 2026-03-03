@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "tools",
+    "name": "duplicate-b",
+    "description": "Test fixture for duplicate key detection (second definition, should be ignored)"
+  },
+  "commands": {
+    "dupcmd": {
+      "name": "dupcmd",
+      "description": { "ja": "重複コマンド（tools定義）", "en": "Duplicate command (tools definition)" },
+      "baseRisk": "high",
+      "category": "container"
+    }
+  }
+}

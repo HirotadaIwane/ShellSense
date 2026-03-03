@@ -1,0 +1,40 @@
+{
+  "version": "test-1.0.0",
+  "templates_long": {
+    "singleCommand": "{header}\n{command}\n{flags}\n{target}\n{sudo}\n{separator}\n{risk}",
+    "chainHeader": "{header}",
+    "chainSegment": "{command}\n{flags}\n{target}\n{sudo}",
+    "chainOperator": "  {operator}",
+    "chainFooter": "{separator}\n{overallRisk}"
+  },
+  "templates_short": {
+    "singleCommand": "[Test {risk}] {commands}",
+    "chainCommand": "[Test {risk}] {commands}"
+  },
+  "labels": {
+    "ja": {
+      "header": "T_SEC",
+      "risk_low": "T_LOW_FULL",
+      "risk_low_short": "T_LOW",
+      "risk_medium": "T_MED_FULL",
+      "risk_medium_short": "T_MED",
+      "risk_high": "T_HIGH_FULL",
+      "risk_high_short": "T_HIGH",
+      "risk_critical": "T_CRIT_FULL",
+      "risk_critical_short": "T_CRIT",
+      "unknownRisk": "T_UR_FULL",
+      "unknownRisk_short": "T_UR",
+      "unknownCommand": "T_未登録",
+      "target": "T_対象:",
+      "delimiter": " -- ",
+      "indent": "  ",
+      "chainNotice": "T_注意",
+      "chainNumbering": "none",
+      "sudoNotice": "T_sudo",
+      "operator_&&": "T_AND",
+      "operator_||": "T_OR",
+      "operator_|": "T_PIPE",
+      "operator_;": "T_SEMI"
+    }
+  }
+}

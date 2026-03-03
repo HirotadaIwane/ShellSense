@@ -1,0 +1,8 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "core",
+    "name": "no-commands",
+    "description": "Test fixture with missing commands key"
+  }
+}

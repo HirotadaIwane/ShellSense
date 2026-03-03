@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "core",
+    "name": "test-commands",
+    "description": "Test fixture for core commands"
+  },
+  "commands": {
+    "testcmd1": {
+      "name": "testcmd1",
+      "description": { "ja": "テストコマンド1", "en": "Test command 1" },
+      "baseRisk": "low",
+      "category": "filesystem"
+    },
+    "testcmd2": {
+      "name": "testcmd2",
+      "description": { "ja": "テストコマンド2", "en": "Test command 2" },
+      "baseRisk": "medium",
+      "category": "text"
+    }
+  }
+}

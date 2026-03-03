@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "ShellSense dictionary file schema (Phase 2)",
+  "required": ["version", "metadata", "commands"],
+  "properties": {
+    "version": { "type": "string" },
+    "metadata": {
+      "type": "object",
+      "required": ["layer", "name"],
+      "properties": {
+        "layer": { "enum": ["core", "os", "tools"] },
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "os": { "enum": ["linux", "macos", "windows"] }
+      }
+    },
+    "commands": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/CommandEntry"
+      }
+    }
+  },
+  "definitions": {
+    "CommandEntry": {
+      "type": "object",
+      "required": ["name", "description", "baseRisk", "category"],
+      "properties": {
+        "name": { "type": "string" },
+        "description": {
+          "type": "object",
+          "required": ["ja", "en"],
+          "properties": {
+            "ja": { "type": "string", "minLength": 1 },
+            "en": { "type": "string", "minLength": 1 }
+          }
+        },
+        "baseRisk": { "enum": ["low", "medium", "high", "critical"] },
+        "category": {
+          "enum": ["filesystem", "text", "git", "package", "network", "process", "system", "container", "cloud", "shell", "other"]
+        },
+        "flags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/FlagEntry"
+          }
+        },
+        "subcommands": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SubcommandEntry"
+          }
+        }
+      }
+    },
+    "FlagEntry": {
+      "type": "object",
+      "required": ["description"],
+      "properties": {
+        "description": {
+          "type": "object",
+          "required": ["ja", "en"],
+          "properties": {
+            "ja": { "type": "string" },
+            "en": { "type": "string" }
+          }
+        },
+        "riskModifier": { "enum": ["low", "medium", "high", "critical"] }
+      }
+    },
+    "SubcommandEntry": {
+      "type": "object",
+      "required": ["description"],
+      "properties": {
+        "description": {
+          "type": "object",
+          "required": ["ja", "en"],
+          "properties": {
+            "ja": { "type": "string" },
+            "en": { "type": "string" }
+          }
+        },
+        "riskOverride": { "enum": ["low", "medium", "high", "critical"] },
+        "flags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/FlagEntry"
+          }
+        }
+      }
+    }
+  }
+}

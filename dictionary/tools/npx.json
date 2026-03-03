@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "tools",
+    "name": "npx",
+    "description": "npm package runner"
+  },
+  "commands": {
+    "npx": {
+      "name": "npx",
+      "description": {
+        "ja": "npmパッケージを直接実行",
+        "en": "Execute npm package binaries"
+      },
+      "baseRisk": "medium",
+      "category": "package",
+      "flags": {
+        "--yes": {
+          "description": { "ja": "確認プロンプトなしでパッケージをインストールして実行", "en": "Automatically install packages without prompting" }
+        },
+        "--no-install": {
+          "description": { "ja": "ローカルにインストール済みのパッケージのみ実行", "en": "Only run packages that are locally installed" }
+        },
+        "--package": {
+          "description": { "ja": "実行するパッケージを明示的に指定", "en": "Explicitly specify the package to run" }
+        }
+      }
+    }
+  }
+}

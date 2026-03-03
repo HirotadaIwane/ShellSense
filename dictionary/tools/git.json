@@ -1,0 +1,1202 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "tools",
+    "name": "git",
+    "description": "Git version control"
+  },
+  "commands": {
+    "git": {
+      "name": "git",
+      "description": {
+        "ja": "Gitバージョン管理システムを操作",
+        "en": "Git version control system"
+      },
+      "baseRisk": "low",
+      "category": "git",
+      "subcommands": {
+        "status": {
+          "description": { "ja": "変更されたファイルの状態を表示", "en": "Show the working tree status" },
+          "riskOverride": "low",
+          "flags": {
+            "--short": {
+              "description": { "ja": "短縮形式で出力", "en": "Show output in short format" }
+            },
+            "--branch": {
+              "description": { "ja": "ブランチ情報を表示", "en": "Show branch information" }
+            },
+            "--porcelain": {
+              "description": { "ja": "スクリプト向けの安定出力形式", "en": "Machine-readable output format" }
+            },
+            "--verbose": {
+              "description": { "ja": "詳細な差分も表示", "en": "Show verbose output with diff" }
+            },
+            "--ignored": {
+              "description": { "ja": "無視されたファイルも表示", "en": "Show ignored files" }
+            }
+          }
+        },
+        "add": {
+          "description": { "ja": "ファイルをコミット対象に追加（ステージング）", "en": "Add file contents to the staging area" },
+          "riskOverride": "low",
+          "flags": {
+            "--all": {
+              "description": { "ja": "全変更をステージング（新規・変更・削除）", "en": "Stage all changes (new, modified, deleted)" }
+            },
+            "--patch": {
+              "description": { "ja": "対話的に変更の一部をステージング", "en": "Interactively stage parts of changes" }
+            },
+            "--dry-run": {
+              "description": { "ja": "実行内容のプレビューのみ", "en": "Dry run, show what would be added" }
+            },
+            "--force": {
+              "description": { "ja": ".gitignore で無視されたファイルも強制追加", "en": "Force adding ignored files" },
+              "riskModifier": "medium"
+            },
+            "--update": {
+              "description": { "ja": "追跡済みファイルの変更と削除のみステージング", "en": "Stage modifications and deletions of tracked files" }
+            },
+            "--verbose": {
+              "description": { "ja": "詳細出力", "en": "Show verbose output" }
+            }
+          }
+        },
+        "commit": {
+          "description": { "ja": "ステージングされた変更を記録", "en": "Record changes to the repository" },
+          "riskOverride": "medium",
+          "flags": {
+            "-m": {
+              "description": { "ja": "コミットメッセージを指定", "en": "Use the given message as the commit message" }
+            },
+            "--all": {
+              "description": { "ja": "変更された追跡済みファイルを自動ステージング", "en": "Automatically stage modified tracked files" }
+            },
+            "--amend": {
+              "description": { "ja": "直前のコミットを修正（履歴書き換え）", "en": "Amend the previous commit (rewrites history)" },
+              "riskModifier": "high"
+            },
+            "--no-verify": {
+              "description": { "ja": "pre-commit/commit-msg フックをスキップ", "en": "Skip pre-commit and commit-msg hooks" },
+              "riskModifier": "high"
+            },
+            "--fixup": {
+              "description": { "ja": "指定コミットの修正用コミットを作成", "en": "Create a fixup commit for the specified commit" }
+            },
+            "--allow-empty": {
+              "description": { "ja": "空のコミットを許可", "en": "Allow empty commits" }
+            },
+            "--dry-run": {
+              "description": { "ja": "コミットせずにプレビュー", "en": "Show what would be committed without committing" }
+            },
+            "--verbose": {
+              "description": { "ja": "差分をコミットメッセージに含める", "en": "Include diff in commit message editor" }
+            }
+          }
+        },
+        "push": {
+          "description": { "ja": "ローカルの変更をリモートリポジトリに送信", "en": "Update remote refs along with associated objects" },
+          "riskOverride": "medium",
+          "flags": {
+            "--force": {
+              "description": { "ja": "リモートの履歴を上書きして強制プッシュ", "en": "Force push, overwriting remote history" },
+              "riskModifier": "critical"
+            },
+            "--force-with-lease": {
+              "description": { "ja": "リモートが想定通りの場合のみ強制プッシュ", "en": "Force push only if remote matches expected state" },
+              "riskModifier": "high"
+            },
+            "--force-if-includes": {
+              "description": { "ja": "ローカルにリモートの最新が含まれる場合のみ強制", "en": "Force push only if local includes remote tip" },
+              "riskModifier": "high"
+            },
+            "--set-upstream": {
+              "description": { "ja": "upstream ブランチを設定", "en": "Set upstream tracking branch" }
+            },
+            "--all": {
+              "description": { "ja": "全ブランチをプッシュ", "en": "Push all branches" },
+              "riskModifier": "medium"
+            },
+            "--delete": {
+              "description": { "ja": "リモートブランチを削除", "en": "Delete remote branch" },
+              "riskModifier": "high"
+            },
+            "--tags": {
+              "description": { "ja": "全タグをプッシュ", "en": "Push all tags" }
+            },
+            "--dry-run": {
+              "description": { "ja": "実行内容のプレビューのみ", "en": "Dry run, show what would be pushed" }
+            },
+            "--mirror": {
+              "description": { "ja": "リポジトリをミラーリング（全参照を強制上書き）", "en": "Mirror repository (force overwrite all refs)" },
+              "riskModifier": "critical"
+            },
+            "--prune": {
+              "description": { "ja": "リモートにないブランチを削除", "en": "Remove remote branches that no longer exist locally" },
+              "riskModifier": "high"
+            },
+            "--no-verify": {
+              "description": { "ja": "pre-push フックをスキップ", "en": "Skip pre-push hooks" },
+              "riskModifier": "high"
+            }
+          }
+        },
+        "pull": {
+          "description": { "ja": "リモートリポジトリの変更を取得してマージ", "en": "Fetch from and integrate with another repository" },
+          "riskOverride": "medium",
+          "flags": {
+            "--rebase": {
+              "description": { "ja": "マージの代わりにリベースで統合", "en": "Rebase instead of merge when pulling" },
+              "riskModifier": "medium"
+            },
+            "--no-rebase": {
+              "description": { "ja": "リベースせずマージで統合", "en": "Merge instead of rebase" }
+            },
+            "--ff-only": {
+              "description": { "ja": "fast-forward できない場合は失敗", "en": "Fail if fast-forward is not possible" }
+            },
+            "--no-ff": {
+              "description": { "ja": "常にマージコミットを作成", "en": "Always create a merge commit" }
+            },
+            "--squash": {
+              "description": { "ja": "変更を1つのコミットにまとめる", "en": "Squash changes into a single commit" }
+            },
+            "--autostash": {
+              "description": { "ja": "pull 前に自動 stash、pull 後に自動復元", "en": "Automatically stash before pull and restore after" }
+            },
+            "--allow-unrelated-histories": {
+              "description": { "ja": "無関係な履歴のマージを許可", "en": "Allow merging unrelated histories" },
+              "riskModifier": "medium"
+            }
+          }
+        },
+        "fetch": {
+          "description": { "ja": "リモートリポジトリから変更を取得", "en": "Download objects and refs from a remote repository" },
+          "riskOverride": "low",
+          "flags": {
+            "--all": {
+              "description": { "ja": "全リモートから取得", "en": "Fetch from all remotes" }
+            },
+            "--prune": {
+              "description": { "ja": "リモートで削除されたブランチをローカルでも削除", "en": "Remove remote-tracking branches that no longer exist" },
+              "riskModifier": "medium"
+            },
+            "--prune-tags": {
+              "description": { "ja": "リモートで削除されたタグもローカルで削除", "en": "Remove tags that no longer exist on remote" },
+              "riskModifier": "medium"
+            },
+            "--tags": {
+              "description": { "ja": "全タグを取得", "en": "Fetch all tags" }
+            },
+            "--force": {
+              "description": { "ja": "ローカル参照を強制更新", "en": "Force update local refs" },
+              "riskModifier": "medium"
+            },
+            "--depth": {
+              "description": { "ja": "浅いクローンの深さを指定", "en": "Limit fetching to the specified depth" }
+            },
+            "--dry-run": {
+              "description": { "ja": "実行内容のプレビューのみ", "en": "Dry run, show what would be fetched" }
+            }
+          }
+        },
+        "branch": {
+          "description": { "ja": "ブランチの一覧表示・作成・削除を行います", "en": "List, create, or delete branches" },
+          "riskOverride": "low",
+          "flags": {
+            "--delete": {
+              "description": { "ja": "マージ済みブランチを削除", "en": "Delete a fully merged branch" },
+              "riskModifier": "medium"
+            },
+            "-D": {
+              "description": { "ja": "ブランチを強制削除（未マージでも）", "en": "Force delete branch (even if unmerged)" },
+              "riskModifier": "high"
+            },
+            "--move": {
+              "description": { "ja": "ブランチ名を変更", "en": "Rename a branch" }
+            },
+            "--all": {
+              "description": { "ja": "ローカル + リモートブランチを表示", "en": "Show both local and remote branches" }
+            },
+            "--remotes": {
+              "description": { "ja": "リモートブランチのみ表示", "en": "Show remote branches only" }
+            },
+            "--list": {
+              "description": { "ja": "パターンに一致するブランチを一覧表示", "en": "List branches matching a pattern" }
+            },
+            "--verbose": {
+              "description": { "ja": "各ブランチの最新コミットを表示", "en": "Show last commit for each branch" }
+            },
+            "--force": {
+              "description": { "ja": "既存ブランチを強制的に再作成", "en": "Force create branch (overwrite existing)" },
+              "riskModifier": "high"
+            },
+            "--set-upstream-to": {
+              "description": { "ja": "upstream ブランチを設定", "en": "Set upstream tracking branch" }
+            },
+            "--show-current": {
+              "description": { "ja": "現在のブランチ名を表示", "en": "Show current branch name" }
+            }
+          }
+        },
+        "checkout": {
+          "description": { "ja": "ブランチを切り替えます、またはファイルを復元", "en": "Switch branches or restore working tree files" },
+          "riskOverride": "medium",
+          "flags": {
+            "-b": {
+              "description": { "ja": "新しいブランチを作成して切り替え", "en": "Create and switch to a new branch" }
+            },
+            "-B": {
+              "description": { "ja": "ブランチを強制作成（既存なら上書き）して切り替え", "en": "Force create branch (overwrite if exists) and switch" },
+              "riskModifier": "high"
+            },
+            "--force": {
+              "description": { "ja": "ローカル変更を破棄して切り替え", "en": "Discard local changes and switch" },
+              "riskModifier": "high"
+            },
+            "--detach": {
+              "description": { "ja": "デタッチド HEAD で切り替え", "en": "Switch to detached HEAD" }
+            },
+            "--orphan": {
+              "description": { "ja": "親のない新ブランチを作成", "en": "Create a new orphan branch" }
+            },
+            "--track": {
+              "description": { "ja": "upstream 追跡を設定", "en": "Set up tracking for the branch" }
+            },
+            "--ours": {
+              "description": { "ja": "競合時に自分の変更を採用", "en": "Use our version for conflicts" },
+              "riskModifier": "medium"
+            },
+            "--theirs": {
+              "description": { "ja": "競合時に相手の変更を採用", "en": "Use their version for conflicts" },
+              "riskModifier": "medium"
+            },
+            "--patch": {
+              "description": { "ja": "対話的に変更を選択して復元", "en": "Interactively select changes to restore" }
+            }
+          }
+        },
+        "switch": {
+          "description": { "ja": "ブランチを切り替え", "en": "Switch branches" },
+          "riskOverride": "medium",
+          "flags": {
+            "--create": {
+              "description": { "ja": "新しいブランチを作成して切り替え", "en": "Create and switch to a new branch" }
+            },
+            "--force-create": {
+              "description": { "ja": "ブランチを強制作成して切り替え", "en": "Force create branch and switch" },
+              "riskModifier": "high"
+            },
+            "--detach": {
+              "description": { "ja": "デタッチド HEAD で切り替え", "en": "Switch to detached HEAD" }
+            },
+            "--force": {
+              "description": { "ja": "ローカル変更を破棄して切り替え", "en": "Discard local changes and switch" },
+              "riskModifier": "high"
+            },
+            "--merge": {
+              "description": { "ja": "競合時にマージを試みる", "en": "Attempt merge on conflicts" }
+            },
+            "--orphan": {
+              "description": { "ja": "親のない新ブランチを作成", "en": "Create a new orphan branch" }
+            },
+            "--guess": {
+              "description": { "ja": "リモートブランチ名から推測して切り替え", "en": "Guess remote branch name" }
+            }
+          }
+        },
+        "merge": {
+          "description": { "ja": "ブランチをマージ（統合）", "en": "Join two or more development histories together" },
+          "riskOverride": "medium",
+          "flags": {
+            "--no-ff": {
+              "description": { "ja": "常にマージコミットを作成", "en": "Always create a merge commit" }
+            },
+            "--ff-only": {
+              "description": { "ja": "fast-forward できない場合は失敗", "en": "Fail if fast-forward is not possible" }
+            },
+            "--squash": {
+              "description": { "ja": "変更を1つのコミットにまとめる（コミットは作らない）", "en": "Squash changes into a single commit (no auto-commit)" }
+            },
+            "--no-commit": {
+              "description": { "ja": "マージ結果をコミットせずにステージング", "en": "Merge without committing" }
+            },
+            "--abort": {
+              "description": { "ja": "マージを中断して元の状態に戻す", "en": "Abort merge and restore original state" }
+            },
+            "--continue": {
+              "description": { "ja": "競合解決後にマージを続行", "en": "Continue merge after resolving conflicts" }
+            },
+            "--strategy": {
+              "description": { "ja": "マージ戦略を指定", "en": "Specify merge strategy" }
+            },
+            "--allow-unrelated-histories": {
+              "description": { "ja": "無関係な履歴のマージを許可", "en": "Allow merging unrelated histories" },
+              "riskModifier": "medium"
+            },
+            "--autostash": {
+              "description": { "ja": "マージ前に自動 stash", "en": "Automatically stash before merge" }
+            }
+          }
+        },
+        "diff": {
+          "description": { "ja": "ファイルの変更内容を表示", "en": "Show changes between commits, commit and working tree, etc." },
+          "riskOverride": "low",
+          "flags": {
+            "--staged": {
+              "description": { "ja": "ステージング済みの変更を表示", "en": "Show staged changes" }
+            },
+            "--stat": {
+              "description": { "ja": "変更ファイルの統計を表示", "en": "Show diffstat summary" }
+            },
+            "--name-only": {
+              "description": { "ja": "変更ファイル名のみ表示", "en": "Show only names of changed files" }
+            },
+            "--name-status": {
+              "description": { "ja": "変更ファイル名と状態を表示", "en": "Show names and status of changed files" }
+            },
+            "--check": {
+              "description": { "ja": "空白エラーを警告", "en": "Warn about whitespace errors" }
+            },
+            "--color-words": {
+              "description": { "ja": "単語単位で色付き差分表示", "en": "Show word-level colored diff" }
+            },
+            "--word-diff": {
+              "description": { "ja": "単語単位の差分表示", "en": "Show word-level diff" }
+            },
+            "--no-index": {
+              "description": { "ja": "Git 管理外のファイル同士を比較", "en": "Compare files outside of Git control" }
+            }
+          }
+        },
+        "log": {
+          "description": { "ja": "コミット履歴を表示", "en": "Show commit logs" },
+          "riskOverride": "low",
+          "flags": {
+            "--oneline": {
+              "description": { "ja": "1行形式で表示", "en": "Show each commit on a single line" }
+            },
+            "--graph": {
+              "description": { "ja": "ブランチ構造をグラフ表示", "en": "Show branch structure as a graph" }
+            },
+            "-n": {
+              "description": { "ja": "表示するコミット数を制限", "en": "Limit the number of commits shown" }
+            },
+            "--all": {
+              "description": { "ja": "全参照のコミットを表示", "en": "Show commits from all refs" }
+            },
+            "--author": {
+              "description": { "ja": "指定した作者のコミットのみ", "en": "Show commits by a specific author" }
+            },
+            "--grep": {
+              "description": { "ja": "メッセージに一致するコミットのみ", "en": "Show commits matching a message pattern" }
+            },
+            "--since": {
+              "description": { "ja": "指定日時以降のコミット", "en": "Show commits after a specific date" }
+            },
+            "--stat": {
+              "description": { "ja": "変更ファイルの統計を表示", "en": "Show diffstat for each commit" }
+            },
+            "--follow": {
+              "description": { "ja": "リネームを追跡して履歴表示", "en": "Follow renames when showing file history" }
+            },
+            "--format": {
+              "description": { "ja": "出力フォーマットを指定", "en": "Specify output format" }
+            }
+          }
+        },
+        "stash": {
+          "description": { "ja": "作業中の変更を一時的に退避", "en": "Stash the changes in a dirty working directory away" },
+          "riskOverride": "low",
+          "flags": {
+            "--include-untracked": {
+              "description": { "ja": "未追跡ファイルも退避", "en": "Include untracked files in stash" }
+            },
+            "--all": {
+              "description": { "ja": "無視されたファイルも含めて退避", "en": "Include ignored files in stash" }
+            },
+            "--keep-index": {
+              "description": { "ja": "ステージング済みの変更を退避しない", "en": "Keep staged changes in the index" }
+            },
+            "--patch": {
+              "description": { "ja": "対話的に退避する変更を選択", "en": "Interactively select changes to stash" }
+            },
+            "--message": {
+              "description": { "ja": "stash にメッセージを設定", "en": "Set a message for the stash" }
+            }
+          }
+        },
+        "reset": {
+          "description": { "ja": "コミットの取り消しやステージングの解除を行います", "en": "Reset current HEAD to the specified state" },
+          "riskOverride": "high",
+          "flags": {
+            "--hard": {
+              "description": { "ja": "HEAD・インデックス・ワークツリー全てをリセット（変更が失われる）", "en": "Reset HEAD, index, and working tree (changes will be lost)" },
+              "riskModifier": "critical"
+            },
+            "--soft": {
+              "description": { "ja": "HEAD のみ移動（インデックス・ワークツリーは維持）", "en": "Move HEAD only (keep index and working tree)" },
+              "riskModifier": "medium"
+            },
+            "--mixed": {
+              "description": { "ja": "HEAD とインデックスをリセット（ワークツリーは維持、デフォルト）", "en": "Reset HEAD and index (keep working tree, default)" },
+              "riskModifier": "medium"
+            },
+            "--merge": {
+              "description": { "ja": "マージを中断してリセット", "en": "Reset to abort a merge" },
+              "riskModifier": "high"
+            },
+            "--keep": {
+              "description": { "ja": "変更を保持しつつ HEAD を移動", "en": "Move HEAD while keeping local changes" },
+              "riskModifier": "medium"
+            },
+            "--patch": {
+              "description": { "ja": "対話的にリセットする変更を選択", "en": "Interactively select changes to reset" }
+            }
+          }
+        },
+        "restore": {
+          "description": { "ja": "ワークツリーのファイルを復元", "en": "Restore working tree files" },
+          "riskOverride": "medium",
+          "flags": {
+            "--staged": {
+              "description": { "ja": "ステージングを解除（ファイルは変更せず）", "en": "Unstage changes (keep file modifications)" }
+            },
+            "--worktree": {
+              "description": { "ja": "ワークツリーのファイルを復元", "en": "Restore working tree files" },
+              "riskModifier": "medium"
+            },
+            "--source": {
+              "description": { "ja": "復元元のコミット/ブランチを指定", "en": "Specify source commit or branch for restore" }
+            },
+            "--patch": {
+              "description": { "ja": "対話的に復元する変更を選択", "en": "Interactively select changes to restore" }
+            },
+            "--ours": {
+              "description": { "ja": "競合時に自分の変更を採用", "en": "Use our version for conflicts" },
+              "riskModifier": "medium"
+            },
+            "--theirs": {
+              "description": { "ja": "競合時に相手の変更を採用", "en": "Use their version for conflicts" },
+              "riskModifier": "medium"
+            }
+          }
+        },
+        "rebase": {
+          "description": { "ja": "コミット履歴を別のベースに付け替え", "en": "Reapply commits on top of another base tip" },
+          "riskOverride": "high",
+          "flags": {
+            "--interactive": {
+              "description": { "ja": "対話的リベース（コミット編集・並べ替え・統合）", "en": "Interactive rebase (edit, reorder, squash commits)" },
+              "riskModifier": "high"
+            },
+            "--onto": {
+              "description": { "ja": "リベース先を指定", "en": "Specify new base for rebase" },
+              "riskModifier": "high"
+            },
+            "--abort": {
+              "description": { "ja": "リベースを中断して元の状態に戻す", "en": "Abort rebase and restore original state" }
+            },
+            "--continue": {
+              "description": { "ja": "競合解決後にリベースを続行", "en": "Continue rebase after resolving conflicts" }
+            },
+            "--skip": {
+              "description": { "ja": "現在のパッチをスキップして続行", "en": "Skip the current patch and continue" },
+              "riskModifier": "medium"
+            },
+            "--force-rebase": {
+              "description": { "ja": "全コミットを強制的にリベース", "en": "Force rebase all commits" },
+              "riskModifier": "high"
+            },
+            "--root": {
+              "description": { "ja": "ルートコミットからリベース", "en": "Rebase from root commit" },
+              "riskModifier": "high"
+            },
+            "--autosquash": {
+              "description": { "ja": "fixup!/squash! コミットを自動処理", "en": "Automatically squash fixup/squash commits" }
+            },
+            "--autostash": {
+              "description": { "ja": "リベース前に自動 stash", "en": "Automatically stash before rebase" }
+            }
+          }
+        },
+        "cherry-pick": {
+          "description": { "ja": "特定のコミットを現在のブランチに適用", "en": "Apply specific commits to the current branch" },
+          "riskOverride": "medium",
+          "flags": {
+            "--no-commit": {
+              "description": { "ja": "コミットせずにワークツリーに適用", "en": "Apply without committing" }
+            },
+            "--edit": {
+              "description": { "ja": "コミットメッセージを編集", "en": "Edit the commit message" }
+            },
+            "--abort": {
+              "description": { "ja": "cherry-pick を中断して元の状態に戻す", "en": "Abort cherry-pick and restore original state" }
+            },
+            "--continue": {
+              "description": { "ja": "競合解決後に cherry-pick を続行", "en": "Continue cherry-pick after resolving conflicts" }
+            },
+            "--skip": {
+              "description": { "ja": "現在のコミットをスキップ", "en": "Skip the current commit" }
+            },
+            "--signoff": {
+              "description": { "ja": "Signed-off-by 行を追加", "en": "Add Signed-off-by line" }
+            }
+          }
+        },
+        "remote": {
+          "description": { "ja": "リモートリポジトリの管理", "en": "Manage set of tracked repositories" },
+          "riskOverride": "low",
+          "flags": {
+            "--verbose": {
+              "description": { "ja": "URL を含む詳細情報を表示", "en": "Show verbose information including URLs" }
+            }
+          }
+        },
+        "tag": {
+          "description": { "ja": "タグの一覧表示・作成・削除", "en": "Create, list, delete, or verify tags" },
+          "riskOverride": "low",
+          "flags": {
+            "--annotate": {
+              "description": { "ja": "注釈付きタグを作成", "en": "Create an annotated tag" }
+            },
+            "--delete": {
+              "description": { "ja": "タグを削除", "en": "Delete a tag" },
+              "riskModifier": "medium"
+            },
+            "--list": {
+              "description": { "ja": "タグを一覧表示", "en": "List tags" }
+            },
+            "--message": {
+              "description": { "ja": "タグメッセージを指定", "en": "Specify tag message" }
+            },
+            "--force": {
+              "description": { "ja": "既存タグを強制上書き", "en": "Force overwrite existing tag" },
+              "riskModifier": "high"
+            },
+            "--sign": {
+              "description": { "ja": "GPG 署名付きタグを作成", "en": "Create a GPG-signed tag" }
+            },
+            "--verify": {
+              "description": { "ja": "タグの GPG 署名を検証", "en": "Verify GPG signature of a tag" }
+            }
+          }
+        },
+        "clone": {
+          "description": { "ja": "リポジトリをコピーしてダウンロード", "en": "Clone a repository into a new directory" },
+          "riskOverride": "medium",
+          "flags": {
+            "--depth": {
+              "description": { "ja": "指定した深さまでの浅いクローン", "en": "Create a shallow clone with specified depth" }
+            },
+            "--branch": {
+              "description": { "ja": "特定のブランチをチェックアウト", "en": "Checkout a specific branch" }
+            },
+            "--single-branch": {
+              "description": { "ja": "1つのブランチのみクローン", "en": "Clone only a single branch" }
+            },
+            "--bare": {
+              "description": { "ja": "ベアリポジトリとしてクローン", "en": "Clone as a bare repository" }
+            },
+            "--mirror": {
+              "description": { "ja": "ミラーリポジトリとしてクローン", "en": "Clone as a mirror repository" }
+            },
+            "--recurse-submodules": {
+              "description": { "ja": "サブモジュールも初期化・クローン", "en": "Initialize and clone submodules" }
+            },
+            "--filter": {
+              "description": { "ja": "部分クローン（blobless 等）", "en": "Partial clone with filter" }
+            },
+            "--sparse": {
+              "description": { "ja": "スパースチェックアウトを有効化", "en": "Enable sparse checkout" }
+            }
+          }
+        },
+        "init": {
+          "description": { "ja": "新しい Git リポジトリを作成", "en": "Create an empty Git repository" },
+          "riskOverride": "medium",
+          "flags": {
+            "--bare": {
+              "description": { "ja": "ベアリポジトリとして初期化", "en": "Initialize as a bare repository" }
+            },
+            "--initial-branch": {
+              "description": { "ja": "初期ブランチ名を指定", "en": "Specify the initial branch name" }
+            }
+          }
+        },
+        "rm": {
+          "description": { "ja": "ファイルを Git 管理から削除", "en": "Remove files from the working tree and index" },
+          "riskOverride": "medium",
+          "flags": {
+            "--force": {
+              "description": { "ja": "変更があるファイルも強制削除", "en": "Force removal of modified files" },
+              "riskModifier": "high"
+            },
+            "-r": {
+              "description": { "ja": "ディレクトリを再帰的に削除", "en": "Recursively remove directories" },
+              "riskModifier": "high"
+            },
+            "--cached": {
+              "description": { "ja": "インデックスからのみ削除（ファイルは残す）", "en": "Remove from index only (keep file on disk)" },
+              "riskModifier": "medium"
+            },
+            "--dry-run": {
+              "description": { "ja": "実行内容のプレビューのみ", "en": "Dry run, show what would be removed" }
+            }
+          }
+        },
+        "mv": {
+          "description": { "ja": "ファイルを移動またはリネーム", "en": "Move or rename a file, directory, or symlink" },
+          "riskOverride": "medium",
+          "flags": {
+            "--force": {
+              "description": { "ja": "既存ファイルを上書きして移動", "en": "Force move, overwrite existing files" },
+              "riskModifier": "medium"
+            },
+            "--dry-run": {
+              "description": { "ja": "実行内容のプレビューのみ", "en": "Dry run, show what would be moved" }
+            },
+            "--verbose": {
+              "description": { "ja": "詳細出力", "en": "Show verbose output" }
+            }
+          }
+        },
+        "config": {
+          "description": { "ja": "Git の設定を表示・変更", "en": "Get and set Git configuration" },
+          "riskOverride": "medium",
+          "flags": {
+            "--global": {
+              "description": { "ja": "グローバル設定を操作", "en": "Use global configuration" }
+            },
+            "--system": {
+              "description": { "ja": "システム設定を操作", "en": "Use system configuration" }
+            },
+            "--local": {
+              "description": { "ja": "ローカル設定を操作", "en": "Use local configuration" }
+            },
+            "--list": {
+              "description": { "ja": "全設定を一覧表示", "en": "List all configuration settings" }
+            },
+            "--get": {
+              "description": { "ja": "値を取得", "en": "Get a configuration value" }
+            },
+            "--unset": {
+              "description": { "ja": "設定を削除", "en": "Remove a configuration entry" },
+              "riskModifier": "medium"
+            },
+            "--unset-all": {
+              "description": { "ja": "一致する全設定を削除", "en": "Remove all matching configuration entries" },
+              "riskModifier": "medium"
+            },
+            "--edit": {
+              "description": { "ja": "エディタで設定ファイルを編集", "en": "Open configuration in editor" }
+            }
+          }
+        },
+        "show": {
+          "description": { "ja": "コミットやオブジェクトの情報を表示", "en": "Show various types of objects" },
+          "riskOverride": "low",
+          "flags": {
+            "--stat": {
+              "description": { "ja": "変更ファイルの統計を表示", "en": "Show diffstat summary" }
+            },
+            "--name-only": {
+              "description": { "ja": "変更ファイル名のみ表示", "en": "Show only names of changed files" }
+            },
+            "--name-status": {
+              "description": { "ja": "変更ファイル名と状態を表示", "en": "Show names and status of changed files" }
+            },
+            "--format": {
+              "description": { "ja": "出力フォーマットを指定", "en": "Specify output format" }
+            },
+            "--no-patch": {
+              "description": { "ja": "差分を表示しない", "en": "Suppress diff output" }
+            }
+          }
+        },
+        "revert": {
+          "description": { "ja": "コミットを打ち消す新しいコミットを作成", "en": "Revert some existing commits" },
+          "riskOverride": "medium",
+          "flags": {
+            "--no-commit": {
+              "description": { "ja": "コミットせずにワークツリーに適用", "en": "Apply without committing" }
+            },
+            "--edit": {
+              "description": { "ja": "コミットメッセージを編集", "en": "Edit the commit message" }
+            },
+            "--no-edit": {
+              "description": { "ja": "メッセージを編集しない", "en": "Do not edit the commit message" }
+            },
+            "--abort": {
+              "description": { "ja": "revert を中断して元の状態に戻す", "en": "Abort revert and restore original state" }
+            },
+            "--continue": {
+              "description": { "ja": "競合解決後に revert を続行", "en": "Continue revert after resolving conflicts" }
+            }
+          }
+        },
+        "bisect": {
+          "description": { "ja": "二分探索でバグの原因コミットを特定", "en": "Use binary search to find the commit that introduced a bug" },
+          "riskOverride": "medium"
+        },
+        "blame": {
+          "description": { "ja": "各行の最終変更者とコミットを表示", "en": "Show who last modified each line of a file" },
+          "riskOverride": "low",
+          "flags": {
+            "-L": {
+              "description": { "ja": "行範囲を指定して表示", "en": "Show annotations for a line range" }
+            },
+            "--show-email": {
+              "description": { "ja": "メールアドレスを表示", "en": "Show email addresses" }
+            },
+            "-w": {
+              "description": { "ja": "空白の変更を無視", "en": "Ignore whitespace changes" }
+            },
+            "-M": {
+              "description": { "ja": "同一ファイル内の移動を検出", "en": "Detect moved lines within a file" }
+            },
+            "-C": {
+              "description": { "ja": "ファイル間のコピーを検出", "en": "Detect copies between files" }
+            }
+          }
+        },
+        "clean": {
+          "description": { "ja": "未追跡ファイルをワークツリーから削除", "en": "Remove untracked files from the working tree" },
+          "riskOverride": "high",
+          "flags": {
+            "--force": {
+              "description": { "ja": "未追跡ファイルを強制削除", "en": "Force removal of untracked files" },
+              "riskModifier": "high"
+            },
+            "-d": {
+              "description": { "ja": "未追跡ディレクトリも削除", "en": "Remove untracked directories as well" },
+              "riskModifier": "high"
+            },
+            "-x": {
+              "description": { "ja": ".gitignore で無視されたファイルも削除", "en": "Remove ignored files as well" },
+              "riskModifier": "critical"
+            },
+            "-X": {
+              "description": { "ja": ".gitignore で無視されたファイルのみ削除", "en": "Remove only ignored files" },
+              "riskModifier": "high"
+            },
+            "--dry-run": {
+              "description": { "ja": "削除対象のプレビューのみ", "en": "Dry run, show what would be removed" }
+            },
+            "--interactive": {
+              "description": { "ja": "対話モードで削除", "en": "Interactive cleaning mode" }
+            }
+          }
+        },
+        "worktree": {
+          "description": { "ja": "複数のワークツリーを管理", "en": "Manage multiple working trees" },
+          "riskOverride": "medium",
+          "flags": {
+            "--force": {
+              "description": { "ja": "強制実行", "en": "Force operation" },
+              "riskModifier": "medium"
+            },
+            "-b": {
+              "description": { "ja": "新しいブランチを作成", "en": "Create a new branch" }
+            },
+            "-B": {
+              "description": { "ja": "ブランチを強制作成", "en": "Force create a branch" },
+              "riskModifier": "high"
+            },
+            "--detach": {
+              "description": { "ja": "デタッチド HEAD で作成", "en": "Create with detached HEAD" }
+            }
+          }
+        },
+        "submodule": {
+          "description": { "ja": "サブモジュールの初期化・更新・管理", "en": "Initialize, update, or inspect submodules" },
+          "riskOverride": "medium",
+          "flags": {
+            "--init": {
+              "description": { "ja": "update 時に自動初期化", "en": "Automatically initialize submodules on update" }
+            },
+            "--recursive": {
+              "description": { "ja": "再帰的に処理", "en": "Process submodules recursively" }
+            },
+            "--force": {
+              "description": { "ja": "強制更新", "en": "Force update" },
+              "riskModifier": "medium"
+            },
+            "--remote": {
+              "description": { "ja": "リモートの最新を取得", "en": "Fetch latest from remote" }
+            }
+          }
+        },
+        "reflog": {
+          "description": { "ja": "参照の変更履歴を表示", "en": "Manage reflog information" },
+          "riskOverride": "low",
+          "flags": {
+            "--all": {
+              "description": { "ja": "全参照の reflog を表示", "en": "Show reflogs for all refs" }
+            },
+            "-n": {
+              "description": { "ja": "表示するエントリ数を制限", "en": "Limit number of entries shown" }
+            }
+          }
+        },
+        "grep": {
+          "description": { "ja": "リポジトリ内のテキストを検索", "en": "Print lines matching a pattern in tracked files" },
+          "riskOverride": "low",
+          "flags": {
+            "--line-number": {
+              "description": { "ja": "行番号を表示", "en": "Show line numbers" }
+            },
+            "--count": {
+              "description": { "ja": "マッチ数を表示", "en": "Show match count per file" }
+            },
+            "--files-with-matches": {
+              "description": { "ja": "マッチしたファイル名のみ表示", "en": "Show only filenames with matches" }
+            },
+            "--ignore-case": {
+              "description": { "ja": "大文字小文字を無視", "en": "Case-insensitive search" }
+            },
+            "--word-regexp": {
+              "description": { "ja": "単語単位でマッチ", "en": "Match whole words only" }
+            },
+            "--extended-regexp": {
+              "description": { "ja": "拡張正規表現を使用", "en": "Use extended regular expressions" }
+            },
+            "--show-function": {
+              "description": { "ja": "マッチした関数名を表示", "en": "Show function name for matches" }
+            }
+          }
+        },
+        "shortlog": {
+          "description": { "ja": "コミットログの要約を表示", "en": "Summarize git log output" },
+          "riskOverride": "low",
+          "flags": {
+            "--numbered": {
+              "description": { "ja": "コミット数でソート", "en": "Sort by number of commits" }
+            },
+            "--summary": {
+              "description": { "ja": "コミット数のみ表示", "en": "Show commit count only" }
+            },
+            "--email": {
+              "description": { "ja": "メールアドレスを表示", "en": "Show email addresses" }
+            }
+          }
+        },
+        "archive": {
+          "description": { "ja": "リポジトリのアーカイブを作成", "en": "Create an archive of files from a named tree" },
+          "riskOverride": "medium",
+          "flags": {
+            "--format": {
+              "description": { "ja": "出力形式を指定（tar, zip 等）", "en": "Specify output format (tar, zip, etc.)" }
+            },
+            "--prefix": {
+              "description": { "ja": "ファイル名にプレフィックスを付加", "en": "Add prefix to filenames" }
+            },
+            "--output": {
+              "description": { "ja": "出力ファイルを指定", "en": "Specify output file" }
+            },
+            "--list": {
+              "description": { "ja": "利用可能な形式を一覧表示", "en": "List available formats" }
+            }
+          }
+        },
+        "sparse-checkout": {
+          "description": { "ja": "スパースチェックアウト（部分チェックアウト）を管理", "en": "Reduce working tree to a subset of tracked files" },
+          "riskOverride": "medium",
+          "flags": {
+            "--cone": {
+              "description": { "ja": "コーンモードで設定", "en": "Use cone mode for patterns" }
+            },
+            "--no-cone": {
+              "description": { "ja": "非コーンモードで設定", "en": "Use non-cone mode for patterns" }
+            }
+          }
+        },
+        "notes": {
+          "description": { "ja": "コミットにノート（メモ）を追加・管理", "en": "Add or inspect object notes" },
+          "riskOverride": "medium",
+          "flags": {
+            "--message": {
+              "description": { "ja": "ノートメッセージを指定", "en": "Specify note message" }
+            },
+            "--force": {
+              "description": { "ja": "既存ノートを上書き", "en": "Overwrite existing note" },
+              "riskModifier": "medium"
+            }
+          }
+        },
+        "describe": {
+          "description": { "ja": "直近のタグからコミットの名前を生成", "en": "Give an object a human-readable name based on an available ref" },
+          "riskOverride": "low",
+          "flags": {
+            "--tags": {
+              "description": { "ja": "軽量タグも含めて検索", "en": "Use any tag, not just annotated" }
+            },
+            "--all": {
+              "description": { "ja": "全参照から検索", "en": "Use any ref, not just tags" }
+            },
+            "--long": {
+              "description": { "ja": "常に長い形式で出力", "en": "Always output long format" }
+            },
+            "--always": {
+              "description": { "ja": "タグが見つからない場合もハッシュを出力", "en": "Show hash if no tag is found" }
+            },
+            "--dirty": {
+              "description": { "ja": "ワークツリーが汚れている場合にサフィックスを付加", "en": "Append suffix if working tree is dirty" }
+            },
+            "--match": {
+              "description": { "ja": "パターンに一致するタグのみ使用", "en": "Only use tags matching a pattern" }
+            }
+          }
+        },
+        "format-patch": {
+          "description": { "ja": "メール送信用のパッチファイルを作成", "en": "Prepare patches for e-mail submission" },
+          "riskOverride": "medium",
+          "flags": {
+            "--stdout": {
+              "description": { "ja": "標準出力にパッチを出力", "en": "Output patches to stdout" }
+            },
+            "--output-directory": {
+              "description": { "ja": "出力ディレクトリを指定", "en": "Specify output directory" }
+            },
+            "--cover-letter": {
+              "description": { "ja": "カバーレターを生成", "en": "Generate a cover letter" }
+            },
+            "--numbered": {
+              "description": { "ja": "パッチに連番を付与", "en": "Number patches in subject" }
+            },
+            "--signoff": {
+              "description": { "ja": "Signed-off-by 行を追加", "en": "Add Signed-off-by line" }
+            }
+          }
+        },
+        "apply": {
+          "description": { "ja": "パッチをワークツリーやインデックスに適用", "en": "Apply a patch to files and/or to the index" },
+          "riskOverride": "medium",
+          "flags": {
+            "--stat": {
+              "description": { "ja": "パッチの統計を表示（適用しない）", "en": "Show diffstat without applying" }
+            },
+            "--check": {
+              "description": { "ja": "パッチの適用可否を確認（適用しない）", "en": "Check if patch applies cleanly" }
+            },
+            "--index": {
+              "description": { "ja": "インデックスにも適用", "en": "Apply to both index and working tree" },
+              "riskModifier": "medium"
+            },
+            "--cached": {
+              "description": { "ja": "インデックスのみに適用", "en": "Apply to index only" },
+              "riskModifier": "medium"
+            },
+            "--3way": {
+              "description": { "ja": "3-way マージで適用", "en": "Use 3-way merge to apply" }
+            },
+            "--reverse": {
+              "description": { "ja": "パッチを逆方向に適用", "en": "Apply patch in reverse" },
+              "riskModifier": "medium"
+            }
+          }
+        },
+        "am": {
+          "description": { "ja": "メールボックスからパッチを適用", "en": "Apply a series of patches from a mailbox" },
+          "riskOverride": "medium",
+          "flags": {
+            "--3way": {
+              "description": { "ja": "3-way マージで適用", "en": "Use 3-way merge to apply" }
+            },
+            "--signoff": {
+              "description": { "ja": "Signed-off-by 行を追加", "en": "Add Signed-off-by line" }
+            },
+            "--abort": {
+              "description": { "ja": "am を中断して元の状態に戻す", "en": "Abort am and restore original state" }
+            },
+            "--continue": {
+              "description": { "ja": "競合解決後に続行", "en": "Continue after resolving conflicts" }
+            },
+            "--skip": {
+              "description": { "ja": "現在のパッチをスキップ", "en": "Skip the current patch" }
+            }
+          }
+        },
+        "rev-parse": {
+          "description": { "ja": "Git の参照やパスを解析・表示", "en": "Pick out and massage parameters" },
+          "riskOverride": "low",
+          "flags": {
+            "--git-dir": {
+              "description": { "ja": ".git ディレクトリのパスを表示", "en": "Show path to .git directory" }
+            },
+            "--show-toplevel": {
+              "description": { "ja": "リポジトリのトップレベルパスを表示", "en": "Show repository top-level path" }
+            },
+            "--is-inside-work-tree": {
+              "description": { "ja": "ワークツリー内かどうかを判定", "en": "Check if inside a working tree" }
+            },
+            "--is-bare-repository": {
+              "description": { "ja": "ベアリポジトリかどうかを判定", "en": "Check if a bare repository" }
+            },
+            "--abbrev-ref": {
+              "description": { "ja": "短い参照名を表示", "en": "Show abbreviated ref name" }
+            },
+            "--short": {
+              "description": { "ja": "短いオブジェクトハッシュを表示", "en": "Show abbreviated object hash" }
+            },
+            "--verify": {
+              "description": { "ja": "オブジェクト名を検証", "en": "Verify an object name" }
+            }
+          }
+        },
+        "ls-files": {
+          "description": { "ja": "インデックスやワークツリーのファイル情報を表示", "en": "Show information about files in the index and working tree" },
+          "riskOverride": "low",
+          "flags": {
+            "--cached": {
+              "description": { "ja": "インデックス内のファイルを表示", "en": "Show cached files" }
+            },
+            "--deleted": {
+              "description": { "ja": "削除されたファイルを表示", "en": "Show deleted files" }
+            },
+            "--modified": {
+              "description": { "ja": "変更されたファイルを表示", "en": "Show modified files" }
+            },
+            "--others": {
+              "description": { "ja": "未追跡ファイルを表示", "en": "Show untracked files" }
+            },
+            "--ignored": {
+              "description": { "ja": "無視されたファイルを表示", "en": "Show ignored files" }
+            },
+            "--stage": {
+              "description": { "ja": "ステージ情報を表示", "en": "Show stage information" }
+            }
+          }
+        },
+        "update-index": {
+          "description": { "ja": "インデックスにファイル情報を登録・更新", "en": "Register file contents in the working tree to the index" },
+          "riskOverride": "medium",
+          "flags": {
+            "--assume-unchanged": {
+              "description": { "ja": "ファイルの変更追跡を停止", "en": "Mark file as unchanged (stop tracking changes)" },
+              "riskModifier": "medium"
+            },
+            "--no-assume-unchanged": {
+              "description": { "ja": "変更追跡を再開", "en": "Unmark file as unchanged (resume tracking)" }
+            },
+            "--skip-worktree": {
+              "description": { "ja": "ワークツリーの変更を無視", "en": "Skip worktree bit for file" },
+              "riskModifier": "medium"
+            },
+            "--no-skip-worktree": {
+              "description": { "ja": "ワークツリーの変更無視を解除", "en": "Unset skip-worktree bit" }
+            },
+            "--force-remove": {
+              "description": { "ja": "ファイルを強制的にインデックスから削除", "en": "Force remove file from index" },
+              "riskModifier": "medium"
+            },
+            "--add": {
+              "description": { "ja": "新しいファイルをインデックスに追加", "en": "Add new files to the index" }
+            },
+            "--refresh": {
+              "description": { "ja": "インデックスを最新状態に更新", "en": "Refresh index to match working tree" }
+            }
+          }
+        },
+        "cat-file": {
+          "description": { "ja": "Git オブジェクトの内容や情報を表示", "en": "Provide content or type/size info for repository objects" },
+          "riskOverride": "low",
+          "flags": {
+            "-t": {
+              "description": { "ja": "オブジェクトの型を表示", "en": "Show object type" }
+            },
+            "-s": {
+              "description": { "ja": "オブジェクトのサイズを表示", "en": "Show object size" }
+            },
+            "-p": {
+              "description": { "ja": "オブジェクトの内容を整形表示", "en": "Pretty-print object content" }
+            },
+            "-e": {
+              "description": { "ja": "オブジェクトの存在確認", "en": "Check if object exists" }
+            },
+            "--batch": {
+              "description": { "ja": "標準入力からバッチ処理", "en": "Batch mode from stdin" }
+            },
+            "--batch-check": {
+              "description": { "ja": "バッチでオブジェクト情報を確認", "en": "Batch check object info" }
+            }
+          }
+        },
+        "bundle": {
+          "description": { "ja": "Git オブジェクトをバンドルファイルにパッケージ化", "en": "Move objects and refs by archive" },
+          "riskOverride": "medium"
+        },
+        "gc": {
+          "description": { "ja": "不要なオブジェクトを整理・最適化", "en": "Cleanup unnecessary files and optimize the repository" },
+          "riskOverride": "medium",
+          "flags": {
+            "--aggressive": {
+              "description": { "ja": "より積極的な最適化（時間がかかる）", "en": "More aggressive optimization (slower)" }
+            },
+            "--auto": {
+              "description": { "ja": "必要な場合のみ実行", "en": "Run only if needed" }
+            },
+            "--prune": {
+              "description": { "ja": "指定日時より古い unreachable オブジェクトを削除", "en": "Prune unreachable objects older than specified date" },
+              "riskModifier": "medium"
+            }
+          }
+        },
+        "fsck": {
+          "description": { "ja": "Git オブジェクトデータベースの整合性を検証", "en": "Verify the connectivity and validity of objects" },
+          "riskOverride": "low",
+          "flags": {
+            "--full": {
+              "description": { "ja": "全オブジェクトを完全検証", "en": "Check all objects completely" }
+            },
+            "--unreachable": {
+              "description": { "ja": "到達不能オブジェクトを表示", "en": "Show unreachable objects" }
+            },
+            "--connectivity-only": {
+              "description": { "ja": "接続性のみ検証（高速）", "en": "Check connectivity only (faster)" }
+            },
+            "--strict": {
+              "description": { "ja": "厳密なチェック", "en": "Enable strict checking" }
+            }
+          }
+        },
+        "prune": {
+          "description": { "ja": "到達不能な Git オブジェクトを削除", "en": "Prune all unreachable objects from the object database" },
+          "riskOverride": "medium",
+          "flags": {
+            "--dry-run": {
+              "description": { "ja": "削除対象のプレビューのみ", "en": "Dry run, show what would be pruned" }
+            },
+            "--verbose": {
+              "description": { "ja": "詳細出力", "en": "Show verbose output" }
+            },
+            "--expire": {
+              "description": { "ja": "指定日時より古いオブジェクトのみ対象", "en": "Only expire objects older than specified date" }
+            }
+          }
+        },
+        "diff-tree": {
+          "description": { "ja": "2つのツリーオブジェクト間の差分を表示", "en": "Compare the content and mode of blobs found via two tree objects" },
+          "riskOverride": "low",
+          "flags": {
+            "-r": {
+              "description": { "ja": "再帰的に差分表示", "en": "Recurse into subtrees" }
+            },
+            "--root": {
+              "description": { "ja": "初期コミットの差分を表示", "en": "Show initial commit as diff" }
+            },
+            "--stat": {
+              "description": { "ja": "変更ファイルの統計を表示", "en": "Show diffstat summary" }
+            },
+            "--name-only": {
+              "description": { "ja": "変更ファイル名のみ表示", "en": "Show only names of changed files" }
+            },
+            "--name-status": {
+              "description": { "ja": "変更ファイル名と状態を表示", "en": "Show names and status of changed files" }
+            }
+          }
+        }
+      },
+      "flags": {}
+    }
+  }
+}

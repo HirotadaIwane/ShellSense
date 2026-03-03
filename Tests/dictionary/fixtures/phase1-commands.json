@@ -1,0 +1,902 @@
+{
+  "version": "1.0.0",
+  "commands": {
+    "ls": {
+      "name": "ls",
+      "description": {
+        "ja": "ファイルやフォルダの一覧を表示",
+        "en": "List directory contents"
+      },
+      "baseRisk": "low",
+      "category": "filesystem",
+      "flags": {
+        "-l": {
+          "description": {
+            "ja": "詳細情報を表示",
+            "en": "Long listing format"
+          }
+        },
+        "-a": {
+          "description": {
+            "ja": "隠しファイルも表示",
+            "en": "Show hidden files"
+          }
+        },
+        "-R": {
+          "description": {
+            "ja": "サブフォルダも再帰的に表示",
+            "en": "List subdirectories recursively"
+          }
+        }
+      }
+    },
+    "cat": {
+      "name": "cat",
+      "description": {
+        "ja": "ファイルの内容を表示",
+        "en": "Concatenate and print files"
+      },
+      "baseRisk": "low",
+      "category": "filesystem",
+      "flags": {
+        "-n": {
+          "description": {
+            "ja": "行番号を表示",
+            "en": "Number all output lines"
+          }
+        }
+      }
+    },
+    "mkdir": {
+      "name": "mkdir",
+      "description": {
+        "ja": "新しいフォルダを作成",
+        "en": "Create directories"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-p": {
+          "description": {
+            "ja": "親フォルダも含めて一括作成",
+            "en": "Create parent directories as needed"
+          }
+        }
+      }
+    },
+    "rm": {
+      "name": "rm",
+      "description": {
+        "ja": "ファイルやフォルダを削除",
+        "en": "Remove files or directories"
+      },
+      "baseRisk": "high",
+      "category": "filesystem",
+      "flags": {
+        "-r": {
+          "description": {
+            "ja": "フォルダの中身も含めて再帰的に削除",
+            "en": "Remove directories and their contents recursively"
+          },
+          "riskModifier": "high"
+        },
+        "-f": {
+          "description": {
+            "ja": "確認なしで強制削除",
+            "en": "Force removal without confirmation"
+          },
+          "riskModifier": "high"
+        },
+        "-i": {
+          "description": {
+            "ja": "削除前に確認を求める",
+            "en": "Prompt before every removal"
+          }
+        }
+      }
+    },
+    "cp": {
+      "name": "cp",
+      "description": {
+        "ja": "ファイルやフォルダをコピー",
+        "en": "Copy files and directories"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-r": {
+          "description": {
+            "ja": "フォルダを再帰的にコピー",
+            "en": "Copy directories recursively"
+          }
+        },
+        "-f": {
+          "description": {
+            "ja": "確認なしで上書き",
+            "en": "Force overwrite without confirmation"
+          }
+        },
+        "-i": {
+          "description": {
+            "ja": "上書き前に確認を求める",
+            "en": "Prompt before overwrite"
+          }
+        }
+      }
+    },
+    "mv": {
+      "name": "mv",
+      "description": {
+        "ja": "ファイルやフォルダを移動・名前変更",
+        "en": "Move or rename files and directories"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-f": {
+          "description": {
+            "ja": "確認なしで上書き",
+            "en": "Force overwrite without confirmation"
+          }
+        },
+        "-i": {
+          "description": {
+            "ja": "上書き前に確認を求める",
+            "en": "Prompt before overwrite"
+          }
+        }
+      }
+    },
+    "touch": {
+      "name": "touch",
+      "description": {
+        "ja": "空のファイルを作成、またはタイムスタンプを更新",
+        "en": "Create empty files or update timestamps"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem"
+    },
+    "git": {
+      "name": "git",
+      "description": {
+        "ja": "Gitバージョン管理システムを操作",
+        "en": "Git version control system"
+      },
+      "baseRisk": "low",
+      "category": "git",
+      "subcommands": {
+        "status": {
+          "description": {
+            "ja": "変更されたファイルの状態を表示",
+            "en": "Show the working tree status"
+          },
+          "riskOverride": "low"
+        },
+        "add": {
+          "description": {
+            "ja": "ファイルをコミット対象に追加（ステージング）",
+            "en": "Add file contents to the staging area"
+          },
+          "riskOverride": "low"
+        },
+        "commit": {
+          "description": {
+            "ja": "ステージングされた変更を記録",
+            "en": "Record changes to the repository"
+          },
+          "riskOverride": "medium"
+        },
+        "push": {
+          "description": {
+            "ja": "ローカルの変更をリモートリポジトリに送信",
+            "en": "Update remote refs along with associated objects"
+          },
+          "riskOverride": "medium"
+        },
+        "pull": {
+          "description": {
+            "ja": "リモートリポジトリの変更を取得してマージ",
+            "en": "Fetch from and integrate with another repository"
+          },
+          "riskOverride": "medium"
+        },
+        "diff": {
+          "description": {
+            "ja": "ファイルの変更内容を表示",
+            "en": "Show changes between commits, commit and working tree, etc."
+          },
+          "riskOverride": "low"
+        },
+        "log": {
+          "description": {
+            "ja": "コミット履歴を表示",
+            "en": "Show commit logs"
+          },
+          "riskOverride": "low"
+        },
+        "clone": {
+          "description": {
+            "ja": "リポジトリをコピーしてダウンロード",
+            "en": "Clone a repository into a new directory"
+          },
+          "riskOverride": "medium"
+        },
+        "checkout": {
+          "description": {
+            "ja": "ブランチを切り替えます、またはファイルを復元",
+            "en": "Switch branches or restore working tree files"
+          },
+          "riskOverride": "medium"
+        },
+        "branch": {
+          "description": {
+            "ja": "ブランチの一覧表示・作成・削除を行います",
+            "en": "List, create, or delete branches"
+          },
+          "riskOverride": "low"
+        },
+        "reset": {
+          "description": {
+            "ja": "コミットの取り消しやステージングの解除を行います",
+            "en": "Reset current HEAD to the specified state"
+          },
+          "riskOverride": "high"
+        },
+        "stash": {
+          "description": {
+            "ja": "作業中の変更を一時的に退避",
+            "en": "Stash the changes in a dirty working directory away"
+          },
+          "riskOverride": "low"
+        }
+      },
+      "flags": {
+        "--force": {
+          "description": {
+            "ja": "強制実行（上書き等の危険あり）",
+            "en": "Force operation (may overwrite)"
+          },
+          "riskModifier": "critical"
+        },
+        "--hard": {
+          "description": {
+            "ja": "作業ディレクトリの変更も含めてリセット（変更が失われる）",
+            "en": "Reset working directory (changes will be lost)"
+          },
+          "riskModifier": "critical"
+        }
+      }
+    },
+    "npm": {
+      "name": "npm",
+      "description": {
+        "ja": "Node.jsパッケージマネージャーを操作",
+        "en": "Node.js package manager"
+      },
+      "baseRisk": "low",
+      "category": "package",
+      "subcommands": {
+        "install": {
+          "description": {
+            "ja": "パッケージをインストール",
+            "en": "Install packages"
+          },
+          "riskOverride": "medium"
+        },
+        "run": {
+          "description": {
+            "ja": "package.jsonに定義されたスクリプトを実行",
+            "en": "Run a script defined in package.json"
+          },
+          "riskOverride": "medium"
+        },
+        "test": {
+          "description": {
+            "ja": "テストスクリプトを実行",
+            "en": "Run the test script"
+          },
+          "riskOverride": "low"
+        },
+        "build": {
+          "description": {
+            "ja": "ビルドスクリプトを実行",
+            "en": "Run the build script"
+          },
+          "riskOverride": "medium"
+        }
+      }
+    },
+    "pip": {
+      "name": "pip",
+      "description": {
+        "ja": "Pythonパッケージマネージャーを操作",
+        "en": "Python package manager"
+      },
+      "baseRisk": "medium",
+      "category": "package",
+      "subcommands": {
+        "install": {
+          "description": {
+            "ja": "パッケージをインストール",
+            "en": "Install packages"
+          },
+          "riskOverride": "medium"
+        },
+        "uninstall": {
+          "description": {
+            "ja": "パッケージをアンインストール",
+            "en": "Uninstall packages"
+          },
+          "riskOverride": "high"
+        },
+        "freeze": {
+          "description": {
+            "ja": "インストール済みパッケージの一覧を出力",
+            "en": "Output installed packages in requirements format"
+          },
+          "riskOverride": "low"
+        },
+        "list": {
+          "description": {
+            "ja": "インストール済みパッケージを表示",
+            "en": "List installed packages"
+          },
+          "riskOverride": "low"
+        }
+      }
+    },
+    "grep": {
+      "name": "grep",
+      "description": {
+        "ja": "ファイル内のテキストをパターン検索",
+        "en": "Search for patterns in files"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-r": {
+          "description": {
+            "ja": "フォルダ内を再帰的に検索",
+            "en": "Search directories recursively"
+          }
+        },
+        "-i": {
+          "description": {
+            "ja": "大文字小文字を区別しない",
+            "en": "Case-insensitive search"
+          }
+        },
+        "-n": {
+          "description": {
+            "ja": "行番号を表示",
+            "en": "Show line numbers"
+          }
+        },
+        "-l": {
+          "description": {
+            "ja": "マッチしたファイル名のみ表示",
+            "en": "Show only file names with matches"
+          }
+        },
+        "-v": {
+          "description": {
+            "ja": "マッチしない行を表示",
+            "en": "Invert match (show non-matching lines)"
+          }
+        },
+        "-c": {
+          "description": {
+            "ja": "マッチした行数を表示",
+            "en": "Show count of matching lines"
+          }
+        }
+      }
+    },
+    "find": {
+      "name": "find",
+      "description": {
+        "ja": "条件に一致するファイルやフォルダを検索",
+        "en": "Search for files in a directory hierarchy"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-name": {
+          "description": {
+            "ja": "ファイル名で検索",
+            "en": "Search by file name"
+          }
+        },
+        "-type": {
+          "description": {
+            "ja": "ファイルの種類で絞り込み",
+            "en": "Filter by file type"
+          }
+        },
+        "-delete": {
+          "description": {
+            "ja": "見つかったファイルを削除",
+            "en": "Delete found files"
+          },
+          "riskModifier": "high"
+        },
+        "-exec": {
+          "description": {
+            "ja": "見つかったファイルに対してコマンドを実行",
+            "en": "Execute command on found files"
+          },
+          "riskModifier": "high"
+        }
+      }
+    },
+    "curl": {
+      "name": "curl",
+      "description": {
+        "ja": "URLからデータを転送",
+        "en": "Transfer data from or to a server"
+      },
+      "baseRisk": "medium",
+      "category": "network",
+      "flags": {
+        "-o": {
+          "description": {
+            "ja": "出力をファイルに保存",
+            "en": "Write output to file"
+          }
+        },
+        "-X": {
+          "description": {
+            "ja": "HTTPメソッドを指定",
+            "en": "Specify HTTP method"
+          }
+        },
+        "-L": {
+          "description": {
+            "ja": "リダイレクトを追従",
+            "en": "Follow redirects"
+          }
+        },
+        "-s": {
+          "description": {
+            "ja": "進捗やエラーを非表示（サイレントモード）",
+            "en": "Silent mode"
+          }
+        },
+        "-d": {
+          "description": {
+            "ja": "データを送信（POSTリクエスト）",
+            "en": "Send data in POST request"
+          }
+        }
+      }
+    },
+    "chmod": {
+      "name": "chmod",
+      "description": {
+        "ja": "ファイルやフォルダのアクセス権限を変更",
+        "en": "Change file mode bits"
+      },
+      "baseRisk": "high",
+      "category": "system",
+      "flags": {
+        "-R": {
+          "description": {
+            "ja": "フォルダ内を再帰的に権限変更",
+            "en": "Change permissions recursively"
+          },
+          "riskModifier": "high"
+        }
+      }
+    },
+    "cd": {
+      "name": "cd",
+      "description": {
+        "ja": "作業ディレクトリを移動",
+        "en": "Change the current directory"
+      },
+      "baseRisk": "low",
+      "category": "shell"
+    },
+    "pwd": {
+      "name": "pwd",
+      "description": {
+        "ja": "現在の作業ディレクトリを表示",
+        "en": "Print the current working directory"
+      },
+      "baseRisk": "low",
+      "category": "shell"
+    },
+    "echo": {
+      "name": "echo",
+      "description": {
+        "ja": "テキストを表示",
+        "en": "Display a line of text"
+      },
+      "baseRisk": "low",
+      "category": "shell"
+    },
+    "node": {
+      "name": "node",
+      "description": {
+        "ja": "Node.jsでJavaScriptを実行",
+        "en": "Execute JavaScript with Node.js"
+      },
+      "baseRisk": "medium",
+      "category": "process",
+      "flags": {
+        "-e": {
+          "description": {
+            "ja": "コマンドライン上のスクリプトを直接実行",
+            "en": "Evaluate script from command line"
+          }
+        }
+      }
+    },
+    "python": {
+      "name": "python",
+      "description": {
+        "ja": "Pythonスクリプトを実行",
+        "en": "Execute Python scripts"
+      },
+      "baseRisk": "medium",
+      "category": "process",
+      "flags": {
+        "-c": {
+          "description": {
+            "ja": "コマンドライン上のスクリプトを直接実行",
+            "en": "Execute script from command line"
+          }
+        }
+      }
+    },
+    "head": {
+      "name": "head",
+      "description": {
+        "ja": "ファイルの先頭部分を表示",
+        "en": "Display the beginning of a file"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-n": {
+          "description": {
+            "ja": "表示する行数を指定",
+            "en": "Number of lines to display"
+          }
+        }
+      }
+    },
+    "tail": {
+      "name": "tail",
+      "description": {
+        "ja": "ファイルの末尾部分を表示",
+        "en": "Display the end of a file"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-n": {
+          "description": {
+            "ja": "表示する行数を指定",
+            "en": "Number of lines to display"
+          }
+        },
+        "-f": {
+          "description": {
+            "ja": "ファイルの追記をリアルタイムで監視",
+            "en": "Follow file changes in real time"
+          }
+        }
+      }
+    },
+    "wc": {
+      "name": "wc",
+      "description": {
+        "ja": "行数・単語数・バイト数を数えます",
+        "en": "Count lines, words, and bytes"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-l": {
+          "description": {
+            "ja": "行数のみを表示",
+            "en": "Count lines only"
+          }
+        },
+        "-w": {
+          "description": {
+            "ja": "単語数のみを表示",
+            "en": "Count words only"
+          }
+        }
+      }
+    },
+    "sort": {
+      "name": "sort",
+      "description": {
+        "ja": "行を並び替えます",
+        "en": "Sort lines of text"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-r": {
+          "description": {
+            "ja": "逆順に並び替え",
+            "en": "Sort in reverse order"
+          }
+        },
+        "-n": {
+          "description": {
+            "ja": "数値として並び替え",
+            "en": "Sort numerically"
+          }
+        }
+      }
+    },
+    "uniq": {
+      "name": "uniq",
+      "description": {
+        "ja": "重複行を除去",
+        "en": "Filter out repeated lines"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-c": {
+          "description": {
+            "ja": "各行の出現回数を表示",
+            "en": "Prefix lines by number of occurrences"
+          }
+        }
+      }
+    },
+    "sed": {
+      "name": "sed",
+      "description": {
+        "ja": "テキストを置換・編集",
+        "en": "Stream editor for filtering and transforming text"
+      },
+      "baseRisk": "medium",
+      "category": "text",
+      "flags": {
+        "-i": {
+          "description": {
+            "ja": "ファイルを直接書き換え",
+            "en": "Edit files in place"
+          },
+          "riskModifier": "high"
+        },
+        "-e": {
+          "description": {
+            "ja": "編集コマンドを指定",
+            "en": "Add editing commands"
+          }
+        }
+      }
+    },
+    "awk": {
+      "name": "awk",
+      "description": {
+        "ja": "パターンに基づきテキストを処理",
+        "en": "Pattern scanning and text processing"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-F": {
+          "description": {
+            "ja": "フィールド区切り文字を指定",
+            "en": "Set field separator"
+          }
+        }
+      }
+    },
+    "ln": {
+      "name": "ln",
+      "description": {
+        "ja": "リンクを作成",
+        "en": "Create links between files"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-s": {
+          "description": {
+            "ja": "シンボリックリンクを作成",
+            "en": "Create symbolic link"
+          }
+        },
+        "-f": {
+          "description": {
+            "ja": "既存のリンクを強制上書き",
+            "en": "Force overwrite existing link"
+          },
+          "riskModifier": "high"
+        }
+      }
+    },
+    "tar": {
+      "name": "tar",
+      "description": {
+        "ja": "ファイルをアーカイブ・展開",
+        "en": "Archive and extract files"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-c": {
+          "description": {
+            "ja": "アーカイブを作成",
+            "en": "Create archive"
+          }
+        },
+        "-x": {
+          "description": {
+            "ja": "アーカイブを展開",
+            "en": "Extract archive"
+          }
+        },
+        "-z": {
+          "description": {
+            "ja": "gzip圧縮/展開",
+            "en": "Compress/decompress with gzip"
+          }
+        },
+        "-f": {
+          "description": {
+            "ja": "アーカイブファイル名を指定",
+            "en": "Specify archive file name"
+          }
+        },
+        "-v": {
+          "description": {
+            "ja": "処理内容を表示",
+            "en": "Verbose output"
+          }
+        }
+      }
+    },
+    "diff": {
+      "name": "diff",
+      "description": {
+        "ja": "ファイルの差分を表示",
+        "en": "Compare files line by line"
+      },
+      "baseRisk": "low",
+      "category": "filesystem",
+      "flags": {
+        "-u": {
+          "description": {
+            "ja": "unified形式で差分を表示",
+            "en": "Output in unified format"
+          }
+        },
+        "-r": {
+          "description": {
+            "ja": "フォルダを再帰的に比較",
+            "en": "Recursively compare directories"
+          }
+        }
+      }
+    },
+    "which": {
+      "name": "which",
+      "description": {
+        "ja": "コマンドの実行パスを表示",
+        "en": "Locate a command"
+      },
+      "baseRisk": "low",
+      "category": "shell"
+    },
+    "xargs": {
+      "name": "xargs",
+      "description": {
+        "ja": "標準入力からコマンドを構築・実行",
+        "en": "Build and execute commands from standard input"
+      },
+      "baseRisk": "medium",
+      "category": "shell",
+      "flags": {
+        "-I": {
+          "description": {
+            "ja": "置換文字列を指定",
+            "en": "Specify replacement string"
+          }
+        }
+      }
+    },
+    "tee": {
+      "name": "tee",
+      "description": {
+        "ja": "出力をファイルと標準出力に分岐",
+        "en": "Duplicate output to file and stdout"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-a": {
+          "description": {
+            "ja": "ファイルに追記（上書きではなく末尾に追加）",
+            "en": "Append to file instead of overwriting"
+          }
+        }
+      }
+    },
+    "export": {
+      "name": "export",
+      "description": {
+        "ja": "環境変数を設定",
+        "en": "Set environment variables"
+      },
+      "baseRisk": "low",
+      "category": "shell"
+    },
+    "source": {
+      "name": "source",
+      "description": {
+        "ja": "スクリプトを現在のシェルで実行",
+        "en": "Execute a script in the current shell"
+      },
+      "baseRisk": "medium",
+      "category": "shell"
+    },
+    "ps": {
+      "name": "ps",
+      "description": {
+        "ja": "実行中のプロセスを表示",
+        "en": "Report a snapshot of current processes"
+      },
+      "baseRisk": "low",
+      "category": "process",
+      "flags": {
+        "-a": {
+          "description": {
+            "ja": "全ユーザーのプロセスを表示",
+            "en": "Show processes for all users"
+          }
+        },
+        "-u": {
+          "description": {
+            "ja": "ユーザー情報付きで表示",
+            "en": "Display user-oriented format"
+          }
+        },
+        "-x": {
+          "description": {
+            "ja": "制御端末なしのプロセスも表示",
+            "en": "Show processes without controlling terminal"
+          }
+        }
+      }
+    },
+    "kill": {
+      "name": "kill",
+      "description": {
+        "ja": "プロセスを終了させます",
+        "en": "Send a signal to a process"
+      },
+      "baseRisk": "high",
+      "category": "process",
+      "flags": {
+        "-9": {
+          "description": {
+            "ja": "強制終了シグナル（SIGKILL）を送信",
+            "en": "Send SIGKILL signal (force kill)"
+          },
+          "riskModifier": "critical"
+        }
+      }
+    },
+    "npx": {
+      "name": "npx",
+      "description": {
+        "ja": "npmパッケージを直接実行",
+        "en": "Execute npm package binaries"
+      },
+      "baseRisk": "medium",
+      "category": "package"
+    }
+  }
+}

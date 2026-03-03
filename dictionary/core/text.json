@@ -1,0 +1,238 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "core",
+    "name": "text",
+    "description": "Text processing and search"
+  },
+  "commands": {
+    "grep": {
+      "name": "grep",
+      "description": {
+        "ja": "ファイル内のテキストをパターン検索",
+        "en": "Search for patterns in files"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-r": {
+          "description": { "ja": "フォルダ内を再帰的に検索", "en": "Search directories recursively" }
+        },
+        "-i": {
+          "description": { "ja": "大文字小文字を区別しない", "en": "Case-insensitive search" }
+        },
+        "-n": {
+          "description": { "ja": "行番号を表示", "en": "Show line numbers" }
+        },
+        "-l": {
+          "description": { "ja": "マッチしたファイル名のみ表示", "en": "Show only file names with matches" }
+        },
+        "-v": {
+          "description": { "ja": "マッチしない行を表示", "en": "Invert match (show non-matching lines)" }
+        },
+        "-c": {
+          "description": { "ja": "マッチした行数を表示", "en": "Show count of matching lines" }
+        }
+      }
+    },
+    "find": {
+      "name": "find",
+      "description": {
+        "ja": "条件に一致するファイルやフォルダを検索",
+        "en": "Search for files in a directory hierarchy"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-name": {
+          "description": { "ja": "ファイル名で検索", "en": "Search by file name" }
+        },
+        "-type": {
+          "description": { "ja": "ファイルの種類で絞り込み", "en": "Filter by file type" }
+        },
+        "-delete": {
+          "description": { "ja": "見つかったファイルを削除", "en": "Delete found files" },
+          "riskModifier": "high"
+        },
+        "-exec": {
+          "description": { "ja": "見つかったファイルに対してコマンドを実行", "en": "Execute command on found files" },
+          "riskModifier": "high"
+        }
+      }
+    },
+    "head": {
+      "name": "head",
+      "description": {
+        "ja": "ファイルの先頭部分を表示",
+        "en": "Display the beginning of a file"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-n": {
+          "description": { "ja": "表示する行数を指定", "en": "Number of lines to display" }
+        }
+      }
+    },
+    "tail": {
+      "name": "tail",
+      "description": {
+        "ja": "ファイルの末尾部分を表示",
+        "en": "Display the end of a file"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-n": {
+          "description": { "ja": "表示する行数を指定", "en": "Number of lines to display" }
+        },
+        "-f": {
+          "description": { "ja": "ファイルの追記をリアルタイムで監視", "en": "Follow file changes in real time" }
+        }
+      }
+    },
+    "wc": {
+      "name": "wc",
+      "description": {
+        "ja": "行数・単語数・バイト数を数えます",
+        "en": "Count lines, words, and bytes"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-l": {
+          "description": { "ja": "行数のみを表示", "en": "Count lines only" }
+        },
+        "-w": {
+          "description": { "ja": "単語数のみを表示", "en": "Count words only" }
+        }
+      }
+    },
+    "sort": {
+      "name": "sort",
+      "description": {
+        "ja": "行を並び替えます",
+        "en": "Sort lines of text"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-r": {
+          "description": { "ja": "逆順に並び替え", "en": "Sort in reverse order" }
+        },
+        "-n": {
+          "description": { "ja": "数値として並び替え", "en": "Sort numerically" }
+        }
+      }
+    },
+    "uniq": {
+      "name": "uniq",
+      "description": {
+        "ja": "重複行を除去",
+        "en": "Filter out repeated lines"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-c": {
+          "description": { "ja": "各行の出現回数を表示", "en": "Prefix lines by number of occurrences" }
+        }
+      }
+    },
+    "sed": {
+      "name": "sed",
+      "description": {
+        "ja": "テキストを置換・編集",
+        "en": "Stream editor for filtering and transforming text"
+      },
+      "baseRisk": "medium",
+      "category": "text",
+      "flags": {
+        "-i": {
+          "description": { "ja": "ファイルを直接書き換え", "en": "Edit files in place" },
+          "riskModifier": "high"
+        },
+        "-e": {
+          "description": { "ja": "編集コマンドを指定", "en": "Add editing commands" }
+        }
+      }
+    },
+    "awk": {
+      "name": "awk",
+      "description": {
+        "ja": "パターンに基づきテキストを処理",
+        "en": "Pattern scanning and text processing"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-F": {
+          "description": { "ja": "フィールド区切り文字を指定", "en": "Set field separator" }
+        }
+      }
+    },
+    "cut": {
+      "name": "cut",
+      "description": {
+        "ja": "テキストの各行から指定部分を切り出す",
+        "en": "Remove sections from each line of input"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-b": {
+          "description": { "ja": "バイト位置で切り出す", "en": "Select bytes" }
+        },
+        "-c": {
+          "description": { "ja": "文字位置で切り出す", "en": "Select characters" }
+        },
+        "-f": {
+          "description": { "ja": "フィールド番号で切り出す", "en": "Select fields" }
+        },
+        "-d": {
+          "description": { "ja": "区切り文字を指定", "en": "Set field delimiter" }
+        }
+      }
+    },
+    "tr": {
+      "name": "tr",
+      "description": {
+        "ja": "文字の変換・削除・圧縮を行う",
+        "en": "Translate, squeeze, or delete characters"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-d": {
+          "description": { "ja": "指定文字を削除", "en": "Delete characters" }
+        },
+        "-s": {
+          "description": { "ja": "連続する同一文字を圧縮", "en": "Squeeze repeated characters" }
+        },
+        "-c": {
+          "description": { "ja": "補集合を対象にする", "en": "Use complement of character set" }
+        }
+      }
+    },
+    "column": {
+      "name": "column",
+      "description": {
+        "ja": "テキストを整形されたカラム表示にする",
+        "en": "Format input into columns"
+      },
+      "baseRisk": "low",
+      "category": "text",
+      "flags": {
+        "-t": {
+          "description": { "ja": "テーブル形式で整形", "en": "Create table format" }
+        },
+        "-s": {
+          "description": { "ja": "区切り文字を指定", "en": "Set input delimiter" }
+        },
+        "-o": {
+          "description": { "ja": "出力区切り文字を指定", "en": "Set output delimiter" }
+        }
+      }
+    }
+  }
+}

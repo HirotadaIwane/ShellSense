@@ -1,0 +1,441 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "tools",
+    "name": "docker",
+    "description": "Docker container platform"
+  },
+  "commands": {
+    "docker": {
+      "name": "docker",
+      "description": {
+        "ja": "Dockerコンテナプラットフォームを操作",
+        "en": "Docker container platform"
+      },
+      "baseRisk": "medium",
+      "category": "container",
+      "subcommands": {
+        "run": {
+          "description": { "ja": "コンテナを作成して実行", "en": "Create and run a new container" },
+          "riskOverride": "medium",
+          "flags": {
+            "--rm": {
+              "description": { "ja": "コンテナ終了時に自動的に削除", "en": "Automatically remove the container when it exits" }
+            },
+            "-d": {
+              "description": { "ja": "バックグラウンドでコンテナを実行（デタッチモード）", "en": "Run container in background (detached mode)" }
+            },
+            "-p": {
+              "description": { "ja": "ホストとコンテナのポートをマッピング", "en": "Publish a container's port to the host" }
+            },
+            "-v": {
+              "description": { "ja": "ボリュームをマウント", "en": "Bind mount a volume" }
+            },
+            "--name": {
+              "description": { "ja": "コンテナに名前を割り当て", "en": "Assign a name to the container" }
+            },
+            "-e": {
+              "description": { "ja": "環境変数を設定", "en": "Set environment variables" }
+            },
+            "-it": {
+              "description": { "ja": "対話モードでコンテナに接続（TTY割り当て）", "en": "Interactive mode with TTY allocation" }
+            },
+            "--network": {
+              "description": { "ja": "コンテナを接続するネットワークを指定", "en": "Connect a container to a network" }
+            }
+          }
+        },
+        "build": {
+          "description": { "ja": "Dockerfileからイメージをビルド", "en": "Build an image from a Dockerfile" },
+          "riskOverride": "medium",
+          "flags": {
+            "-t": {
+              "description": { "ja": "イメージに名前とタグを付与", "en": "Name and optionally tag the image" }
+            },
+            "--no-cache": {
+              "description": { "ja": "キャッシュを使用せずにビルド", "en": "Do not use cache when building the image" }
+            },
+            "-f": {
+              "description": { "ja": "Dockerfileのパスを指定", "en": "Specify the Dockerfile path" }
+            },
+            "--build-arg": {
+              "description": { "ja": "ビルド時の変数を設定", "en": "Set build-time variables" }
+            }
+          }
+        },
+        "ps": {
+          "description": { "ja": "実行中のコンテナ一覧を表示", "en": "List running containers" },
+          "riskOverride": "low",
+          "flags": {
+            "-a": {
+              "description": { "ja": "停止中を含む全コンテナを表示", "en": "Show all containers (including stopped)" }
+            },
+            "-q": {
+              "description": { "ja": "コンテナIDのみ表示", "en": "Only display container IDs" }
+            },
+            "--filter": {
+              "description": { "ja": "条件でフィルタリング", "en": "Filter output based on conditions" }
+            }
+          }
+        },
+        "images": {
+          "description": { "ja": "イメージ一覧を表示", "en": "List images" },
+          "riskOverride": "low",
+          "flags": {
+            "-a": {
+              "description": { "ja": "中間イメージを含む全イメージを表示", "en": "Show all images (including intermediate)" }
+            },
+            "-q": {
+              "description": { "ja": "イメージIDのみ表示", "en": "Only display image IDs" }
+            },
+            "--filter": {
+              "description": { "ja": "条件でフィルタリング", "en": "Filter output based on conditions" }
+            }
+          }
+        },
+        "exec": {
+          "description": { "ja": "実行中のコンテナ内でコマンドを実行", "en": "Execute a command in a running container" },
+          "riskOverride": "medium",
+          "flags": {
+            "-it": {
+              "description": { "ja": "対話モードでコンテナに接続（TTY割り当て）", "en": "Interactive mode with TTY allocation" }
+            },
+            "-d": {
+              "description": { "ja": "バックグラウンドでコマンドを実行", "en": "Run command in background (detached mode)" }
+            },
+            "-u": {
+              "description": { "ja": "実行ユーザーを指定", "en": "Specify the username or UID" }
+            },
+            "-w": {
+              "description": { "ja": "コンテナ内の作業ディレクトリを指定", "en": "Working directory inside the container" }
+            }
+          }
+        },
+        "stop": {
+          "description": { "ja": "実行中のコンテナを停止", "en": "Stop one or more running containers" },
+          "riskOverride": "medium",
+          "flags": {
+            "-t": {
+              "description": { "ja": "停止までの猶予時間を秒数で指定", "en": "Seconds to wait before killing the container" }
+            }
+          }
+        },
+        "rm": {
+          "description": { "ja": "コンテナを削除", "en": "Remove one or more containers" },
+          "riskOverride": "high",
+          "flags": {
+            "--force": {
+              "description": { "ja": "実行中でも強制的にコンテナを削除", "en": "Force removal of a running container" },
+              "riskModifier": "high"
+            },
+            "-v": {
+              "description": { "ja": "コンテナに関連付けられた匿名ボリュームも削除", "en": "Remove anonymous volumes associated with the container" },
+              "riskModifier": "medium"
+            }
+          }
+        },
+        "logs": {
+          "description": { "ja": "コンテナのログを表示", "en": "Fetch the logs of a container" },
+          "riskOverride": "low",
+          "flags": {
+            "-f": {
+              "description": { "ja": "ログをリアルタイムで追跡", "en": "Follow log output in real time" }
+            },
+            "--tail": {
+              "description": { "ja": "末尾から表示する行数を指定", "en": "Number of lines to show from the end" }
+            },
+            "-t": {
+              "description": { "ja": "タイムスタンプを表示", "en": "Show timestamps" }
+            },
+            "--since": {
+              "description": { "ja": "指定時刻以降のログを表示", "en": "Show logs since timestamp" }
+            }
+          }
+        },
+        "pull": {
+          "description": { "ja": "レジストリからイメージを取得", "en": "Download an image from a registry" },
+          "riskOverride": "low",
+          "flags": {
+            "--platform": {
+              "description": { "ja": "プラットフォームを指定してイメージを取得", "en": "Set platform for the image" }
+            }
+          }
+        },
+        "push": {
+          "description": { "ja": "レジストリにイメージを送信", "en": "Upload an image to a registry" },
+          "riskOverride": "medium"
+        },
+        "network": {
+          "description": { "ja": "Dockerネットワークを管理", "en": "Manage Docker networks" },
+          "riskOverride": "medium"
+        },
+        "volume": {
+          "description": { "ja": "Dockerボリュームを管理", "en": "Manage Docker volumes" },
+          "riskOverride": "medium"
+        },
+        "compose up": {
+          "description": { "ja": "コンテナをビルドして起動", "en": "Create and start containers" },
+          "riskOverride": "medium",
+          "flags": {
+            "-d": {
+              "description": { "ja": "バックグラウンドでコンテナを起動", "en": "Run containers in background (detached mode)" }
+            },
+            "--build": {
+              "description": { "ja": "起動前にイメージをビルド", "en": "Build images before starting containers" }
+            },
+            "--force-recreate": {
+              "description": { "ja": "設定変更がなくてもコンテナを再作成", "en": "Recreate containers even if configuration hasn't changed" },
+              "riskModifier": "medium"
+            },
+            "--scale": {
+              "description": { "ja": "サービスのコンテナ数を指定", "en": "Scale service to specified number of instances" }
+            }
+          }
+        },
+        "compose down": {
+          "description": { "ja": "コンテナを停止して削除", "en": "Stop and remove containers, networks" },
+          "riskOverride": "high",
+          "flags": {
+            "-v": {
+              "description": { "ja": "名前付きボリュームも削除", "en": "Remove named volumes declared in the volumes section" },
+              "riskModifier": "high"
+            },
+            "--rmi": {
+              "description": { "ja": "イメージも削除（all: 全イメージ、local: カスタムイメージのみ）", "en": "Remove images (all: all images, local: only custom images)" },
+              "riskModifier": "high"
+            },
+            "--remove-orphans": {
+              "description": { "ja": "定義から外れた孤立コンテナも削除", "en": "Remove containers for services not defined in the Compose file" }
+            }
+          }
+        },
+        "compose build": {
+          "description": { "ja": "サービスをビルド", "en": "Build or rebuild services" },
+          "riskOverride": "medium",
+          "flags": {
+            "--no-cache": {
+              "description": { "ja": "キャッシュを使用せずにビルド", "en": "Do not use cache when building the image" }
+            },
+            "--pull": {
+              "description": { "ja": "常に最新のベースイメージを取得してビルド", "en": "Always pull a newer version of the base image" }
+            }
+          }
+        },
+        "compose ps": {
+          "description": { "ja": "コンテナの状態を表示", "en": "List containers" },
+          "riskOverride": "low",
+          "flags": {
+            "-a": {
+              "description": { "ja": "停止中を含む全コンテナを表示", "en": "Show all containers (including stopped)" }
+            },
+            "-q": {
+              "description": { "ja": "コンテナIDのみ表示", "en": "Only display container IDs" }
+            }
+          }
+        },
+        "start": {
+          "description": { "ja": "停止中のコンテナを起動", "en": "Start one or more stopped containers" },
+          "riskOverride": "medium",
+          "flags": {
+            "-a": {
+              "description": { "ja": "STDOUT/STDERRにアタッチしてシグナルを転送", "en": "Attach STDOUT/STDERR and forward signals" }
+            },
+            "--detach-keys": {
+              "description": { "ja": "コンテナからデタッチするキーシーケンスを指定", "en": "Override the key sequence for detaching" }
+            },
+            "-i": {
+              "description": { "ja": "コンテナのSTDINにアタッチ", "en": "Attach container's STDIN" }
+            }
+          }
+        },
+        "restart": {
+          "description": { "ja": "コンテナを再起動", "en": "Restart one or more containers" },
+          "riskOverride": "medium",
+          "flags": {
+            "-s": {
+              "description": { "ja": "再起動前にコンテナに送信するシグナルを指定", "en": "Signal to send to the container before restarting" }
+            },
+            "-t": {
+              "description": { "ja": "強制終了までの猶予時間を秒数で指定（デフォルト: 10）", "en": "Seconds to wait before killing the container (default: 10)" }
+            }
+          }
+        },
+        "kill": {
+          "description": { "ja": "コンテナを強制終了", "en": "Kill one or more running containers" },
+          "riskOverride": "high",
+          "flags": {
+            "-s": {
+              "description": { "ja": "コンテナに送信するシグナルを指定（デフォルト: KILL）", "en": "Signal to send to the container (default: KILL)" }
+            }
+          }
+        },
+        "rmi": {
+          "description": { "ja": "イメージを削除", "en": "Remove one or more images" },
+          "riskOverride": "high",
+          "flags": {
+            "-f": {
+              "description": { "ja": "イメージを強制削除", "en": "Force removal of the image" },
+              "riskModifier": "high"
+            },
+            "--no-prune": {
+              "description": { "ja": "タグなし親イメージを削除しない", "en": "Do not delete untagged parent images" }
+            }
+          }
+        },
+        "system prune": {
+          "description": { "ja": "未使用のコンテナ・イメージ・ネットワークを一括削除", "en": "Remove unused containers, images, and networks" },
+          "riskOverride": "critical",
+          "flags": {
+            "-a": {
+              "description": { "ja": "使用中でない全イメージも削除対象に含む", "en": "Remove all unused images, not just dangling ones" },
+              "riskModifier": "high"
+            },
+            "-f": {
+              "description": { "ja": "確認プロンプトなしで実行", "en": "Do not prompt for confirmation" }
+            },
+            "--filter": {
+              "description": { "ja": "フィルタ条件を指定（例: until=24h, label=...）", "en": "Provide filter values (e.g. until=24h, label=...)" }
+            },
+            "--volumes": {
+              "description": { "ja": "匿名ボリュームも削除対象に含む", "en": "Prune anonymous volumes" },
+              "riskModifier": "high"
+            }
+          }
+        },
+        "tag": {
+          "description": { "ja": "イメージにタグを付与", "en": "Create a tag that refers to a source image" },
+          "riskOverride": "low",
+          "flags": {}
+        },
+        "inspect": {
+          "description": { "ja": "Dockerオブジェクトの詳細情報を表示", "en": "Return low-level information on Docker objects" },
+          "riskOverride": "low",
+          "flags": {
+            "-f": {
+              "description": { "ja": "Goテンプレートで出力をフォーマット", "en": "Format output using a Go template" }
+            },
+            "-s": {
+              "description": { "ja": "コンテナの場合にファイルサイズを表示", "en": "Display total file sizes if the type is container" }
+            },
+            "--type": {
+              "description": { "ja": "指定した種類のJSON情報を返す（container, image, network等）", "en": "Return JSON for specified type (container, image, network, etc.)" }
+            }
+          }
+        },
+        "cp": {
+          "description": { "ja": "コンテナとホスト間でファイルをコピー", "en": "Copy files between container and host" },
+          "riskOverride": "medium",
+          "flags": {
+            "-a": {
+              "description": { "ja": "アーカイブモード（UID/GID情報を保持してコピー）", "en": "Archive mode (copy all uid/gid information)" }
+            },
+            "-L": {
+              "description": { "ja": "ソースパスのシンボリックリンクを常に追跡", "en": "Always follow symbolic links in source path" }
+            },
+            "-q": {
+              "description": { "ja": "コピー中の進捗表示を抑制", "en": "Suppress progress output during copy" }
+            }
+          }
+        },
+        "save": {
+          "description": { "ja": "イメージをtarアーカイブに保存", "en": "Save one or more images to a tar archive" },
+          "riskOverride": "low",
+          "flags": {
+            "-o": {
+              "description": { "ja": "STDOUTの代わりにファイルに書き出し", "en": "Write to a file instead of STDOUT" }
+            }
+          }
+        },
+        "load": {
+          "description": { "ja": "tarアーカイブからイメージを読み込み", "en": "Load an image from a tar archive" },
+          "riskOverride": "medium",
+          "flags": {
+            "-i": {
+              "description": { "ja": "STDINの代わりにtarアーカイブファイルから読み込み", "en": "Read from tar archive file instead of STDIN" }
+            },
+            "-q": {
+              "description": { "ja": "ロード時の出力を抑制", "en": "Suppress the load output" }
+            }
+          }
+        },
+        "compose logs": {
+          "description": { "ja": "サービスのログを表示", "en": "View output from containers" },
+          "riskOverride": "low",
+          "flags": {
+            "-f": {
+              "description": { "ja": "ログをリアルタイムで追跡", "en": "Follow log output in real time" }
+            },
+            "--no-color": {
+              "description": { "ja": "モノクロで出力", "en": "Produce monochrome output" }
+            },
+            "--no-log-prefix": {
+              "description": { "ja": "ログにサービス名プレフィックスを付けない", "en": "Don't print prefix in logs" }
+            },
+            "--since": {
+              "description": { "ja": "指定時刻以降のログを表示", "en": "Show logs since timestamp or relative time" }
+            },
+            "-t": {
+              "description": { "ja": "タイムスタンプを表示", "en": "Show timestamps" }
+            },
+            "--tail": {
+              "description": { "ja": "末尾から表示する行数を指定（デフォルト: all）", "en": "Number of lines from end (default: all)" }
+            }
+          }
+        },
+        "compose exec": {
+          "description": { "ja": "サービスコンテナ内でコマンドを実行", "en": "Execute a command in a running service container" },
+          "riskOverride": "medium",
+          "flags": {
+            "-d": {
+              "description": { "ja": "バックグラウンドでコマンドを実行", "en": "Run command in the background" }
+            },
+            "-e": {
+              "description": { "ja": "環境変数を設定", "en": "Set environment variables" }
+            },
+            "-T": {
+              "description": { "ja": "擬似TTY割り当てを無効化", "en": "Disable pseudo-TTY allocation" }
+            },
+            "--privileged": {
+              "description": { "ja": "拡張権限でコマンドを実行", "en": "Give extended privileges to the process" },
+              "riskModifier": "high"
+            },
+            "-u": {
+              "description": { "ja": "実行ユーザーを指定", "en": "Run the command as this user" }
+            }
+          }
+        },
+        "compose restart": {
+          "description": { "ja": "サービスコンテナを再起動", "en": "Restart service containers" },
+          "riskOverride": "medium",
+          "flags": {
+            "--no-deps": {
+              "description": { "ja": "依存サービスを再起動しない", "en": "Don't restart dependent services" }
+            },
+            "-t": {
+              "description": { "ja": "シャットダウンまでの猶予時間を秒数で指定（デフォルト: 10）", "en": "Shutdown timeout in seconds (default: 10)" }
+            }
+          }
+        },
+        "compose pull": {
+          "description": { "ja": "サービスのイメージを取得", "en": "Pull service images" },
+          "riskOverride": "low",
+          "flags": {
+            "--ignore-buildable": {
+              "description": { "ja": "ビルド可能なイメージを無視", "en": "Ignore images that can be built" }
+            },
+            "--ignore-pull-failures": {
+              "description": { "ja": "取得可能なイメージのみ取得し失敗を無視", "en": "Pull what it can and ignore failures" }
+            },
+            "--include-deps": {
+              "description": { "ja": "依存サービスのイメージも取得", "en": "Also pull services declared as dependencies" }
+            },
+            "-q": {
+              "description": { "ja": "進捗表示なしで取得", "en": "Pull without printing progress information" }
+            }
+          }
+        }
+      },
+      "flags": {}
+    }
+  }
+}

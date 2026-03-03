@@ -1,0 +1,68 @@
+{
+  "$schema": "../formatter.schema.json#/definitions/StyleFile",
+  "version": "2.0.0",
+
+  "templates_long": {
+    "singleCommand": "{risk} \n {command} \n {flags} \n {target}\n{sudo}",
+    "chainHeader": "{overallRisk} \n {chainNotice}\n{sudo}",
+    "chainSegment": "├{command} \n {flags} \n {target}",
+    "chainOperator": " {operator}",
+    "chainFooter": ""
+  },
+
+  "templates_short": {
+    "singleCommand": "{risk} \n {commands}",
+    "chainCommand": "{risk} \n {commands}"
+  },
+
+  "labels": {
+    "ja": {
+      "header": "",
+      "risk_low": "[···] LOW",
+      "risk_low_short": "[···] ",
+      "risk_medium": "[█··] MED",
+      "risk_medium_short": "[█··] ",
+      "risk_high": "[██·] HIGH",
+      "risk_high_short": "[██·] HIGH",
+      "risk_critical": "[███] CRIT",
+      "risk_critical_short": "[███] CRIT",
+      "unknownRisk": "[???] ",
+      "unknownRisk_short": "[???]",
+      "unknownCommand": "未登録コマンド",
+      "target": "▸",
+      "delimiter": " ▸ ",
+      "indent": " ",
+      "chainNotice": "⛓",
+      "chainNumbering": "dot",
+      "sudoNotice": "⚡sudo",
+      "operator_&&": "&&",
+      "operator_||": "||",
+      "operator_|": "|",
+      "operator_;": ";"
+    },
+    "en": {
+      "header": "",
+      "risk_low": "[···] LOW ",
+      "risk_low_short": "[···] ",
+      "risk_medium": "[█··] MED",
+      "risk_medium_short": "[█··] ",
+      "risk_high": "[██·] HIGH",
+      "risk_high_short": "[██·] ",
+      "risk_critical": "[███] CRIT",
+      "risk_critical_short": "[███] ",
+      "unknownRisk": "[???] ",
+      "unknownRisk_short": "[???]",
+      "unknownCommand": "Unknown command",
+      "target": "▸",
+      "delimiter": " ▸ ",
+      "indent": " ",
+      "chainNotice": "⛓",
+      "chainNumbering": "dot",
+      "sudoNotice": "⚡sudo",
+      "operator_&&": "&&",
+      "operator_||": "||",
+      "operator_|": "|",
+      "operator_;": ";"
+    }
+  }
+}

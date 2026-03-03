@@ -1,0 +1,295 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "core",
+    "name": "process",
+    "description": "Process management and execution"
+  },
+  "commands": {
+    "ps": {
+      "name": "ps",
+      "description": {
+        "ja": "実行中のプロセスを表示",
+        "en": "Report a snapshot of current processes"
+      },
+      "baseRisk": "low",
+      "category": "process",
+      "flags": {
+        "-a": {
+          "description": { "ja": "全ユーザーのプロセスを表示", "en": "Show processes for all users" }
+        },
+        "-u": {
+          "description": { "ja": "ユーザー情報付きで表示", "en": "Display user-oriented format" }
+        },
+        "-x": {
+          "description": { "ja": "制御端末なしのプロセスも表示", "en": "Show processes without controlling terminal" }
+        }
+      }
+    },
+    "kill": {
+      "name": "kill",
+      "description": {
+        "ja": "プロセスを終了させます",
+        "en": "Send a signal to a process"
+      },
+      "baseRisk": "high",
+      "category": "process",
+      "flags": {
+        "-9": {
+          "description": { "ja": "強制終了シグナル（SIGKILL）を送信", "en": "Send SIGKILL signal (force kill)" },
+          "riskModifier": "critical"
+        }
+      }
+    },
+    "node": {
+      "name": "node",
+      "description": {
+        "ja": "Node.jsでJavaScriptを実行",
+        "en": "Execute JavaScript with Node.js"
+      },
+      "baseRisk": "medium",
+      "category": "process",
+      "flags": {
+        "-e": {
+          "description": { "ja": "コマンドライン上のスクリプトを直接実行", "en": "Evaluate script from command line" }
+        }
+      }
+    },
+    "python": {
+      "name": "python",
+      "description": {
+        "ja": "Pythonスクリプトを実行",
+        "en": "Execute Python scripts"
+      },
+      "baseRisk": "medium",
+      "category": "process",
+      "flags": {
+        "-c": {
+          "description": { "ja": "コマンドライン上のスクリプトを直接実行", "en": "Execute script from command line" }
+        }
+      }
+    },
+    "killall": {
+      "name": "killall",
+      "description": {
+        "ja": "プロセス名を指定してシグナルを送信",
+        "en": "Kill processes by name"
+      },
+      "baseRisk": "high",
+      "category": "process",
+      "flags": {
+        "-e": {
+          "description": { "ja": "プロセス名完全一致", "en": "Exact name match" }
+        },
+        "-i": {
+          "description": { "ja": "確認を求める", "en": "Prompt for confirmation" }
+        },
+        "-l": {
+          "description": { "ja": "シグナル一覧表示", "en": "List signal names" }
+        },
+        "-s": {
+          "description": { "ja": "シグナル指定", "en": "Specify signal" },
+          "riskModifier": "high"
+        },
+        "-u": {
+          "description": { "ja": "ユーザー指定で一括kill", "en": "Kill by user" },
+          "riskModifier": "high"
+        },
+        "-v": {
+          "description": { "ja": "詳細表示", "en": "Verbose output" }
+        },
+        "-9": {
+          "description": { "ja": "SIGKILL強制終了", "en": "Force kill with SIGKILL" },
+          "riskModifier": "critical"
+        }
+      }
+    },
+    "pkill": {
+      "name": "pkill",
+      "description": {
+        "ja": "パターンマッチでプロセスにシグナルを送信",
+        "en": "Signal processes based on name pattern"
+      },
+      "baseRisk": "high",
+      "category": "process",
+      "flags": {
+        "-f": {
+          "description": { "ja": "コマンドライン全体でマッチ", "en": "Match against full command line" },
+          "riskModifier": "high"
+        },
+        "-n": {
+          "description": { "ja": "最新プロセスのみ", "en": "Newest process only" }
+        },
+        "-o": {
+          "description": { "ja": "最古プロセスのみ", "en": "Oldest process only" }
+        },
+        "-u": {
+          "description": { "ja": "ユーザー指定", "en": "Filter by user" }
+        },
+        "-x": {
+          "description": { "ja": "プロセス名完全一致", "en": "Exact name match" }
+        },
+        "-9": {
+          "description": { "ja": "SIGKILL強制終了", "en": "Force kill with SIGKILL" },
+          "riskModifier": "critical"
+        }
+      }
+    },
+    "bg": {
+      "name": "bg",
+      "description": {
+        "ja": "停止中のジョブをバックグラウンドで再開",
+        "en": "Resume a stopped job in the background"
+      },
+      "baseRisk": "low",
+      "category": "process",
+      "flags": {}
+    },
+    "fg": {
+      "name": "fg",
+      "description": {
+        "ja": "ジョブをフォアグラウンドに戻す",
+        "en": "Bring a job to the foreground"
+      },
+      "baseRisk": "low",
+      "category": "process",
+      "flags": {}
+    },
+    "jobs": {
+      "name": "jobs",
+      "description": {
+        "ja": "現在のシェルのジョブ一覧を表示",
+        "en": "List active jobs in the current shell"
+      },
+      "baseRisk": "low",
+      "category": "process",
+      "flags": {
+        "-l": {
+          "description": { "ja": "PIDも表示", "en": "Show PIDs" }
+        },
+        "-p": {
+          "description": { "ja": "PIDのみ表示", "en": "Show PIDs only" }
+        },
+        "-r": {
+          "description": { "ja": "実行中のみ", "en": "Running jobs only" }
+        }
+      }
+    },
+    "nohup": {
+      "name": "nohup",
+      "description": {
+        "ja": "HUPシグナルを無視してコマンドを実行",
+        "en": "Run a command immune to hangup signals"
+      },
+      "baseRisk": "low",
+      "category": "process",
+      "flags": {}
+    },
+    "timeout": {
+      "name": "timeout",
+      "description": {
+        "ja": "指定時間経過後にコマンドを終了させる",
+        "en": "Run a command with a time limit"
+      },
+      "baseRisk": "low",
+      "category": "process",
+      "flags": {
+        "-s": {
+          "description": { "ja": "送信シグナル指定", "en": "Specify signal to send" },
+          "riskModifier": "medium"
+        },
+        "-k": {
+          "description": { "ja": "SIGKILL猶予時間指定", "en": "Set kill-after duration" }
+        },
+        "--preserve-status": {
+          "description": { "ja": "コマンドの終了ステータスを保持", "en": "Preserve command exit status" }
+        }
+      }
+    },
+    "sleep": {
+      "name": "sleep",
+      "description": {
+        "ja": "指定時間だけ待機する",
+        "en": "Delay for a specified amount of time"
+      },
+      "baseRisk": "low",
+      "category": "process",
+      "flags": {}
+    },
+    "htop": {
+      "name": "htop",
+      "description": {
+        "ja": "対話的なプロセスビューア",
+        "en": "Interactive process viewer"
+      },
+      "baseRisk": "low",
+      "category": "process",
+      "flags": {
+        "-d": {
+          "description": { "ja": "更新間隔指定", "en": "Set refresh delay" }
+        },
+        "-u": {
+          "description": { "ja": "ユーザー指定", "en": "Filter by user" }
+        },
+        "-p": {
+          "description": { "ja": "PID指定で監視", "en": "Monitor specific PIDs" }
+        },
+        "-t": {
+          "description": { "ja": "ツリー表示", "en": "Show process tree" }
+        }
+      }
+    },
+    "lsof": {
+      "name": "lsof",
+      "description": {
+        "ja": "開いているファイルやネットワークポートを一覧表示します",
+        "en": "List open files and network connections"
+      },
+      "baseRisk": "low",
+      "category": "process",
+      "flags": {
+        "-i": {
+          "description": { "ja": "ネットワーク接続を表示（ポート番号指定可）", "en": "List network connections (optionally filter by port)" }
+        },
+        "-p": {
+          "description": { "ja": "指定PIDのプロセスが開いているファイルを表示", "en": "Show files opened by specified PID" }
+        },
+        "-u": {
+          "description": { "ja": "指定ユーザーのプロセスを表示", "en": "Show files opened by specified user" }
+        },
+        "-t": {
+          "description": { "ja": "PIDのみを出力（スクリプト向け）", "en": "Output PIDs only (for scripting)" }
+        },
+        "+D": {
+          "description": { "ja": "指定ディレクトリ配下のファイルを表示", "en": "List files opened under specified directory" }
+        }
+      }
+    },
+    "pgrep": {
+      "name": "pgrep",
+      "description": {
+        "ja": "パターンに一致するプロセスのPIDを検索します",
+        "en": "Search for processes by name pattern"
+      },
+      "baseRisk": "low",
+      "category": "process",
+      "flags": {
+        "-f": {
+          "description": { "ja": "コマンドライン全体でパターンマッチ", "en": "Match against full command line" }
+        },
+        "-l": {
+          "description": { "ja": "PIDとプロセス名を表示", "en": "Show PID and process name" }
+        },
+        "-a": {
+          "description": { "ja": "PIDとフルコマンドラインを表示", "en": "Show PID and full command line" }
+        },
+        "-u": {
+          "description": { "ja": "指定ユーザーのプロセスのみ検索", "en": "Match only processes owned by specified user" }
+        },
+        "-c": {
+          "description": { "ja": "一致するプロセスの数を表示", "en": "Show count of matching processes" }
+        }
+      }
+    }
+  }
+}

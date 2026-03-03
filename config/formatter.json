@@ -1,0 +1,5 @@
+{
+  "$schema": "./formatter.schema.json",
+  "style": "emoji",
+  "overrides": {}
+}

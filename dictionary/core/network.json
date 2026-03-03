@@ -1,0 +1,346 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "core",
+    "name": "network",
+    "description": "Network operations"
+  },
+  "commands": {
+    "curl": {
+      "name": "curl",
+      "description": {
+        "ja": "URLからデータを転送",
+        "en": "Transfer data from or to a server"
+      },
+      "baseRisk": "medium",
+      "category": "network",
+      "flags": {
+        "-o": {
+          "description": { "ja": "出力をファイルに保存", "en": "Write output to file" }
+        },
+        "-X": {
+          "description": { "ja": "HTTPメソッドを指定", "en": "Specify HTTP method" }
+        },
+        "-L": {
+          "description": { "ja": "リダイレクトを追従", "en": "Follow redirects" }
+        },
+        "-s": {
+          "description": { "ja": "進捗やエラーを非表示（サイレントモード）", "en": "Silent mode" }
+        },
+        "-d": {
+          "description": { "ja": "データを送信（POSTリクエスト）", "en": "Send data in POST request" }
+        }
+      }
+    },
+    "ping": {
+      "name": "ping",
+      "description": {
+        "ja": "ネットワークホストへの到達性を確認",
+        "en": "Send ICMP packets to test network connectivity"
+      },
+      "baseRisk": "low",
+      "category": "network",
+      "flags": {
+        "-c": {
+          "description": { "ja": "送信パケット数指定", "en": "Set packet count" }
+        },
+        "-i": {
+          "description": { "ja": "送信間隔指定", "en": "Set interval" }
+        },
+        "-w": {
+          "description": { "ja": "タイムアウト指定", "en": "Set deadline timeout" }
+        },
+        "-s": {
+          "description": { "ja": "パケットサイズ指定", "en": "Set packet size" }
+        },
+        "-t": {
+          "description": { "ja": "TTL値指定", "en": "Set TTL value" }
+        },
+        "-q": {
+          "description": { "ja": "サマリーのみ表示", "en": "Quiet output" }
+        },
+        "-f": {
+          "description": { "ja": "フラッドping", "en": "Flood ping" },
+          "riskModifier": "medium"
+        }
+      }
+    },
+    "ifconfig": {
+      "name": "ifconfig",
+      "description": {
+        "ja": "ネットワークインターフェースの設定を表示・変更",
+        "en": "Configure or display network interface parameters"
+      },
+      "baseRisk": "medium",
+      "category": "network",
+      "flags": {
+        "-a": {
+          "description": { "ja": "全インターフェース表示", "en": "Show all interfaces" }
+        },
+        "-s": {
+          "description": { "ja": "短縮表示", "en": "Short display format" }
+        },
+        "up": {
+          "description": { "ja": "インターフェース有効化", "en": "Enable interface" }
+        },
+        "down": {
+          "description": { "ja": "インターフェース無効化", "en": "Disable interface" }
+        }
+      }
+    },
+    "ip": {
+      "name": "ip",
+      "description": {
+        "ja": "ネットワークインターフェース・ルーティング等を管理",
+        "en": "Show and manipulate routing, network devices and interfaces"
+      },
+      "baseRisk": "medium",
+      "category": "network",
+      "subcommands": {
+        "addr": {
+          "description": { "ja": "IPアドレスを表示・管理", "en": "Manage IP addresses" },
+          "riskOverride": "medium",
+          "flags": {
+            "show": {
+              "description": { "ja": "アドレス一覧表示", "en": "Show addresses" }
+            },
+            "add": {
+              "description": { "ja": "アドレス追加", "en": "Add address" }
+            },
+            "del": {
+              "description": { "ja": "アドレス削除", "en": "Delete address" },
+              "riskModifier": "high"
+            },
+            "flush": {
+              "description": { "ja": "全アドレス削除", "en": "Flush all addresses" },
+              "riskModifier": "high"
+            }
+          }
+        },
+        "link": {
+          "description": { "ja": "ネットワークリンクを表示・管理", "en": "Manage network links" },
+          "riskOverride": "medium",
+          "flags": {
+            "show": {
+              "description": { "ja": "リンク情報表示", "en": "Show link info" }
+            },
+            "set": {
+              "description": { "ja": "リンク設定変更", "en": "Modify link settings" }
+            }
+          }
+        },
+        "route": {
+          "description": { "ja": "ルーティングテーブルを表示・管理", "en": "Manage routing table" },
+          "riskOverride": "high",
+          "flags": {
+            "show": {
+              "description": { "ja": "ルート一覧表示", "en": "Show routes" }
+            },
+            "add": {
+              "description": { "ja": "ルート追加", "en": "Add route" }
+            },
+            "del": {
+              "description": { "ja": "ルート削除", "en": "Delete route" },
+              "riskModifier": "high"
+            },
+            "flush": {
+              "description": { "ja": "ルーティングテーブルをフラッシュ", "en": "Flush routing table" },
+              "riskModifier": "critical"
+            }
+          }
+        },
+        "neigh": {
+          "description": { "ja": "ARPテーブルを表示・管理", "en": "Manage ARP table entries" },
+          "riskOverride": "medium",
+          "flags": {
+            "show": {
+              "description": { "ja": "ARPテーブル表示", "en": "Show ARP entries" }
+            },
+            "add": {
+              "description": { "ja": "エントリ追加", "en": "Add entry" }
+            },
+            "del": {
+              "description": { "ja": "エントリ削除", "en": "Delete entry" },
+              "riskModifier": "high"
+            },
+            "flush": {
+              "description": { "ja": "ARPテーブルをフラッシュ", "en": "Flush ARP table" },
+              "riskModifier": "high"
+            }
+          }
+        }
+      },
+      "flags": {}
+    },
+    "netstat": {
+      "name": "netstat",
+      "description": {
+        "ja": "ネットワーク接続・ルーティング・統計を表示",
+        "en": "Print network connections, routing tables and statistics"
+      },
+      "baseRisk": "low",
+      "category": "network",
+      "flags": {
+        "-a": {
+          "description": { "ja": "全接続表示", "en": "Show all connections" }
+        },
+        "-t": {
+          "description": { "ja": "TCP接続のみ", "en": "Show TCP only" }
+        },
+        "-u": {
+          "description": { "ja": "UDP接続のみ", "en": "Show UDP only" }
+        },
+        "-l": {
+          "description": { "ja": "LISTENのみ", "en": "Show listening sockets only" }
+        },
+        "-n": {
+          "description": { "ja": "数値表示", "en": "Show numeric addresses" }
+        },
+        "-p": {
+          "description": { "ja": "PID/プログラム名表示", "en": "Show PID and program name" }
+        },
+        "-r": {
+          "description": { "ja": "ルーティングテーブル表示", "en": "Show routing table" }
+        }
+      }
+    },
+    "ss": {
+      "name": "ss",
+      "description": {
+        "ja": "ソケット統計を表示",
+        "en": "Display socket statistics"
+      },
+      "baseRisk": "low",
+      "category": "network",
+      "flags": {
+        "-a": {
+          "description": { "ja": "全ソケット表示", "en": "Show all sockets" }
+        },
+        "-t": {
+          "description": { "ja": "TCPのみ", "en": "Show TCP only" }
+        },
+        "-u": {
+          "description": { "ja": "UDPのみ", "en": "Show UDP only" }
+        },
+        "-l": {
+          "description": { "ja": "LISTENのみ", "en": "Show listening only" }
+        },
+        "-n": {
+          "description": { "ja": "数値表示", "en": "Show numeric" }
+        },
+        "-p": {
+          "description": { "ja": "プロセス情報表示", "en": "Show process info" }
+        },
+        "-K": {
+          "description": { "ja": "ソケット強制終了", "en": "Kill matching sockets" },
+          "riskModifier": "high"
+        }
+      }
+    },
+    "traceroute": {
+      "name": "traceroute",
+      "description": {
+        "ja": "パケットが宛先に到達するまでの経路を表示",
+        "en": "Trace the route packets take to a network host"
+      },
+      "baseRisk": "low",
+      "category": "network",
+      "flags": {
+        "-n": {
+          "description": { "ja": "DNS逆引きしない", "en": "Don't resolve hostnames" }
+        },
+        "-m": {
+          "description": { "ja": "最大ホップ数指定", "en": "Set max hops" }
+        },
+        "-w": {
+          "description": { "ja": "応答待機時間指定", "en": "Set wait time" }
+        },
+        "-q": {
+          "description": { "ja": "各ホップの送信数指定", "en": "Set queries per hop" }
+        },
+        "-I": {
+          "description": { "ja": "ICMPを使用", "en": "Use ICMP" }
+        },
+        "-T": {
+          "description": { "ja": "TCPを使用", "en": "Use TCP" }
+        }
+      }
+    },
+    "dig": {
+      "name": "dig",
+      "description": {
+        "ja": "DNS情報を詳細にルックアップ",
+        "en": "DNS lookup utility"
+      },
+      "baseRisk": "low",
+      "category": "network",
+      "flags": {
+        "+short": {
+          "description": { "ja": "簡潔な回答のみ表示", "en": "Show short answer only" }
+        },
+        "+trace": {
+          "description": { "ja": "ルートからの委任チェーンを追跡", "en": "Trace delegation chain from root" }
+        },
+        "-x": {
+          "description": { "ja": "逆引きルックアップ", "en": "Reverse DNS lookup" }
+        },
+        "-t": {
+          "description": { "ja": "クエリタイプ指定", "en": "Set query type" }
+        },
+        "+noall": {
+          "description": { "ja": "全セクション非表示", "en": "Disable all sections" }
+        }
+      }
+    },
+    "nslookup": {
+      "name": "nslookup",
+      "description": {
+        "ja": "DNSルックアップを行う",
+        "en": "Query DNS name servers"
+      },
+      "baseRisk": "low",
+      "category": "network",
+      "flags": {
+        "-type=": {
+          "description": { "ja": "クエリタイプ指定", "en": "Set query type" }
+        },
+        "-timeout=": {
+          "description": { "ja": "タイムアウト指定", "en": "Set timeout" }
+        },
+        "-debug": {
+          "description": { "ja": "デバッグ情報表示", "en": "Show debug info" }
+        }
+      }
+    },
+    "nc": {
+      "name": "nc",
+      "description": {
+        "ja": "ネットワーク接続のテスト・データ転送を行います（netcat）",
+        "en": "Network utility for reading/writing across network connections (netcat)"
+      },
+      "baseRisk": "low",
+      "category": "network",
+      "flags": {
+        "-l": {
+          "description": { "ja": "リスニングモード（接続を待ち受ける）", "en": "Listen mode (wait for incoming connections)" },
+          "riskModifier": "medium"
+        },
+        "-p": {
+          "description": { "ja": "ポート番号を指定", "en": "Specify port number" }
+        },
+        "-z": {
+          "description": { "ja": "ポートスキャンモード（データ送信なし）", "en": "Port scanning mode (zero I/O)" }
+        },
+        "-v": {
+          "description": { "ja": "詳細出力", "en": "Verbose output" }
+        },
+        "-w": {
+          "description": { "ja": "接続タイムアウト秒数を指定", "en": "Set connection timeout in seconds" }
+        },
+        "-u": {
+          "description": { "ja": "UDPモード（デフォルトはTCP）", "en": "Use UDP instead of TCP" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "core",
+    "name": "with-schema-test",
+    "description": "Test fixture for schema.json exclusion test"
+  },
+  "commands": {
+    "schemacmd": {
+      "name": "schemacmd",
+      "description": { "ja": "スキーマ除外テスト用コマンド", "en": "Command for schema exclusion test" },
+      "baseRisk": "low",
+      "category": "system"
+    }
+  }
+}

@@ -1,0 +1,680 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "core",
+    "name": "filesystem",
+    "description": "File and directory operations"
+  },
+  "commands": {
+    "ls": {
+      "name": "ls",
+      "description": {
+        "ja": "ファイルやフォルダの一覧を表示",
+        "en": "List directory contents"
+      },
+      "baseRisk": "low",
+      "category": "filesystem",
+      "flags": {
+        "-l": {
+          "description": { "ja": "詳細情報を表示", "en": "Long listing format" }
+        },
+        "-a": {
+          "description": { "ja": "隠しファイルも表示", "en": "Show hidden files" }
+        },
+        "-R": {
+          "description": { "ja": "サブフォルダも再帰的に表示", "en": "List subdirectories recursively" }
+        }
+      }
+    },
+    "cat": {
+      "name": "cat",
+      "description": {
+        "ja": "ファイルの内容を表示",
+        "en": "Concatenate and print files"
+      },
+      "baseRisk": "low",
+      "category": "filesystem",
+      "flags": {
+        "-n": {
+          "description": { "ja": "行番号を表示", "en": "Number all output lines" }
+        }
+      }
+    },
+    "mkdir": {
+      "name": "mkdir",
+      "description": {
+        "ja": "新しいフォルダを作成",
+        "en": "Create directories"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-p": {
+          "description": { "ja": "親フォルダも含めて一括作成", "en": "Create parent directories as needed" }
+        }
+      }
+    },
+    "rm": {
+      "name": "rm",
+      "description": {
+        "ja": "ファイルやフォルダを削除",
+        "en": "Remove files or directories"
+      },
+      "baseRisk": "high",
+      "category": "filesystem",
+      "flags": {
+        "-r": {
+          "description": { "ja": "フォルダの中身も含めて再帰的に削除", "en": "Remove directories and their contents recursively" },
+          "riskModifier": "high"
+        },
+        "-f": {
+          "description": { "ja": "確認なしで強制削除", "en": "Force removal without confirmation" },
+          "riskModifier": "high"
+        },
+        "-i": {
+          "description": { "ja": "削除前に確認を求める", "en": "Prompt before every removal" }
+        }
+      }
+    },
+    "cp": {
+      "name": "cp",
+      "description": {
+        "ja": "ファイルやフォルダをコピー",
+        "en": "Copy files and directories"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-r": {
+          "description": { "ja": "フォルダを再帰的にコピー", "en": "Copy directories recursively" }
+        },
+        "-f": {
+          "description": { "ja": "確認なしで上書き", "en": "Force overwrite without confirmation" }
+        },
+        "-i": {
+          "description": { "ja": "上書き前に確認を求める", "en": "Prompt before overwrite" }
+        }
+      }
+    },
+    "mv": {
+      "name": "mv",
+      "description": {
+        "ja": "ファイルやフォルダを移動・名前変更",
+        "en": "Move or rename files and directories"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-f": {
+          "description": { "ja": "確認なしで上書き", "en": "Force overwrite without confirmation" }
+        },
+        "-i": {
+          "description": { "ja": "上書き前に確認を求める", "en": "Prompt before overwrite" }
+        }
+      }
+    },
+    "touch": {
+      "name": "touch",
+      "description": {
+        "ja": "空のファイルを作成、またはタイムスタンプを更新",
+        "en": "Create empty files or update timestamps"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem"
+    },
+    "ln": {
+      "name": "ln",
+      "description": {
+        "ja": "リンクを作成",
+        "en": "Create links between files"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-s": {
+          "description": { "ja": "シンボリックリンクを作成", "en": "Create symbolic link" }
+        },
+        "-f": {
+          "description": { "ja": "既存のリンクを強制上書き", "en": "Force overwrite existing link" },
+          "riskModifier": "high"
+        }
+      }
+    },
+    "tar": {
+      "name": "tar",
+      "description": {
+        "ja": "ファイルをアーカイブ・展開",
+        "en": "Archive and extract files"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-c": {
+          "description": { "ja": "アーカイブを作成", "en": "Create archive" }
+        },
+        "-x": {
+          "description": { "ja": "アーカイブを展開", "en": "Extract archive" }
+        },
+        "-z": {
+          "description": { "ja": "gzip圧縮/展開", "en": "Compress/decompress with gzip" }
+        },
+        "-f": {
+          "description": { "ja": "アーカイブファイル名を指定", "en": "Specify archive file name" }
+        },
+        "-v": {
+          "description": { "ja": "処理内容を表示", "en": "Verbose output" }
+        }
+      }
+    },
+    "diff": {
+      "name": "diff",
+      "description": {
+        "ja": "ファイルの差分を表示",
+        "en": "Compare files line by line"
+      },
+      "baseRisk": "low",
+      "category": "filesystem",
+      "flags": {
+        "-u": {
+          "description": { "ja": "unified形式で差分を表示", "en": "Output in unified format" }
+        },
+        "-r": {
+          "description": { "ja": "フォルダを再帰的に比較", "en": "Recursively compare directories" }
+        }
+      }
+    },
+    "tee": {
+      "name": "tee",
+      "description": {
+        "ja": "出力をファイルと標準出力に分岐",
+        "en": "Duplicate output to file and stdout"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-a": {
+          "description": { "ja": "ファイルに追記（上書きではなく末尾に追加）", "en": "Append to file instead of overwriting" }
+        }
+      }
+    },
+    "gzip": {
+      "name": "gzip",
+      "description": {
+        "ja": "ファイルをGzip形式で圧縮",
+        "en": "Compress files using gzip"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-c": {
+          "description": { "ja": "stdout出力", "en": "Write to stdout" }
+        },
+        "-d": {
+          "description": { "ja": "解凍", "en": "Decompress" }
+        },
+        "-f": {
+          "description": { "ja": "強制上書き", "en": "Force overwrite" },
+          "riskModifier": "high"
+        },
+        "-k": {
+          "description": { "ja": "元ファイル保持", "en": "Keep original files" }
+        },
+        "-l": {
+          "description": { "ja": "圧縮情報表示", "en": "List compression info" }
+        },
+        "-r": {
+          "description": { "ja": "再帰圧縮", "en": "Compress recursively" }
+        },
+        "-t": {
+          "description": { "ja": "整合性テスト", "en": "Test integrity" }
+        },
+        "-v": {
+          "description": { "ja": "詳細表示", "en": "Verbose output" }
+        }
+      }
+    },
+    "gunzip": {
+      "name": "gunzip",
+      "description": {
+        "ja": "Gzip形式のファイルを解凍",
+        "en": "Decompress gzip files"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-c": {
+          "description": { "ja": "stdout出力", "en": "Write to stdout" }
+        },
+        "-f": {
+          "description": { "ja": "強制上書き", "en": "Force overwrite" },
+          "riskModifier": "high"
+        },
+        "-k": {
+          "description": { "ja": "圧縮ファイル保持", "en": "Keep compressed files" }
+        },
+        "-l": {
+          "description": { "ja": "圧縮情報表示", "en": "List compression info" }
+        },
+        "-t": {
+          "description": { "ja": "整合性テスト", "en": "Test integrity" }
+        },
+        "-v": {
+          "description": { "ja": "詳細表示", "en": "Verbose output" }
+        }
+      }
+    },
+    "bzip2": {
+      "name": "bzip2",
+      "description": {
+        "ja": "ファイルをbzip2形式で圧縮",
+        "en": "Compress files using bzip2"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-c": {
+          "description": { "ja": "stdout出力", "en": "Write to stdout" }
+        },
+        "-d": {
+          "description": { "ja": "解凍", "en": "Decompress" }
+        },
+        "-f": {
+          "description": { "ja": "強制上書き", "en": "Force overwrite" },
+          "riskModifier": "high"
+        },
+        "-k": {
+          "description": { "ja": "元ファイル保持", "en": "Keep original files" }
+        },
+        "-t": {
+          "description": { "ja": "整合性テスト", "en": "Test integrity" }
+        },
+        "-v": {
+          "description": { "ja": "詳細表示", "en": "Verbose output" }
+        },
+        "-z": {
+          "description": { "ja": "明示的に圧縮", "en": "Explicitly compress" }
+        }
+      }
+    },
+    "bunzip2": {
+      "name": "bunzip2",
+      "description": {
+        "ja": "bzip2形式のファイルを解凍",
+        "en": "Decompress bzip2 files"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-c": {
+          "description": { "ja": "stdout出力", "en": "Write to stdout" }
+        },
+        "-f": {
+          "description": { "ja": "強制上書き", "en": "Force overwrite" },
+          "riskModifier": "high"
+        },
+        "-k": {
+          "description": { "ja": "圧縮ファイル保持", "en": "Keep compressed files" }
+        },
+        "-t": {
+          "description": { "ja": "整合性テスト", "en": "Test integrity" }
+        },
+        "-v": {
+          "description": { "ja": "詳細表示", "en": "Verbose output" }
+        }
+      }
+    },
+    "mount": {
+      "name": "mount",
+      "description": {
+        "ja": "ファイルシステムをマウント",
+        "en": "Mount a filesystem"
+      },
+      "baseRisk": "critical",
+      "category": "filesystem",
+      "flags": {
+        "-a": {
+          "description": { "ja": "fstab全マウント", "en": "Mount all in fstab" }
+        },
+        "-t": {
+          "description": { "ja": "FS種類指定", "en": "Specify filesystem type" }
+        },
+        "-o": {
+          "description": { "ja": "マウントオプション指定", "en": "Specify mount options" }
+        },
+        "-r": {
+          "description": { "ja": "読み取り専用マウント", "en": "Mount read-only" }
+        },
+        "-v": {
+          "description": { "ja": "詳細表示", "en": "Verbose output" }
+        },
+        "-n": {
+          "description": { "ja": "mtab書込み無し", "en": "Don't write to mtab" }
+        },
+        "-l": {
+          "description": { "ja": "マウント一覧表示", "en": "List mounted filesystems" }
+        },
+        "-B": {
+          "description": { "ja": "バインドマウント", "en": "Bind mount" }
+        }
+      }
+    },
+    "umount": {
+      "name": "umount",
+      "description": {
+        "ja": "ファイルシステムをアンマウント",
+        "en": "Unmount a filesystem"
+      },
+      "baseRisk": "high",
+      "category": "filesystem",
+      "flags": {
+        "-a": {
+          "description": { "ja": "全アンマウント", "en": "Unmount all" }
+        },
+        "-f": {
+          "description": { "ja": "強制アンマウント", "en": "Force unmount" },
+          "riskModifier": "critical"
+        },
+        "-l": {
+          "description": { "ja": "遅延アンマウント", "en": "Lazy unmount" },
+          "riskModifier": "high"
+        },
+        "-v": {
+          "description": { "ja": "詳細表示", "en": "Verbose output" }
+        },
+        "-t": {
+          "description": { "ja": "FS種類指定", "en": "Unmount by filesystem type" }
+        }
+      }
+    },
+    "fsck": {
+      "name": "fsck",
+      "description": {
+        "ja": "ファイルシステムの整合性を検査・修復",
+        "en": "Check and repair a filesystem"
+      },
+      "baseRisk": "critical",
+      "category": "filesystem",
+      "flags": {
+        "-a": {
+          "description": { "ja": "自動修復", "en": "Auto repair" }
+        },
+        "-f": {
+          "description": { "ja": "強制検査", "en": "Force check even if clean" },
+          "riskModifier": "critical"
+        },
+        "-n": {
+          "description": { "ja": "検査のみ変更なし", "en": "Check only without changes" }
+        },
+        "-p": {
+          "description": { "ja": "安全な修復を自動実行", "en": "Auto fix safe errors" }
+        },
+        "-t": {
+          "description": { "ja": "FS種類指定", "en": "Specify filesystem type" }
+        },
+        "-v": {
+          "description": { "ja": "詳細表示", "en": "Verbose output" }
+        },
+        "-y": {
+          "description": { "ja": "全修復にyes", "en": "Answer yes to all repairs" },
+          "riskModifier": "critical"
+        }
+      }
+    },
+    "wget": {
+      "name": "wget",
+      "description": {
+        "ja": "URLからファイルをダウンロード",
+        "en": "Download files from the web"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-O": {
+          "description": { "ja": "出力ファイル名指定", "en": "Specify output filename" }
+        },
+        "-c": {
+          "description": { "ja": "ダウンロード再開", "en": "Continue partial download" }
+        },
+        "-q": {
+          "description": { "ja": "出力抑制", "en": "Quiet mode" }
+        },
+        "-r": {
+          "description": { "ja": "再帰ダウンロード", "en": "Download recursively" },
+          "riskModifier": "medium"
+        },
+        "-m": {
+          "description": { "ja": "ミラーリング", "en": "Mirror website" },
+          "riskModifier": "medium"
+        },
+        "-N": {
+          "description": { "ja": "タイムスタンプ比較", "en": "Use timestamping" }
+        },
+        "-nc": {
+          "description": { "ja": "上書き禁止", "en": "Don't overwrite existing files" }
+        },
+        "--no-check-certificate": {
+          "description": { "ja": "SSL検証スキップ", "en": "Skip SSL verification" }
+        },
+        "-P": {
+          "description": { "ja": "保存先ディレクトリ指定", "en": "Set download directory" }
+        },
+        "-t": {
+          "description": { "ja": "リトライ回数指定", "en": "Set retry count" }
+        },
+        "-T": {
+          "description": { "ja": "タイムアウト指定", "en": "Set timeout" }
+        },
+        "-i": {
+          "description": { "ja": "URLリストファイル指定", "en": "Read URLs from file" }
+        }
+      }
+    },
+    "zip": {
+      "name": "zip",
+      "description": {
+        "ja": "ファイルをZIP形式で圧縮",
+        "en": "Compress files into ZIP archive"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-r": {
+          "description": { "ja": "再帰圧縮", "en": "Recurse into directories" }
+        },
+        "-q": {
+          "description": { "ja": "出力抑制", "en": "Quiet mode" }
+        },
+        "-d": {
+          "description": { "ja": "アーカイブからファイル削除", "en": "Delete files from archive" }
+        },
+        "-u": {
+          "description": { "ja": "更新分のみ追加", "en": "Update changed files only" }
+        },
+        "-m": {
+          "description": { "ja": "圧縮後に元ファイル削除", "en": "Move files into archive and delete originals" },
+          "riskModifier": "high"
+        },
+        "-j": {
+          "description": { "ja": "パス情報を保存しない", "en": "Junk directory paths" }
+        },
+        "-e": {
+          "description": { "ja": "パスワード暗号化", "en": "Encrypt with password" }
+        },
+        "-x": {
+          "description": { "ja": "ファイル除外", "en": "Exclude files" }
+        }
+      }
+    },
+    "unzip": {
+      "name": "unzip",
+      "description": {
+        "ja": "ZIP形式のファイルを解凍",
+        "en": "Extract files from ZIP archive"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-l": {
+          "description": { "ja": "一覧表示", "en": "List archive contents" }
+        },
+        "-t": {
+          "description": { "ja": "整合性テスト", "en": "Test archive integrity" }
+        },
+        "-o": {
+          "description": { "ja": "確認なし上書き", "en": "Overwrite without prompting" },
+          "riskModifier": "high"
+        },
+        "-n": {
+          "description": { "ja": "上書き禁止", "en": "Never overwrite existing files" }
+        },
+        "-d": {
+          "description": { "ja": "展開先ディレクトリ指定", "en": "Specify extraction directory" }
+        },
+        "-q": {
+          "description": { "ja": "出力抑制", "en": "Quiet mode" }
+        },
+        "-v": {
+          "description": { "ja": "詳細表示", "en": "Verbose output" }
+        },
+        "-j": {
+          "description": { "ja": "ディレクトリ構造無視", "en": "Ignore directory structure" }
+        }
+      }
+    },
+    "df": {
+      "name": "df",
+      "description": {
+        "ja": "ディスクの使用状況を表示",
+        "en": "Report filesystem disk space usage"
+      },
+      "baseRisk": "low",
+      "category": "filesystem",
+      "flags": {
+        "-h": {
+          "description": { "ja": "読みやすい単位で表示", "en": "Human-readable sizes" }
+        },
+        "-T": {
+          "description": { "ja": "FS種類を表示", "en": "Show filesystem type" }
+        },
+        "-a": {
+          "description": { "ja": "全FS表示", "en": "Show all filesystems" }
+        },
+        "-i": {
+          "description": { "ja": "iノード情報表示", "en": "Show inode information" }
+        },
+        "-l": {
+          "description": { "ja": "ローカルFSのみ", "en": "Show local filesystems only" }
+        },
+        "--total": {
+          "description": { "ja": "合計行を追加", "en": "Show grand total" }
+        }
+      }
+    },
+    "du": {
+      "name": "du",
+      "description": {
+        "ja": "ファイルやディレクトリのディスク使用量を表示",
+        "en": "Estimate file and directory space usage"
+      },
+      "baseRisk": "low",
+      "category": "filesystem",
+      "flags": {
+        "-h": {
+          "description": { "ja": "読みやすい単位で表示", "en": "Human-readable sizes" }
+        },
+        "-s": {
+          "description": { "ja": "合計のみ表示", "en": "Show total only" }
+        },
+        "-a": {
+          "description": { "ja": "ファイルごとに表示", "en": "Show all files" }
+        },
+        "-c": {
+          "description": { "ja": "総合計を表示", "en": "Show grand total" }
+        },
+        "-d": {
+          "description": { "ja": "表示階層の深さ指定", "en": "Set max depth" }
+        },
+        "-L": {
+          "description": { "ja": "シンボリックリンクを辿る", "en": "Follow symbolic links" }
+        },
+        "--exclude": {
+          "description": { "ja": "パターン除外", "en": "Exclude files matching pattern" }
+        }
+      }
+    },
+    "rsync": {
+      "name": "rsync",
+      "description": {
+        "ja": "ファイルやディレクトリを効率的に同期・コピー",
+        "en": "Efficiently sync and copy files"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-a": {
+          "description": { "ja": "アーカイブモード", "en": "Archive mode" }
+        },
+        "-v": {
+          "description": { "ja": "詳細表示", "en": "Verbose output" }
+        },
+        "-r": {
+          "description": { "ja": "再帰コピー", "en": "Recurse into directories" }
+        },
+        "-z": {
+          "description": { "ja": "転送時圧縮", "en": "Compress during transfer" }
+        },
+        "-n": {
+          "description": { "ja": "ドライラン", "en": "Dry run" }
+        },
+        "-P": {
+          "description": { "ja": "進捗表示と部分転送", "en": "Show progress and keep partial files" }
+        },
+        "--delete": {
+          "description": { "ja": "送信先の余剰ファイル削除", "en": "Delete files not in source" },
+          "riskModifier": "high"
+        },
+        "--exclude": {
+          "description": { "ja": "パターン除外", "en": "Exclude files matching pattern" }
+        },
+        "-e": {
+          "description": { "ja": "リモートシェル指定", "en": "Specify remote shell" }
+        },
+        "-h": {
+          "description": { "ja": "読みやすい単位で表示", "en": "Human-readable output" }
+        },
+        "-u": {
+          "description": { "ja": "新しいファイルのみコピー", "en": "Skip newer files on receiver" }
+        },
+        "-c": {
+          "description": { "ja": "チェックサムで比較", "en": "Use checksum for comparison" }
+        }
+      }
+    },
+    "file": {
+      "name": "file",
+      "description": {
+        "ja": "ファイルの種類を判定",
+        "en": "Determine file type"
+      },
+      "baseRisk": "low",
+      "category": "filesystem",
+      "flags": {
+        "-b": {
+          "description": { "ja": "ファイル名非表示", "en": "Brief mode without filename" }
+        },
+        "-i": {
+          "description": { "ja": "MIMEタイプ表示", "en": "Show MIME type" }
+        },
+        "--mime-type": {
+          "description": { "ja": "MIMEタイプのみ表示", "en": "Show MIME type only" }
+        },
+        "-L": {
+          "description": { "ja": "シンボリックリンクを辿る", "en": "Follow symbolic links" }
+        },
+        "-z": {
+          "description": { "ja": "圧縮ファイルの中身も調べる", "en": "Look inside compressed files" }
+        }
+      }
+    }
+  }
+}

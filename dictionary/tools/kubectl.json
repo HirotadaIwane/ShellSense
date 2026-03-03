@@ -1,0 +1,175 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "tools",
+    "name": "kubectl",
+    "description": "Kubernetes command-line tool"
+  },
+  "commands": {
+    "kubectl": {
+      "name": "kubectl",
+      "description": {
+        "ja": "Kubernetesクラスタを操作",
+        "en": "Kubernetes command-line tool"
+      },
+      "baseRisk": "medium",
+      "category": "container",
+      "subcommands": {
+        "get": {
+          "description": { "ja": "リソースの一覧・詳細を表示", "en": "Display one or many resources" },
+          "riskOverride": "low",
+          "flags": {
+            "-o": {
+              "description": { "ja": "出力形式を指定（json, yaml, wide等）", "en": "Output format (json, yaml, wide, etc.)" }
+            },
+            "-n": {
+              "description": { "ja": "対象の名前空間を指定", "en": "Specify the namespace" }
+            },
+            "--all-namespaces": {
+              "description": { "ja": "全名前空間のリソースを表示", "en": "List resources across all namespaces" }
+            },
+            "-l": {
+              "description": { "ja": "ラベルセレクターでフィルタリング", "en": "Filter by label selector" }
+            },
+            "-w": {
+              "description": { "ja": "変更をリアルタイムで監視", "en": "Watch for changes" }
+            },
+            "--all": {
+              "description": { "ja": "指定した種類の全リソースを表示", "en": "Select all resources of the specified type" }
+            }
+          }
+        },
+        "describe": {
+          "description": { "ja": "リソースの詳細情報を表示", "en": "Show details of a specific resource" },
+          "riskOverride": "low",
+          "flags": {
+            "-n": {
+              "description": { "ja": "対象の名前空間を指定", "en": "Specify the namespace" }
+            }
+          }
+        },
+        "apply": {
+          "description": { "ja": "マニフェストファイルからリソースを適用", "en": "Apply a configuration to a resource by file name" },
+          "riskOverride": "medium",
+          "flags": {
+            "-f": {
+              "description": { "ja": "マニフェストファイルのパスを指定", "en": "Specify the file path of the manifest" }
+            },
+            "-n": {
+              "description": { "ja": "対象の名前空間を指定", "en": "Specify the namespace" }
+            },
+            "--dry-run": {
+              "description": { "ja": "実行せずに変更内容をプレビュー", "en": "Preview changes without applying" },
+              "riskModifier": "medium"
+            },
+            "--force": {
+              "description": { "ja": "リソースを削除して再作成で強制適用", "en": "Delete and recreate resources to force apply" },
+              "riskModifier": "high"
+            }
+          }
+        },
+        "delete": {
+          "description": { "ja": "リソースを削除", "en": "Delete resources" },
+          "riskOverride": "high",
+          "flags": {
+            "--force": {
+              "description": { "ja": "即座にリソースを強制削除（graceful shutdownをスキップ）", "en": "Force delete resources immediately (skip graceful shutdown)" },
+              "riskModifier": "high"
+            },
+            "--grace-period": {
+              "description": { "ja": "削除猶予期間を秒数で指定（0で即時削除）", "en": "Period of time in seconds to wait before forcefully terminating (0 for immediate)" },
+              "riskModifier": "high"
+            },
+            "-n": {
+              "description": { "ja": "対象の名前空間を指定", "en": "Specify the namespace" }
+            },
+            "-l": {
+              "description": { "ja": "ラベルセレクターでフィルタリング", "en": "Filter by label selector" }
+            },
+            "--all": {
+              "description": { "ja": "名前空間内の指定種類の全リソースを削除", "en": "Delete all resources of the specified type in the namespace" },
+              "riskModifier": "critical"
+            }
+          }
+        },
+        "logs": {
+          "description": { "ja": "Podのログを表示", "en": "Print the logs for a container in a pod" },
+          "riskOverride": "low",
+          "flags": {
+            "-f": {
+              "description": { "ja": "ログをリアルタイムで追跡", "en": "Follow log output in real time" }
+            },
+            "--tail": {
+              "description": { "ja": "末尾から表示する行数を指定", "en": "Number of lines to show from the end" }
+            },
+            "-c": {
+              "description": { "ja": "対象のコンテナ名を指定", "en": "Specify the container name" }
+            },
+            "-p": {
+              "description": { "ja": "前回のコンテナインスタンスのログを表示", "en": "Print the logs for the previous instance of the container" }
+            },
+            "--since": {
+              "description": { "ja": "指定時間以降のログを表示", "en": "Show logs since a relative time" }
+            }
+          }
+        },
+        "exec": {
+          "description": { "ja": "Pod内でコマンドを実行", "en": "Execute a command in a container" },
+          "riskOverride": "medium",
+          "flags": {
+            "-it": {
+              "description": { "ja": "対話モードでPodに接続（TTY割り当て）", "en": "Interactive mode with TTY allocation" }
+            },
+            "-c": {
+              "description": { "ja": "対象のコンテナ名を指定", "en": "Specify the container name" }
+            },
+            "-n": {
+              "description": { "ja": "対象の名前空間を指定", "en": "Specify the namespace" }
+            }
+          }
+        },
+        "port-forward": {
+          "description": { "ja": "ローカルポートをPodに転送", "en": "Forward one or more local ports to a pod" },
+          "riskOverride": "low",
+          "flags": {
+            "--address": {
+              "description": { "ja": "リッスンするアドレスを指定", "en": "Addresses to listen on" }
+            }
+          }
+        },
+        "create": {
+          "description": { "ja": "リソースを作成", "en": "Create a resource from a file or stdin" },
+          "riskOverride": "medium",
+          "flags": {
+            "-f": {
+              "description": { "ja": "マニフェストファイルのパスを指定", "en": "Specify the file path of the manifest" }
+            },
+            "-n": {
+              "description": { "ja": "対象の名前空間を指定", "en": "Specify the namespace" }
+            },
+            "--dry-run": {
+              "description": { "ja": "実行せずに変更内容をプレビュー", "en": "Preview changes without applying" }
+            }
+          }
+        },
+        "scale": {
+          "description": { "ja": "レプリカ数を変更", "en": "Set a new size for a deployment or replicaset" },
+          "riskOverride": "medium",
+          "flags": {
+            "--replicas": {
+              "description": { "ja": "レプリカ数を指定", "en": "Specify the new number of replicas" }
+            },
+            "-n": {
+              "description": { "ja": "対象の名前空間を指定", "en": "Specify the namespace" }
+            }
+          }
+        },
+        "rollout": {
+          "description": { "ja": "デプロイメントのロールアウトを管理", "en": "Manage the rollout of a resource" },
+          "riskOverride": "medium"
+        }
+      },
+      "flags": {}
+    }
+  }
+}

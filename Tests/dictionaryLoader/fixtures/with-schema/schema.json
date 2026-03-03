@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ShellSense Dictionary File",
+  "description": "Schema for dictionary JSON files (should be excluded by loader)",
+  "type": "object",
+  "properties": {
+    "version": { "type": "string" },
+    "metadata": { "type": "object" },
+    "commands": { "type": "object" }
+  }
+}

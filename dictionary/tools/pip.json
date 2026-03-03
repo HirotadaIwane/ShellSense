@@ -1,0 +1,124 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "tools",
+    "name": "pip",
+    "description": "Python package manager"
+  },
+  "commands": {
+    "pip": {
+      "name": "pip",
+      "description": {
+        "ja": "Pythonパッケージマネージャーを操作",
+        "en": "Python package manager"
+      },
+      "baseRisk": "medium",
+      "category": "package",
+      "subcommands": {
+        "install": {
+          "description": { "ja": "パッケージをインストール", "en": "Install packages" },
+          "riskOverride": "medium",
+          "flags": {
+            "--upgrade": {
+              "description": { "ja": "パッケージを最新バージョンにアップグレード", "en": "Upgrade package to the latest version" },
+              "riskModifier": "medium"
+            },
+            "-r": {
+              "description": { "ja": "requirements ファイルからパッケージをインストール", "en": "Install from a requirements file" }
+            },
+            "--user": {
+              "description": { "ja": "ユーザーディレクトリにインストール", "en": "Install to the user directory" }
+            },
+            "--force-reinstall": {
+              "description": { "ja": "既存パッケージを強制的に再インストール", "en": "Force reinstallation of packages" },
+              "riskModifier": "medium"
+            },
+            "--no-deps": {
+              "description": { "ja": "依存パッケージをインストールしない", "en": "Do not install package dependencies" }
+            }
+          }
+        },
+        "uninstall": {
+          "description": { "ja": "パッケージをアンインストール", "en": "Uninstall packages" },
+          "riskOverride": "high",
+          "flags": {
+            "-y": {
+              "description": { "ja": "確認プロンプトなしでアンインストール", "en": "Uninstall without confirmation prompt" }
+            },
+            "--no-input": {
+              "description": { "ja": "ユーザー入力を求めずに実行", "en": "Run without asking for user input" }
+            }
+          }
+        },
+        "freeze": {
+          "description": { "ja": "インストール済みパッケージの一覧を出力", "en": "Output installed packages in requirements format" },
+          "riskOverride": "low",
+          "flags": {
+            "--local": {
+              "description": { "ja": "ローカル環境のパッケージのみ出力", "en": "Output only locally installed packages" }
+            },
+            "--user": {
+              "description": { "ja": "ユーザーディレクトリのパッケージのみ出力", "en": "Output only user-installed packages" }
+            }
+          }
+        },
+        "list": {
+          "description": { "ja": "インストール済みパッケージを表示", "en": "List installed packages" },
+          "riskOverride": "low",
+          "flags": {
+            "--outdated": {
+              "description": { "ja": "更新可能なパッケージのみ表示", "en": "Show only outdated packages" }
+            },
+            "--format": {
+              "description": { "ja": "出力形式を指定（columns, freeze, json）", "en": "Specify output format (columns, freeze, json)" }
+            }
+          }
+        },
+        "show": {
+          "description": { "ja": "パッケージの詳細情報を表示", "en": "Show information about installed packages" },
+          "riskOverride": "low",
+          "flags": {
+            "-f": {
+              "description": { "ja": "インストール済みファイルの一覧を表示", "en": "Show the full list of installed files for each package" }
+            }
+          }
+        },
+        "check": {
+          "description": { "ja": "インストール済みパッケージの依存関係を検証", "en": "Verify installed packages have compatible dependencies" },
+          "riskOverride": "low",
+          "flags": {}
+        },
+        "download": {
+          "description": { "ja": "パッケージをインストールせずにダウンロード", "en": "Download packages without installing them" },
+          "riskOverride": "low",
+          "flags": {
+            "-d": {
+              "description": { "ja": "ダウンロード先ディレクトリを指定", "en": "Download packages into specified directory" }
+            },
+            "-r": {
+              "description": { "ja": "requirementsファイルからパッケージを指定", "en": "Install from the given requirements file" }
+            },
+            "--no-deps": {
+              "description": { "ja": "依存パッケージをダウンロードしない", "en": "Don't download package dependencies" }
+            },
+            "--pre": {
+              "description": { "ja": "プレリリース版・開発版を含む", "en": "Include pre-release and development versions" }
+            },
+            "--platform": {
+              "description": { "ja": "指定プラットフォーム互換のホイールのみ取得", "en": "Only use wheels compatible with specified platform" }
+            },
+            "--python-version": {
+              "description": { "ja": "Pythonバージョン互換性チェックに使用", "en": "Python version for compatibility checks" }
+            },
+            "--only-binary": {
+              "description": { "ja": "バイナリパッケージのみ使用", "en": "Do not use source packages" }
+            },
+            "--no-binary": {
+              "description": { "ja": "ソースパッケージのみ使用", "en": "Do not use binary packages" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

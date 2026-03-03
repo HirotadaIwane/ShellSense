@@ -1,0 +1,116 @@
+{
+  "name": "shellsense",
+  "displayName": "ShellSense",
+  "description": "Terminal command explanations and risk levels for Claude Code",
+  "version": "0.1.0",
+  "publisher": "shellsense",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "icon": "icon.png",
+  "license": "MIT",
+  "keywords": ["claude-code", "shell", "terminal", "command", "hook", "risk", "claude"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HirotadaIwane/ShellSense"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "shellsense.test",
+        "title": "ShellSense: Test"
+      }
+    ],
+    "configuration": {
+      "title": "ShellSense",
+      "properties": {
+        "shellsense.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable ShellSense notifications"
+        },
+        "shellsense.language": {
+          "type": "string",
+          "default": "ja",
+          "enum": ["ja", "en"],
+          "enumDescriptions": [
+            "日本語",
+            "English"
+          ],
+          "description": "Language for command explanations"
+        },
+        "shellsense.minRiskLevel": {
+          "type": "string",
+          "default": "low",
+          "enum": ["low", "medium", "high", "critical"],
+          "enumDescriptions": [
+            "Show all commands",
+            "Medium and above",
+            "High and above",
+            "Critical only"
+          ],
+          "description": "Minimum risk level to show notifications"
+        },
+        "shellsense.hookEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show notifications from Claude Code hook"
+        },
+        "shellsense.terminalEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show notifications for terminal commands"
+        },
+        "shellsense.notificationFormat": {
+          "type": "string",
+          "default": "detailed",
+          "enum": ["detailed", "compact"],
+          "enumDescriptions": [
+            "Multi-line detailed explanation with flags and targets",
+            "Single-line compact summary"
+          ],
+          "description": "Notification output format"
+        },
+        "shellsense.style": {
+          "type": "string",
+          "default": "legend",
+          "enum": ["legend", "emoji"],
+          "enumDescriptions": [
+            "Block shade gauge, HUD-style compact display (default)",
+            "Rich emoji decorations"
+          ],
+          "description": "Display style preset"
+        },
+        "shellsense.chainNumbering": {
+          "type": "string",
+          "default": "dot",
+          "enum": ["dot", "circled", "keycap", "dingbat", "none"],
+          "enumDescriptions": [
+            "1. 2. 3. (default)",
+            "① ② ③",
+            "1️⃣ 2️⃣ 3️⃣",
+            "➊ ➋ ➌",
+            "No numbering"
+          ],
+          "description": "Chain command numbering style"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "node esbuild.js --production",
+    "check-types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.93.0",
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.24.0",
+    "esbuild-plugin-copy": "^2.1.0",
+    "typescript": "^5.0.0"
+  }
+}

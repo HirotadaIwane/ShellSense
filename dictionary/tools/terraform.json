@@ -1,0 +1,151 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "tools",
+    "name": "terraform",
+    "description": "Terraform infrastructure as code tool"
+  },
+  "commands": {
+    "terraform": {
+      "name": "terraform",
+      "description": {
+        "ja": "Terraformでインフラストラクチャを管理",
+        "en": "Terraform infrastructure as code tool"
+      },
+      "baseRisk": "medium",
+      "category": "cloud",
+      "subcommands": {
+        "init": {
+          "description": { "ja": "作業ディレクトリを初期化", "en": "Prepare your working directory for other commands" },
+          "riskOverride": "low",
+          "flags": {
+            "-backend-config": {
+              "description": { "ja": "バックエンド設定を指定", "en": "Specify backend configuration" }
+            },
+            "-upgrade": {
+              "description": { "ja": "プラグインを最新バージョンにアップグレード", "en": "Upgrade plugins to the latest version" }
+            },
+            "-reconfigure": {
+              "description": { "ja": "バックエンドを再設定（既存の状態を無視）", "en": "Reconfigure backend, ignoring any saved configuration" }
+            }
+          }
+        },
+        "plan": {
+          "description": { "ja": "実行計画を表示", "en": "Show changes required by the current configuration" },
+          "riskOverride": "low",
+          "flags": {
+            "-out": {
+              "description": { "ja": "実行計画をファイルに保存", "en": "Write the plan to a file" }
+            },
+            "-target": {
+              "description": { "ja": "特定のリソースのみを対象に計画", "en": "Target specific resources for planning" }
+            },
+            "-var": {
+              "description": { "ja": "変数の値を指定", "en": "Set a variable value" }
+            },
+            "-var-file": {
+              "description": { "ja": "変数定義ファイルを指定", "en": "Set variables from a file" }
+            },
+            "-destroy": {
+              "description": { "ja": "リソース削除の実行計画を作成", "en": "Generate a plan to destroy all resources" },
+              "riskModifier": "medium"
+            }
+          }
+        },
+        "apply": {
+          "description": { "ja": "インフラストラクチャの変更を適用", "en": "Create or update infrastructure" },
+          "riskOverride": "high",
+          "flags": {
+            "--auto-approve": {
+              "description": { "ja": "確認プロンプトなしで変更を適用（本番環境で危険）", "en": "Skip interactive approval before applying (dangerous in production)" },
+              "riskModifier": "critical"
+            },
+            "-target": {
+              "description": { "ja": "特定のリソースのみを対象に適用", "en": "Target specific resources for apply" }
+            },
+            "-var": {
+              "description": { "ja": "変数の値を指定", "en": "Set a variable value" }
+            },
+            "-var-file": {
+              "description": { "ja": "変数定義ファイルを指定", "en": "Set variables from a file" }
+            },
+            "-parallelism": {
+              "description": { "ja": "並行操作数を制限", "en": "Limit the number of concurrent operations" }
+            }
+          }
+        },
+        "destroy": {
+          "description": { "ja": "管理対象のリソースを全て削除", "en": "Destroy previously-created infrastructure" },
+          "riskOverride": "critical",
+          "flags": {
+            "--auto-approve": {
+              "description": { "ja": "確認プロンプトなしで全リソースを削除（極めて危険）", "en": "Skip interactive approval before destroying (extremely dangerous)" },
+              "riskModifier": "critical"
+            },
+            "-target": {
+              "description": { "ja": "特定のリソースのみを対象に削除", "en": "Target specific resources for destruction" }
+            },
+            "-var": {
+              "description": { "ja": "変数の値を指定", "en": "Set a variable value" }
+            },
+            "-var-file": {
+              "description": { "ja": "変数定義ファイルを指定", "en": "Set variables from a file" }
+            }
+          }
+        },
+        "validate": {
+          "description": { "ja": "設定ファイルを検証", "en": "Check whether the configuration is valid" },
+          "riskOverride": "low"
+        },
+        "fmt": {
+          "description": { "ja": "設定ファイルをフォーマット", "en": "Reformat your configuration in the standard style" },
+          "riskOverride": "low",
+          "flags": {
+            "-check": {
+              "description": { "ja": "フォーマットが必要かチェックのみ行う", "en": "Check if formatting is needed without making changes" }
+            },
+            "-diff": {
+              "description": { "ja": "フォーマット差分を表示", "en": "Display differences between original and formatted" }
+            },
+            "-recursive": {
+              "description": { "ja": "サブディレクトリも再帰的にフォーマット", "en": "Process files in subdirectories recursively" }
+            }
+          }
+        },
+        "state": {
+          "description": { "ja": "ステートファイルを管理", "en": "Advanced state management" },
+          "riskOverride": "medium"
+        },
+        "output": {
+          "description": { "ja": "出力値を表示", "en": "Show output values from your root module" },
+          "riskOverride": "low",
+          "flags": {
+            "-json": {
+              "description": { "ja": "JSON形式で出力", "en": "Output in JSON format" }
+            },
+            "-raw": {
+              "description": { "ja": "生の値のみ出力（引用符なし）", "en": "Output raw value without quotes" }
+            }
+          }
+        },
+        "import": {
+          "description": { "ja": "既存リソースをTerraform管理下にインポート", "en": "Associate existing infrastructure with a Terraform resource" },
+          "riskOverride": "medium",
+          "flags": {
+            "-var": {
+              "description": { "ja": "変数の値を指定", "en": "Set a variable value" }
+            },
+            "-var-file": {
+              "description": { "ja": "変数定義ファイルを指定", "en": "Set variables from a file" }
+            }
+          }
+        },
+        "workspace": {
+          "description": { "ja": "ワークスペースを管理", "en": "Workspace management" },
+          "riskOverride": "low"
+        }
+      },
+      "flags": {}
+    }
+  }
+}

@@ -1,0 +1,233 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "tools",
+    "name": "npm",
+    "description": "Node.js package manager"
+  },
+  "commands": {
+    "npm": {
+      "name": "npm",
+      "description": {
+        "ja": "Node.jsパッケージマネージャーを操作",
+        "en": "Node.js package manager"
+      },
+      "baseRisk": "low",
+      "category": "package",
+      "subcommands": {
+        "install": {
+          "description": { "ja": "パッケージをインストール", "en": "Install packages" },
+          "riskOverride": "medium",
+          "flags": {
+            "--save-dev": {
+              "description": { "ja": "開発依存としてインストール", "en": "Install as a development dependency" }
+            },
+            "--global": {
+              "description": { "ja": "グローバルにインストール（システム全体に影響）", "en": "Install globally (affects the entire system)" },
+              "riskModifier": "medium"
+            },
+            "--force": {
+              "description": { "ja": "キャッシュを無視して強制的にインストール", "en": "Force installation, ignoring cache" },
+              "riskModifier": "medium"
+            },
+            "--legacy-peer-deps": {
+              "description": { "ja": "peer dependency の競合を無視してインストール", "en": "Ignore peer dependency conflicts during install" }
+            }
+          }
+        },
+        "run": {
+          "description": { "ja": "package.jsonに定義されたスクリプトを実行", "en": "Run a script defined in package.json" },
+          "riskOverride": "medium",
+          "flags": {
+            "--silent": {
+              "description": { "ja": "ログ出力を抑制して実行", "en": "Run with minimal log output" }
+            },
+            "--if-present": {
+              "description": { "ja": "スクリプトが存在する場合のみ実行（存在しなくてもエラーにしない）", "en": "Run only if the script exists (no error if missing)" }
+            }
+          }
+        },
+        "test": {
+          "description": { "ja": "テストスクリプトを実行", "en": "Run the test script" },
+          "riskOverride": "low",
+          "flags": {
+            "--coverage": {
+              "description": { "ja": "コードカバレッジレポートを生成", "en": "Generate code coverage report" }
+            }
+          }
+        },
+        "build": {
+          "description": { "ja": "ビルドスクリプトを実行", "en": "Run the build script" },
+          "riskOverride": "medium"
+        },
+        "init": {
+          "description": { "ja": "新しいpackage.jsonを作成", "en": "Create a new package.json file" },
+          "riskOverride": "low",
+          "flags": {
+            "-y": {
+              "description": { "ja": "対話プロンプトをスキップしてデフォルト値を使用", "en": "Skip questionnaire and use defaults" }
+            },
+            "--scope": {
+              "description": { "ja": "スコープ付きパッケージとして初期化", "en": "Create a scoped package" }
+            },
+            "--init-version": {
+              "description": { "ja": "デフォルトのバージョンを指定", "en": "Set the default version" }
+            }
+          }
+        },
+        "uninstall": {
+          "description": { "ja": "パッケージをアンインストール", "en": "Uninstall packages" },
+          "riskOverride": "medium",
+          "flags": {
+            "--save": {
+              "description": { "ja": "dependenciesから削除（デフォルト）", "en": "Remove from dependencies (default)" }
+            },
+            "--save-dev": {
+              "description": { "ja": "devDependenciesから削除", "en": "Remove from devDependencies" }
+            },
+            "--no-save": {
+              "description": { "ja": "package.jsonから削除しない", "en": "Do not remove from package.json" }
+            },
+            "--global": {
+              "description": { "ja": "グローバルパッケージをアンインストール", "en": "Uninstall global package" },
+              "riskModifier": "medium"
+            }
+          }
+        },
+        "update": {
+          "description": { "ja": "パッケージを最新バージョンに更新", "en": "Update packages to the latest version" },
+          "riskOverride": "medium",
+          "flags": {
+            "--global": {
+              "description": { "ja": "グローバルパッケージを更新", "en": "Update global packages" },
+              "riskModifier": "medium"
+            },
+            "--save": {
+              "description": { "ja": "更新後のバージョンをpackage.jsonに保存", "en": "Save updated versions to package.json" }
+            }
+          }
+        },
+        "ci": {
+          "description": { "ja": "ロックファイルに基づいてクリーンインストールを実行", "en": "Clean install based on package-lock.json" },
+          "riskOverride": "medium",
+          "flags": {
+            "--ignore-scripts": {
+              "description": { "ja": "インストール時にスクリプトを実行しない", "en": "Do not run scripts during install" }
+            },
+            "--no-audit": {
+              "description": { "ja": "セキュリティ監査を無効化", "en": "Disable security audit" }
+            },
+            "--no-fund": {
+              "description": { "ja": "ファンディングメッセージを非表示", "en": "Suppress funding message" }
+            },
+            "--dry-run": {
+              "description": { "ja": "実際にインストールせず実行内容を表示", "en": "Report what would be done without installing" }
+            }
+          }
+        },
+        "audit": {
+          "description": { "ja": "インストール済みパッケージの脆弱性をチェック", "en": "Check installed packages for known vulnerabilities" },
+          "riskOverride": "low",
+          "flags": {
+            "--json": {
+              "description": { "ja": "JSON形式で出力", "en": "Output in JSON format" }
+            },
+            "--audit-level": {
+              "description": { "ja": "報告する最低脆弱性レベルを指定（info, low, moderate, high, critical）", "en": "Minimum vulnerability level to report (info, low, moderate, high, critical)" }
+            },
+            "fix": {
+              "description": { "ja": "脆弱性を自動修正", "en": "Automatically fix vulnerabilities" },
+              "riskModifier": "medium"
+            },
+            "--force": {
+              "description": { "ja": "メジャーバージョン更新を含む強制修正（audit fix時）", "en": "Force fix including major version updates (with audit fix)" },
+              "riskModifier": "medium"
+            },
+            "--dry-run": {
+              "description": { "ja": "実際に修正せず修正内容を表示", "en": "Report what would be fixed without applying" }
+            }
+          }
+        },
+        "outdated": {
+          "description": { "ja": "更新可能なパッケージを一覧表示", "en": "List outdated packages" },
+          "riskOverride": "low",
+          "flags": {
+            "--global": {
+              "description": { "ja": "グローバルパッケージを確認", "en": "Check global packages" }
+            },
+            "--long": {
+              "description": { "ja": "拡張情報を表示", "en": "Show extended information" }
+            },
+            "--json": {
+              "description": { "ja": "JSON形式で出力", "en": "Output in JSON format" }
+            },
+            "--all": {
+              "description": { "ja": "推移的依存を含む全パッケージを表示", "en": "Show all outdated packages including transitive dependencies" }
+            }
+          }
+        },
+        "publish": {
+          "description": { "ja": "パッケージをnpmレジストリに公開", "en": "Publish a package to the npm registry" },
+          "riskOverride": "high",
+          "flags": {
+            "--tag": {
+              "description": { "ja": "指定したdist-tagで公開（デフォルト: latest）", "en": "Publish with a given dist-tag (default: latest)" }
+            },
+            "--access": {
+              "description": { "ja": "パッケージのアクセスレベルを設定（public / restricted）", "en": "Set package access level (public / restricted)" }
+            },
+            "--dry-run": {
+              "description": { "ja": "実際に公開せず公開内容を表示", "en": "Report what would be published without actually publishing" }
+            },
+            "--otp": {
+              "description": { "ja": "二要素認証のワンタイムパスワードを指定", "en": "One-time password for two-factor authentication" }
+            }
+          }
+        },
+        "link": {
+          "description": { "ja": "パッケージをグローバルにシンボリックリンク", "en": "Symlink a package globally" },
+          "riskOverride": "medium",
+          "flags": {
+            "--save": {
+              "description": { "ja": "package.jsonに保存", "en": "Save to package.json" }
+            }
+          }
+        },
+        "unlink": {
+          "description": { "ja": "パッケージのシンボリックリンクを解除", "en": "Remove a symlink to a package" },
+          "riskOverride": "medium",
+          "flags": {
+            "--no-save": {
+              "description": { "ja": "package.jsonから削除しない", "en": "Do not remove from package.json" }
+            },
+            "--global": {
+              "description": { "ja": "グローバルリンクを解除", "en": "Unlink global package" },
+              "riskModifier": "medium"
+            }
+          }
+        },
+        "cache clean": {
+          "description": { "ja": "npmキャッシュを削除", "en": "Delete the npm cache" },
+          "riskOverride": "medium",
+          "flags": {
+            "--force": {
+              "description": { "ja": "キャッシュの削除を強制実行（必須フラグ）", "en": "Force cache clean (required flag)" }
+            }
+          }
+        },
+        "start": {
+          "description": { "ja": "startスクリプトを実行", "en": "Run the start script" },
+          "riskOverride": "medium",
+          "flags": {
+            "--ignore-scripts": {
+              "description": { "ja": "pre/postスクリプトを実行しない", "en": "Do not run pre/post scripts" }
+            },
+            "--if-present": {
+              "description": { "ja": "スクリプトが存在しない場合もエラーにしない", "en": "Don't error if the script is missing" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

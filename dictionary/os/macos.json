@@ -1,0 +1,956 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "os",
+    "name": "macos",
+    "description": "macOS-specific commands for developers (Homebrew, Xcode tools, system management, security)",
+    "os": "macos"
+  },
+  "commands": {
+    "brew": {
+      "name": "brew",
+      "description": {
+        "ja": "Homebrewパッケージマネージャーです",
+        "en": "Homebrew package manager"
+      },
+      "baseRisk": "medium",
+      "category": "package",
+      "subcommands": {
+        "install": {
+          "description": { "ja": "パッケージをインストール", "en": "Install a package" },
+          "riskOverride": "medium"
+        },
+        "uninstall": {
+          "description": { "ja": "パッケージをアンインストール", "en": "Uninstall a package" },
+          "riskOverride": "high"
+        },
+        "update": {
+          "description": { "ja": "Homebrew自体とパッケージリストを更新", "en": "Update Homebrew and package lists" },
+          "riskOverride": "low"
+        },
+        "upgrade": {
+          "description": { "ja": "インストール済みパッケージを更新", "en": "Upgrade installed packages" },
+          "riskOverride": "medium"
+        },
+        "search": {
+          "description": { "ja": "パッケージを検索", "en": "Search for packages" },
+          "riskOverride": "low"
+        },
+        "list": {
+          "description": { "ja": "インストール済みパッケージ一覧を表示", "en": "List installed packages" },
+          "riskOverride": "low"
+        },
+        "info": {
+          "description": { "ja": "パッケージの詳細情報を表示", "en": "Show package details" },
+          "riskOverride": "low"
+        },
+        "tap": {
+          "description": { "ja": "サードパーティリポジトリを追加", "en": "Add a third-party repository" },
+          "riskOverride": "low"
+        },
+        "untap": {
+          "description": { "ja": "サードパーティリポジトリを削除", "en": "Remove a third-party repository" },
+          "riskOverride": "medium"
+        },
+        "services": {
+          "description": { "ja": "バックグラウンドサービスを管理", "en": "Manage background services" },
+          "riskOverride": "medium"
+        },
+        "cleanup": {
+          "description": { "ja": "古いバージョンのパッケージを削除", "en": "Remove old versions of packages" },
+          "riskOverride": "medium"
+        },
+        "doctor": {
+          "description": { "ja": "Homebrewの問題を診断", "en": "Diagnose Homebrew issues" },
+          "riskOverride": "low"
+        },
+        "pin": {
+          "description": { "ja": "パッケージのアップグレードを固定", "en": "Pin a package to prevent upgrades" },
+          "riskOverride": "low"
+        },
+        "unpin": {
+          "description": { "ja": "パッケージのアップグレード固定を解除", "en": "Unpin a package to allow upgrades" },
+          "riskOverride": "low"
+        }
+      },
+      "flags": {
+        "--cask": {
+          "description": { "ja": "GUIアプリケーションを対象に操作", "en": "Operate on GUI applications (casks)" }
+        },
+        "--force": {
+          "description": { "ja": "強制的に実行", "en": "Force the operation" },
+          "riskModifier": "high"
+        }
+      }
+    },
+    "mas": {
+      "name": "mas",
+      "description": {
+        "ja": "Mac App StoreのCLIツールです",
+        "en": "Mac App Store command line interface"
+      },
+      "baseRisk": "medium",
+      "category": "package",
+      "subcommands": {
+        "install": {
+          "description": { "ja": "アプリをインストール", "en": "Install an application" },
+          "riskOverride": "medium"
+        },
+        "uninstall": {
+          "description": { "ja": "アプリをアンインストール", "en": "Uninstall an application" },
+          "riskOverride": "high"
+        },
+        "search": {
+          "description": { "ja": "アプリを検索", "en": "Search for applications" },
+          "riskOverride": "low"
+        },
+        "list": {
+          "description": { "ja": "インストール済みアプリ一覧を表示", "en": "List installed applications" },
+          "riskOverride": "low"
+        },
+        "upgrade": {
+          "description": { "ja": "インストール済みアプリを更新", "en": "Upgrade installed applications" },
+          "riskOverride": "medium"
+        },
+        "outdated": {
+          "description": { "ja": "更新可能なアプリを表示", "en": "List applications with pending updates" },
+          "riskOverride": "low"
+        }
+      }
+    },
+    "defaults": {
+      "name": "defaults",
+      "description": {
+        "ja": "macOSの環境設定（plist）を読み書きします",
+        "en": "Read and write macOS user defaults (plist preferences)"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "subcommands": {
+        "read": {
+          "description": { "ja": "設定値を読み取り", "en": "Read a preference value" },
+          "riskOverride": "low"
+        },
+        "write": {
+          "description": { "ja": "設定値を書き込み", "en": "Write a preference value" },
+          "riskOverride": "medium"
+        },
+        "delete": {
+          "description": { "ja": "設定値を削除", "en": "Delete a preference value" },
+          "riskOverride": "high"
+        },
+        "find": {
+          "description": { "ja": "設定値を検索", "en": "Search for a preference value" },
+          "riskOverride": "low"
+        },
+        "export": {
+          "description": { "ja": "設定をファイルにエクスポート", "en": "Export preferences to a file" },
+          "riskOverride": "low"
+        },
+        "import": {
+          "description": { "ja": "ファイルから設定をインポート", "en": "Import preferences from a file" },
+          "riskOverride": "medium"
+        }
+      }
+    },
+    "launchctl": {
+      "name": "launchctl",
+      "description": {
+        "ja": "macOSのlaunchdサービスを管理します",
+        "en": "Manage macOS launchd services"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "subcommands": {
+        "load": {
+          "description": { "ja": "サービスを読み込み", "en": "Load a service" },
+          "riskOverride": "medium"
+        },
+        "unload": {
+          "description": { "ja": "サービスを停止・アンロード", "en": "Unload a service" },
+          "riskOverride": "high"
+        },
+        "start": {
+          "description": { "ja": "サービスを開始", "en": "Start a service" },
+          "riskOverride": "medium"
+        },
+        "stop": {
+          "description": { "ja": "サービスを停止", "en": "Stop a service" },
+          "riskOverride": "high"
+        },
+        "list": {
+          "description": { "ja": "読み込み済みサービス一覧を表示", "en": "List loaded services" },
+          "riskOverride": "low"
+        },
+        "bootstrap": {
+          "description": { "ja": "サービスをドメインにブートストラップ", "en": "Bootstrap a service into a domain" },
+          "riskOverride": "medium"
+        },
+        "bootout": {
+          "description": { "ja": "サービスをドメインからブートアウト", "en": "Boot out a service from a domain" },
+          "riskOverride": "high"
+        },
+        "print": {
+          "description": { "ja": "サービスの詳細情報を表示", "en": "Print service details" },
+          "riskOverride": "low"
+        }
+      }
+    },
+    "diskutil": {
+      "name": "diskutil",
+      "description": {
+        "ja": "macOSのディスクとパーティションを管理します",
+        "en": "Manage macOS disks and partitions"
+      },
+      "baseRisk": "high",
+      "category": "system",
+      "subcommands": {
+        "list": {
+          "description": { "ja": "ディスクとパーティション一覧を表示", "en": "List disks and partitions" },
+          "riskOverride": "low"
+        },
+        "info": {
+          "description": { "ja": "ディスクの詳細情報を表示", "en": "Show disk information" },
+          "riskOverride": "low"
+        },
+        "erase": {
+          "description": { "ja": "ボリュームを消去", "en": "Erase a volume" },
+          "riskOverride": "critical"
+        },
+        "mount": {
+          "description": { "ja": "ボリュームをマウント", "en": "Mount a volume" },
+          "riskOverride": "medium"
+        },
+        "unmount": {
+          "description": { "ja": "ボリュームをアンマウント", "en": "Unmount a volume" },
+          "riskOverride": "medium"
+        },
+        "mountDisk": {
+          "description": { "ja": "ディスク全体をマウント", "en": "Mount an entire disk" },
+          "riskOverride": "medium"
+        },
+        "unmountDisk": {
+          "description": { "ja": "ディスク全体をアンマウント", "en": "Unmount an entire disk" },
+          "riskOverride": "high"
+        },
+        "eraseDisk": {
+          "description": { "ja": "ディスク全体を消去・再フォーマット", "en": "Erase and reformat an entire disk" },
+          "riskOverride": "critical"
+        },
+        "partitionDisk": {
+          "description": { "ja": "ディスクをパーティション分割", "en": "Partition a disk" },
+          "riskOverride": "critical"
+        },
+        "verifyDisk": {
+          "description": { "ja": "ディスクの整合性を検証", "en": "Verify disk integrity" },
+          "riskOverride": "low"
+        },
+        "repairDisk": {
+          "description": { "ja": "ディスクを修復", "en": "Repair a disk" },
+          "riskOverride": "high"
+        },
+        "apfs": {
+          "description": { "ja": "APFSボリュームを管理", "en": "Manage APFS volumes" },
+          "riskOverride": "high"
+        }
+      }
+    },
+    "softwareupdate": {
+      "name": "softwareupdate",
+      "description": {
+        "ja": "macOSのシステムアップデートを管理します",
+        "en": "Manage macOS system software updates"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "flags": {
+        "-l": {
+          "description": { "ja": "利用可能なアップデート一覧を表示", "en": "List available updates" }
+        },
+        "-i": {
+          "description": { "ja": "指定したアップデートをインストール", "en": "Install specified updates" },
+          "riskModifier": "medium"
+        },
+        "-ia": {
+          "description": { "ja": "全てのアップデートをインストール", "en": "Install all available updates" },
+          "riskModifier": "high"
+        },
+        "-d": {
+          "description": { "ja": "アップデートをダウンロードのみ（インストールしない）", "en": "Download updates only (do not install)" }
+        },
+        "--agree-to-license": {
+          "description": { "ja": "ライセンス同意を自動承認", "en": "Automatically agree to license agreements" }
+        }
+      }
+    },
+    "scutil": {
+      "name": "scutil",
+      "description": {
+        "ja": "macOSのネットワーク設定やホスト名を確認・変更します",
+        "en": "Manage macOS network configuration and hostname"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "flags": {
+        "--dns": {
+          "description": { "ja": "DNS設定を表示", "en": "Show DNS configuration" }
+        },
+        "--proxy": {
+          "description": { "ja": "プロキシ設定を表示", "en": "Show proxy configuration" }
+        },
+        "--get": {
+          "description": { "ja": "指定した設定値を取得", "en": "Get a specific configuration value" }
+        },
+        "--set": {
+          "description": { "ja": "指定した設定値を変更", "en": "Set a specific configuration value" },
+          "riskModifier": "high"
+        }
+      }
+    },
+    "systemsetup": {
+      "name": "systemsetup",
+      "description": {
+        "ja": "macOSのシステム環境設定をCLIで管理します",
+        "en": "Manage macOS system preferences via CLI"
+      },
+      "baseRisk": "high",
+      "category": "system",
+      "flags": {
+        "-getcomputersleep": {
+          "description": { "ja": "コンピュータのスリープ設定を取得", "en": "Get computer sleep setting" }
+        },
+        "-setcomputersleep": {
+          "description": { "ja": "コンピュータのスリープ設定を変更", "en": "Set computer sleep setting" },
+          "riskModifier": "medium"
+        },
+        "-getremotelogin": {
+          "description": { "ja": "リモートログイン設定を取得", "en": "Get remote login setting" }
+        },
+        "-setremotelogin": {
+          "description": { "ja": "リモートログイン設定を変更", "en": "Set remote login setting" },
+          "riskModifier": "high"
+        },
+        "-gettimezone": {
+          "description": { "ja": "タイムゾーン設定を取得", "en": "Get timezone setting" }
+        },
+        "-settimezone": {
+          "description": { "ja": "タイムゾーン設定を変更", "en": "Set timezone setting" },
+          "riskModifier": "medium"
+        }
+      }
+    },
+    "tmutil": {
+      "name": "tmutil",
+      "description": {
+        "ja": "Time Machineバックアップを管理します",
+        "en": "Manage Time Machine backups"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "subcommands": {
+        "startbackup": {
+          "description": { "ja": "バックアップを開始", "en": "Start a backup" },
+          "riskOverride": "medium"
+        },
+        "stopbackup": {
+          "description": { "ja": "バックアップを停止", "en": "Stop a running backup" },
+          "riskOverride": "medium"
+        },
+        "listbackups": {
+          "description": { "ja": "バックアップ一覧を表示", "en": "List all backups" },
+          "riskOverride": "low"
+        },
+        "latestbackup": {
+          "description": { "ja": "最新バックアップのパスを表示", "en": "Show path of latest backup" },
+          "riskOverride": "low"
+        },
+        "delete": {
+          "description": { "ja": "バックアップを削除", "en": "Delete a backup" },
+          "riskOverride": "critical"
+        },
+        "restore": {
+          "description": { "ja": "バックアップからファイルを復元", "en": "Restore files from a backup" },
+          "riskOverride": "medium"
+        },
+        "disable": {
+          "description": { "ja": "Time Machineを無効化", "en": "Disable Time Machine" },
+          "riskOverride": "high"
+        },
+        "enable": {
+          "description": { "ja": "Time Machineを有効化", "en": "Enable Time Machine" },
+          "riskOverride": "medium"
+        }
+      }
+    },
+    "xcode-select": {
+      "name": "xcode-select",
+      "description": {
+        "ja": "Xcodeコマンドラインデベロッパーツールを管理します",
+        "en": "Manage Xcode command line developer tools"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "subcommands": {
+        "--install": {
+          "description": { "ja": "コマンドラインデベロッパーツールをインストール", "en": "Install command line developer tools" },
+          "riskOverride": "medium"
+        },
+        "--switch": {
+          "description": { "ja": "アクティブなデベロッパーディレクトリを切り替え", "en": "Switch active developer directory" },
+          "riskOverride": "medium"
+        },
+        "--reset": {
+          "description": { "ja": "デベロッパーディレクトリをデフォルトに戻す", "en": "Reset developer directory to default" },
+          "riskOverride": "medium"
+        }
+      },
+      "flags": {
+        "-p": {
+          "description": { "ja": "現在のデベロッパーディレクトリのパスを表示", "en": "Print current developer directory path" }
+        }
+      }
+    },
+    "xcrun": {
+      "name": "xcrun",
+      "description": {
+        "ja": "Xcode開発ツールを検索・実行します",
+        "en": "Locate and run Xcode developer tools"
+      },
+      "baseRisk": "low",
+      "category": "system",
+      "flags": {
+        "--sdk": {
+          "description": { "ja": "使用するSDKを指定", "en": "Specify the SDK to use" }
+        },
+        "--find": {
+          "description": { "ja": "ツールのパスを検索", "en": "Find the path of a tool" }
+        },
+        "--show-sdk-path": {
+          "description": { "ja": "SDKのパスを表示", "en": "Show the SDK path" }
+        },
+        "--show-sdk-version": {
+          "description": { "ja": "SDKのバージョンを表示", "en": "Show the SDK version" }
+        }
+      }
+    },
+    "xcodebuild": {
+      "name": "xcodebuild",
+      "description": {
+        "ja": "XcodeプロジェクトをCLIでビルド・テスト・アーカイブします",
+        "en": "Build, test, and archive Xcode projects from CLI"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "subcommands": {
+        "build": {
+          "description": { "ja": "プロジェクトをビルド", "en": "Build the project" },
+          "riskOverride": "medium"
+        },
+        "clean": {
+          "description": { "ja": "ビルド成果物をクリーン", "en": "Clean build artifacts" },
+          "riskOverride": "medium"
+        },
+        "test": {
+          "description": { "ja": "テストを実行", "en": "Run tests" },
+          "riskOverride": "medium"
+        },
+        "archive": {
+          "description": { "ja": "アーカイブを作成", "en": "Create an archive" },
+          "riskOverride": "medium"
+        }
+      }
+    },
+    "swift": {
+      "name": "swift",
+      "description": {
+        "ja": "Swiftコンパイラおよびパッケージマネージャーです",
+        "en": "Swift compiler and package manager"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "subcommands": {
+        "build": {
+          "description": { "ja": "パッケージをビルド", "en": "Build the package" },
+          "riskOverride": "medium"
+        },
+        "test": {
+          "description": { "ja": "テストを実行", "en": "Run tests" },
+          "riskOverride": "low"
+        },
+        "run": {
+          "description": { "ja": "ターゲットを実行", "en": "Run an executable target" },
+          "riskOverride": "medium"
+        },
+        "package": {
+          "description": { "ja": "パッケージ操作を実行", "en": "Perform package operations" },
+          "riskOverride": "medium"
+        }
+      }
+    },
+    "instruments": {
+      "name": "instruments",
+      "description": {
+        "ja": "アプリケーションのパフォーマンスプロファイリングを行います",
+        "en": "Profile application performance"
+      },
+      "baseRisk": "low",
+      "category": "system",
+      "flags": {
+        "-t": {
+          "description": { "ja": "使用するテンプレートを指定", "en": "Specify the template to use" }
+        },
+        "-D": {
+          "description": { "ja": "出力ドキュメントのパスを指定", "en": "Specify the output document path" }
+        },
+        "-w": {
+          "description": { "ja": "対象デバイスを指定", "en": "Specify the target device" }
+        }
+      }
+    },
+    "security": {
+      "name": "security",
+      "description": {
+        "ja": "macOSのKeychain・証明書・セキュリティ設定を管理します",
+        "en": "Manage macOS Keychain, certificates, and security settings"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "subcommands": {
+        "find-identity": {
+          "description": { "ja": "署名用IDを検索", "en": "Find signing identities" },
+          "riskOverride": "low"
+        },
+        "find-certificate": {
+          "description": { "ja": "証明書を検索", "en": "Find certificates" },
+          "riskOverride": "low"
+        },
+        "add-trusted-cert": {
+          "description": { "ja": "信頼済み証明書を追加", "en": "Add a trusted certificate" },
+          "riskOverride": "high"
+        },
+        "delete-certificate": {
+          "description": { "ja": "証明書を削除", "en": "Delete a certificate" },
+          "riskOverride": "critical"
+        },
+        "find-generic-password": {
+          "description": { "ja": "一般パスワードを検索", "en": "Find a generic password" },
+          "riskOverride": "low"
+        },
+        "add-generic-password": {
+          "description": { "ja": "一般パスワードを追加", "en": "Add a generic password" },
+          "riskOverride": "medium"
+        },
+        "unlock-keychain": {
+          "description": { "ja": "Keychainをアンロック", "en": "Unlock a keychain" },
+          "riskOverride": "medium"
+        }
+      }
+    },
+    "codesign": {
+      "name": "codesign",
+      "description": {
+        "ja": "アプリケーションにコード署名を行います",
+        "en": "Sign application code"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "flags": {
+        "-s": {
+          "description": { "ja": "署名用IDを指定", "en": "Specify the signing identity" },
+          "riskModifier": "medium"
+        },
+        "-v": {
+          "description": { "ja": "署名を検証", "en": "Verify the signature" }
+        },
+        "--deep": {
+          "description": { "ja": "ネストされたコードも含めて署名", "en": "Sign nested code as well" }
+        },
+        "--force": {
+          "description": { "ja": "既存の署名を上書き", "en": "Replace existing signature" },
+          "riskModifier": "high"
+        }
+      }
+    },
+    "spctl": {
+      "name": "spctl",
+      "description": {
+        "ja": "macOSのGatekeeper（セキュリティ評価）を管理します",
+        "en": "Manage macOS Gatekeeper security assessment"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "flags": {
+        "--assess": {
+          "description": { "ja": "アプリケーションのセキュリティ評価を実行", "en": "Assess application security" }
+        },
+        "--master-enable": {
+          "description": { "ja": "Gatekeeperを有効化", "en": "Enable Gatekeeper" },
+          "riskModifier": "high"
+        },
+        "--master-disable": {
+          "description": { "ja": "Gatekeeperを無効化", "en": "Disable Gatekeeper" },
+          "riskModifier": "critical"
+        },
+        "--add": {
+          "description": { "ja": "ルールを追加", "en": "Add a rule" },
+          "riskModifier": "medium"
+        },
+        "--remove": {
+          "description": { "ja": "ルールを削除", "en": "Remove a rule" },
+          "riskModifier": "high"
+        }
+      }
+    },
+    "sw_vers": {
+      "name": "sw_vers",
+      "description": {
+        "ja": "macOSのバージョン情報を表示します",
+        "en": "Display macOS version information"
+      },
+      "baseRisk": "low",
+      "category": "system"
+    },
+    "system_profiler": {
+      "name": "system_profiler",
+      "description": {
+        "ja": "macOSの詳細なシステム情報を表示します",
+        "en": "Display detailed macOS system information"
+      },
+      "baseRisk": "low",
+      "category": "system"
+    },
+    "sysctl": {
+      "name": "sysctl",
+      "description": {
+        "ja": "カーネルパラメータを表示・変更します（BSD版）",
+        "en": "Display and modify kernel parameters (BSD version)"
+      },
+      "baseRisk": "medium",
+      "category": "system",
+      "flags": {
+        "-a": {
+          "description": { "ja": "全てのカーネルパラメータを表示", "en": "Display all kernel parameters" }
+        },
+        "-w": {
+          "description": { "ja": "カーネルパラメータの値を設定", "en": "Set a kernel parameter value" },
+          "riskModifier": "high"
+        }
+      }
+    },
+    "open": {
+      "name": "open",
+      "description": {
+        "ja": "ファイル・URL・アプリケーションをデフォルトハンドラで開きます",
+        "en": "Open files, URLs, or applications with default handler"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-a": {
+          "description": { "ja": "指定アプリケーションで開く", "en": "Open with specified application" }
+        },
+        "-e": {
+          "description": { "ja": "テキストエディットで開く", "en": "Open with TextEdit" }
+        },
+        "-t": {
+          "description": { "ja": "デフォルトのテキストエディタで開く", "en": "Open with default text editor" }
+        },
+        "-R": {
+          "description": { "ja": "Finderで対象ファイルを選択表示", "en": "Reveal the file in Finder" }
+        },
+        "-n": {
+          "description": { "ja": "アプリケーションの新しいインスタンスを起動", "en": "Open a new instance of the application" }
+        }
+      }
+    },
+    "pbcopy": {
+      "name": "pbcopy",
+      "description": {
+        "ja": "標準入力をクリップボードにコピーします",
+        "en": "Copy standard input to the clipboard"
+      },
+      "baseRisk": "low",
+      "category": "shell"
+    },
+    "pbpaste": {
+      "name": "pbpaste",
+      "description": {
+        "ja": "クリップボードの内容を標準出力に出力します",
+        "en": "Output clipboard contents to standard output"
+      },
+      "baseRisk": "low",
+      "category": "shell"
+    },
+    "mdfind": {
+      "name": "mdfind",
+      "description": {
+        "ja": "Spotlightを使用してファイルを検索します",
+        "en": "Search for files using Spotlight"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-name": {
+          "description": { "ja": "ファイル名で検索", "en": "Search by file name" }
+        },
+        "-onlyin": {
+          "description": { "ja": "指定ディレクトリ内のみ検索", "en": "Search only within specified directory" }
+        },
+        "-live": {
+          "description": { "ja": "結果をリアルタイムで更新", "en": "Update results in real-time" }
+        }
+      }
+    },
+    "mdls": {
+      "name": "mdls",
+      "description": {
+        "ja": "ファイルのSpotlightメタデータを表示します",
+        "en": "Display Spotlight metadata for a file"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-name": {
+          "description": { "ja": "指定した属性のみ表示", "en": "Display only specified attribute" }
+        },
+        "-raw": {
+          "description": { "ja": "生の値を表示", "en": "Display raw values" }
+        }
+      }
+    },
+    "say": {
+      "name": "say",
+      "description": {
+        "ja": "テキストを音声で読み上げます",
+        "en": "Convert text to audible speech"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-v": {
+          "description": { "ja": "使用する音声を指定", "en": "Specify the voice to use" }
+        },
+        "-o": {
+          "description": { "ja": "音声をファイルに出力", "en": "Output speech to a file" },
+          "riskModifier": "medium"
+        },
+        "-r": {
+          "description": { "ja": "読み上げ速度を指定（語/分）", "en": "Specify speaking rate (words per minute)" }
+        }
+      }
+    },
+    "caffeinate": {
+      "name": "caffeinate",
+      "description": {
+        "ja": "macOSのスリープを一時的に防止します",
+        "en": "Prevent macOS from sleeping temporarily"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-d": {
+          "description": { "ja": "ディスプレイのスリープを防止", "en": "Prevent display from sleeping" }
+        },
+        "-i": {
+          "description": { "ja": "システムのアイドルスリープを防止", "en": "Prevent system idle sleep" }
+        },
+        "-s": {
+          "description": { "ja": "システムスリープを防止", "en": "Prevent system sleep" }
+        },
+        "-t": {
+          "description": { "ja": "指定秒数後にスリープ防止を解除", "en": "Release sleep prevention after specified seconds" }
+        },
+        "-w": {
+          "description": { "ja": "指定PIDのプロセス終了までスリープを防止", "en": "Prevent sleep while specified PID is running" }
+        }
+      }
+    },
+    "osascript": {
+      "name": "osascript",
+      "description": {
+        "ja": "AppleScript/JavaScript for Automation (JXA) を実行します",
+        "en": "Execute AppleScript or JavaScript for Automation (JXA)"
+      },
+      "baseRisk": "medium",
+      "category": "shell",
+      "flags": {
+        "-e": {
+          "description": { "ja": "スクリプトを直接指定して実行", "en": "Execute inline script" }
+        },
+        "-l": {
+          "description": { "ja": "使用するスクリプト言語を指定", "en": "Specify the scripting language" }
+        }
+      }
+    },
+    "stat": {
+      "name": "stat",
+      "description": {
+        "ja": "ファイルのメタデータ（サイズ・権限・タイムスタンプ）を表示します（BSD版）",
+        "en": "Display file metadata including size, permissions, and timestamps (BSD version)"
+      },
+      "baseRisk": "low",
+      "category": "shell",
+      "flags": {
+        "-f": {
+          "description": { "ja": "指定フォーマットで表示", "en": "Display using specified format" }
+        },
+        "-x": {
+          "description": { "ja": "詳細情報を表示", "en": "Display verbose information" }
+        }
+      }
+    },
+    "networksetup": {
+      "name": "networksetup",
+      "description": {
+        "ja": "macOSのネットワーク設定を管理します",
+        "en": "Manage macOS network settings"
+      },
+      "baseRisk": "medium",
+      "category": "network",
+      "flags": {
+        "-listallnetworkservices": {
+          "description": { "ja": "全ネットワークサービスを一覧表示", "en": "List all network services" }
+        },
+        "-getinfo": {
+          "description": { "ja": "ネットワークサービスの情報を取得", "en": "Get network service information" }
+        },
+        "-setdnsservers": {
+          "description": { "ja": "DNSサーバーを設定", "en": "Set DNS servers" },
+          "riskModifier": "high"
+        },
+        "-setwebproxy": {
+          "description": { "ja": "Webプロキシを設定", "en": "Set web proxy" },
+          "riskModifier": "high"
+        }
+      }
+    },
+    "dscl": {
+      "name": "dscl",
+      "description": {
+        "ja": "macOSのDirectory Serviceデータベースを操作します",
+        "en": "Manage macOS Directory Service database"
+      },
+      "baseRisk": "high",
+      "category": "network",
+      "flags": {
+        "-read": {
+          "description": { "ja": "ディレクトリエントリを読み取り", "en": "Read a directory entry" }
+        },
+        "-create": {
+          "description": { "ja": "ディレクトリエントリを作成", "en": "Create a directory entry" },
+          "riskModifier": "high"
+        },
+        "-delete": {
+          "description": { "ja": "ディレクトリエントリを削除", "en": "Delete a directory entry" },
+          "riskModifier": "critical"
+        },
+        "-list": {
+          "description": { "ja": "ディレクトリエントリ一覧を表示", "en": "List directory entries" }
+        }
+      }
+    },
+    "ditto": {
+      "name": "ditto",
+      "description": {
+        "ja": "ファイルやディレクトリをメタデータ保持でコピーします（macOS固有）",
+        "en": "Copy files and directories preserving metadata (macOS-specific)"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "-V": {
+          "description": { "ja": "詳細な進行状況を表示", "en": "Print verbose progress" }
+        },
+        "--rsrc": {
+          "description": { "ja": "リソースフォークを保持してコピー", "en": "Preserve resource forks" }
+        }
+      }
+    },
+    "hdiutil": {
+      "name": "hdiutil",
+      "description": {
+        "ja": "macOSのディスクイメージ（.dmg）を管理します",
+        "en": "Manage macOS disk images (.dmg files)"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "subcommands": {
+        "create": {
+          "description": { "ja": "ディスクイメージを作成", "en": "Create a disk image" },
+          "riskOverride": "medium"
+        },
+        "attach": {
+          "description": { "ja": "ディスクイメージをマウント", "en": "Attach (mount) a disk image" },
+          "riskOverride": "medium"
+        },
+        "detach": {
+          "description": { "ja": "ディスクイメージをアンマウント", "en": "Detach (unmount) a disk image" },
+          "riskOverride": "medium"
+        },
+        "info": {
+          "description": { "ja": "マウント済みディスクイメージの情報を表示", "en": "Show information about attached disk images" },
+          "riskOverride": "low"
+        },
+        "verify": {
+          "description": { "ja": "ディスクイメージの整合性を検証", "en": "Verify disk image integrity" },
+          "riskOverride": "low"
+        },
+        "erase": {
+          "description": { "ja": "ディスクイメージを消去", "en": "Erase a disk image" },
+          "riskOverride": "critical"
+        }
+      }
+    },
+    "pkgutil": {
+      "name": "pkgutil",
+      "description": {
+        "ja": "macOSのパッケージレシートを管理します",
+        "en": "Manage macOS package receipts"
+      },
+      "baseRisk": "medium",
+      "category": "filesystem",
+      "flags": {
+        "--pkgs": {
+          "description": { "ja": "インストール済みパッケージ一覧を表示", "en": "List installed packages" }
+        },
+        "--pkg-info": {
+          "description": { "ja": "パッケージの詳細情報を表示", "en": "Show package details" }
+        },
+        "--files": {
+          "description": { "ja": "パッケージに含まれるファイル一覧を表示", "en": "List files in a package" }
+        },
+        "--forget": {
+          "description": { "ja": "パッケージレシートを削除", "en": "Remove a package receipt" },
+          "riskModifier": "high"
+        },
+        "--expand": {
+          "description": { "ja": "パッケージを展開", "en": "Expand a package" },
+          "riskModifier": "medium"
+        }
+      }
+    },
+    "log": {
+      "name": "log",
+      "description": {
+        "ja": "macOSの統合ログシステムにアクセスします",
+        "en": "Access the macOS unified logging system"
+      },
+      "baseRisk": "low",
+      "category": "process",
+      "flags": {
+        "show": {
+          "description": { "ja": "ログエントリを表示", "en": "Show log entries" }
+        },
+        "stream": {
+          "description": { "ja": "ログをリアルタイムでストリーミング", "en": "Stream log entries in real-time" }
+        },
+        "--predicate": {
+          "description": { "ja": "フィルタ条件を指定", "en": "Specify filter predicate" }
+        },
+        "--last": {
+          "description": { "ja": "指定期間のログを表示", "en": "Show logs from specified time period" }
+        }
+      }
+    }
+  }
+}

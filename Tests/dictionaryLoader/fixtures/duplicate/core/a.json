@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "metadata": {
+    "layer": "core",
+    "name": "duplicate-a",
+    "description": "Test fixture for duplicate key detection (first definition)"
+  },
+  "commands": {
+    "dupcmd": {
+      "name": "dupcmd",
+      "description": { "ja": "重複コマンド（core定義）", "en": "Duplicate command (core definition)" },
+      "baseRisk": "low",
+      "category": "filesystem"
+    }
+  }
+}
